@@ -39,19 +39,19 @@ const CONFIG = {
                 {
                     icon: "📦",
                     name: "V2Box",
-                    link: "#"
+                    link: "https://play.google.com/store/apps/details?id=dev.hexasoftware.v2box"
                 },
 
                 {
                     icon: "⚡",
                     name: "NPV Tunnel",
-                    link: "#"
+                    link: "https://play.google.com/store/apps/details?id=com.napsternetlabs.napsternetv"
                 },
 
                 {
                     icon: "🔥",
                     name: "Happ",
-                    link: "#"
+                    link: "https://github.com/Happ-proxy/happ-android/releases/latest/download/Happ.apk"
                 }
 
             ]
