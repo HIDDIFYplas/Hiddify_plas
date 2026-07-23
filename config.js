@@ -14,42 +14,42 @@ const CONFIG = {
     categories: [
 
         {
-            title: "🤖 Android",
+            title: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/Android.png' style='width: 24px; height: 24px; vertical-align: middle; display: inline-block;'> Android",
 
             apps: [
 
                 {
-                    icon: "📱",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/Hidify.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Hiddify",
                     link: "https://github.com/hiddify/hiddify-app/releases/download/v4.1.1/Hiddify-Android-universal.apk"
                 },
 
                 {
-                    icon: "🚀",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/V2rey.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "v2rayNG",
                     link: "https://github.com/2dust/v2rayNG/releases/download/2.2.6/v2rayNG_2.2.6-fdroid_armeabi-v7a.apk"
                 },
 
                 {
-                    icon: "🦊",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/karing.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Karing",
                     link: "https://github.com/KaringX/karing/releases/download/v1.2.22.2502/karing_1.2.22.2502_android_arm.apk"
                 },
 
                 {
-                    icon: "📦",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/v2box.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "V2Box",
                     link: "https://play.google.com/store/apps/details?id=dev.hexasoftware.v2box"
                 },
 
                 {
-                    icon: "⚡",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/npv%20tunnel.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "NPV Tunnel",
                     link: "https://play.google.com/store/apps/details?id=com.napsternetlabs.napsternetv"
                 },
 
                 {
-                    icon: "🔥",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/happ.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Happ",
                     link: "https://github.com/Happ-proxy/happ-android/releases/latest/download/Happ.apk"
                 }
@@ -59,30 +59,30 @@ const CONFIG = {
         },
 
         {
-            title: "🪟 Windows",
+            title: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/Windows.png' style='width: 24px; height: 24px; vertical-align: middle; display: inline-block;'> Windows",
 
             apps: [
 
                 {
-                    icon: "💻",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/V2rey.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "v2rayN",
                     link: "https://github.com/2dust/v2rayN/releases/download/7.23.4/v2rayN-windows-64-desktop.zip"
                 },
 
                 {
-                    icon: "🦁",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/Hidify.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Hiddify",
                     link: "https://github.com/hiddify/hiddify-app/releases/download/v4.1.1/Hiddify-Windows-Portable-x64.zip"
                 },
 
                 {
-                    icon: "🦊",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/karing.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Karing",
                     link: "https://github.com/KaringX/karing/releases/download/v1.2.22.2502/karing_1.2.22.2502_windows_x64.exe"
                 },
 
                 {
-                    icon: "🔥",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/happ.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Happ",
                     link: "https://github.com/Happ-proxy/happ-desktop/releases/download/3.3.6/setup-Happ.x64.exe"
                 }
@@ -92,42 +92,43 @@ const CONFIG = {
         },
 
         {
-            title: "🍎 iPhone",
+            title: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/iPhone.png' style='width: 24px; height: 24px; vertical-align: middle; display: inline-block;'> iPhone",
+
 
             apps: [
 
                 {
-                    icon: "📦",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/v2box.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "V2Box",
                     link: "https://apps.apple.com/us/app/v2box-v2ray-client/id6446814690"
                 },
 
                 {
-                    icon: "🦁",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/Hidify.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Hiddify",
                     link: "https://apps.apple.com/us/app/hiddify-proxy-vpn/id6596777532"
                 },
 
                 {
-                    icon: "🦊",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/karing.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Karing",
                     link: "https://apps.apple.com/us/app/karing/id6472431552"
                 },
 
                 {
-                    icon: "⭐",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/InShot_20260724_032026723.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Streisand",
                     link: "https://apps.apple.com/us/app/streisand/id6450534064"
                 },
 
                 {
-                    icon: "⚡",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/npv%20tunnel.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Npv Tunnel",
                     link: "https://apps.apple.com/us/app/npv-tunnel/id1629465476"
                 },
 
                 {
-                    icon: "🔥",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/happ.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Happ",
                     link: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
                 }
@@ -137,24 +138,25 @@ const CONFIG = {
         },
 
         {
-            title: "📺 Android TV",
+            title: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/Android%20TV.png' style='width: 24px; height: 24px; vertical-align: middle; display: inline-block;'> Android TV",
+
 
             apps: [
 
                 {
-                    icon: "📱",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/Hidify.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Hiddify",
                     link: "https://github.com/hiddify/hiddify-app/releases/download/v4.1.1/Hiddify-Android-arm7.apk"
                 },
 
                 {
-                    icon: "🦊",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/karing.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Karing",
                     link: "https://github.com/KaringX/karing/releases/download/v1.2.22.2502/karing_1.2.22.2502_android_armeabi-v7a.apk"
                 },
 
                 {
-                    icon: "🔥",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/happ.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Happ",
                     link: "https://play.google.com/store/apps/details?id=com.happproxy"
                 }
@@ -164,24 +166,25 @@ const CONFIG = {
         },
 
         {
-            title: "🖥️ macOS",
+            title: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/Mac%20OS.png' style='width: 24px; height: 24px; vertical-align: middle; display: inline-block;'> mac OS",
+
 
             apps: [
 
                 {
-                    icon: "🦁",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/Hidify.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Hiddify",
                     link: "https://github.com/hiddify/hiddify-app/releases/download/v4.1.1/Hiddify-MacOS.dmg"
                 },
 
                 {
-                    icon: "🦊",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/karing.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Karing",
                     link: "https://github.com/KaringX/karing/releases/download/v1.2.22.2502/karing_1.2.22.2502_macos_universal.dmg"
                 },
 
                 {
-                    icon: "🔥",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/happ.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Happ",
                     link: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215?platform=mac"
                 }
@@ -191,30 +194,31 @@ const CONFIG = {
         },
 
         {
-            title: "🐧 Linux",
+            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/1784829929450.png' style='width: 24px; height: 24px; vertical-align: middle; display: inline-block;'> Linux",
+
 
             apps: [
 
                 {
-                    icon: "🚀",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/V2rey.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "v2rayNG",
                     link: "https://github.com/2dust/v2rayN/releases/download/7.23.4/v2rayN-linux-64.deb"
                 },
 
                 {
-                    icon: "🦁",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/Hidify.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Hiddify",
                     link: "https://github.com/hiddify/hiddify-app/releases/download/v4.1.1/Hiddify-Debian-x64.deb"
                 },
 
                 {
-                    icon: "🦊",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/karing.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Karing",
                     link: "https://github.com/KaringX/karing/releases/download/v1.2.22.2502/karing_1.2.22.2502_linux_amd64.deb"
                 },
 
                 {
-                    icon: "🔥",
+                    icon: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/happ.png' style='width: 22px; height: 22px; vertical-align: middle; display: inline-block;'>",
                     name: "Happ",
                     link: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.linux.x64.deb"
                 }
