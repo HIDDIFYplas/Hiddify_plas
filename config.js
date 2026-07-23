@@ -134,6 +134,93 @@ const CONFIG = {
 
             ]
 
+        },
+
+        {
+            title: "📺 Android TV",
+
+            apps: [
+
+                {
+                    icon: "📱",
+                    name: "Hiddify",
+                    link: "https://github.com/hiddify/hiddify-app/releases/download/v4.1.1/Hiddify-Android-arm7.apk"
+                },
+
+                {
+                    icon: "🦊",
+                    name: "Karing",
+                    link: "https://github.com/KaringX/karing/releases/download/v1.2.22.2502/karing_1.2.22.2502_android_armeabi-v7a.apk"
+                },
+
+                {
+                    icon: "🔥",
+                    name: "Happ",
+                    link: "https://play.google.com/store/apps/details?id=com.happproxy"
+                }
+
+            ]
+
+        },
+
+        {
+            title: "🖥️ macOS",
+
+            apps: [
+
+                {
+                    icon: "🦁",
+                    name: "Hiddify",
+                    link: "https://github.com/hiddify/hiddify-app/releases/download/v4.1.1/Hiddify-MacOS.dmg"
+                },
+
+                {
+                    icon: "🦊",
+                    name: "Karing",
+                    link: "https://github.com/KaringX/karing/releases/download/v1.2.22.2502/karing_1.2.22.2502_macos_universal.dmg"
+                },
+
+                {
+                    icon: "🔥",
+                    name: "Happ",
+                    link: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215?platform=mac"
+                }
+
+            ]
+
+        },
+
+        {
+            title: "🐧 Linux",
+
+            apps: [
+
+                {
+                    icon: "🚀",
+                    name: "v2rayNG",
+                    link: "https://github.com/2dust/v2rayN/releases/download/7.23.4/v2rayN-linux-64.deb"
+                },
+
+                {
+                    icon: "🦁",
+                    name: "Hiddify",
+                    link: "https://github.com/hiddify/hiddify-app/releases/download/v4.1.1/Hiddify-Debian-x64.deb"
+                },
+
+                {
+                    icon: "🦊",
+                    name: "Karing",
+                    link: "https://github.com/KaringX/karing/releases/download/v1.2.22.2502/karing_1.2.22.2502_linux_amd64.deb"
+                },
+
+                {
+                    icon: "🔥",
+                    name: "Happ",
+                    link: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.linux.x64.deb"
+                }
+
+            ]
+
         }
 
     ]
