@@ -14,8 +14,8 @@ const CONFIG = {
     categories: [
 
         {
-            title: "<img src="Screenshot_۲۰۲۶-۰۷-۲۳-۲۰-۵۷-۰۲-۱۶۹_com.camerasideas.instashot.png" alt="logo" style="width: 70px; height: 70px; border-radius: 50%;">
-    ۰
+            title: "<img src="Screenshot_۲۰۲۶-۰۷-۲۳-۲۰-۵۷-۰۲-۱۶۹_com.camerasideas.instashot.png" alt="logo" style="width: 70px; height: 70px; border-radius: 50%;'>",
+    
             apps: [
 
                 {
