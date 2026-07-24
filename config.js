@@ -19,7 +19,7 @@ const CONFIG = {
             apps: [
 
                 {
-                    icon: "⚡",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Hidify.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Hiddify",
                     link: "https://github.com/hiddify/hiddify-app/releases/download/v4.1.1/Hiddify-Android-universal.apk"
                 },
