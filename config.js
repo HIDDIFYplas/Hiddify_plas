@@ -14,7 +14,7 @@ const CONFIG = {
     categories: [
 
         {
-            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Android.png' style='width:72px;height:52px;vertical-align:middle;margin-right:6px;'> Android",
+            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Android.png' style='width:60px;height:60px;vertical-align:middle;margin-right:6px;'> Android",
     
             apps: [
 
@@ -92,7 +92,7 @@ const CONFIG = {
         },
 
         {
-            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/iPhone.png' style='width:72px;height:50px;vertical-align:middle;margin-right:6px;'> iPhone",
+            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Apple.png' style='width:60px;height:60px;vertical-align:middle;margin-right:6px;'> iPhone",
 
 
             apps: [
@@ -166,7 +166,7 @@ const CONFIG = {
         },
 
         {
-            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Mac%20OS.png' style='width:72px;height:50px;vertical-align:middle;margin-right:6px;'> mac OS",
+            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Mac%20OS.png' style='width:60px;height:60px;vertical-align:middle;margin-right:6px;'> mac OS",
 
 
             apps: [
