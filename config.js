@@ -14,7 +14,7 @@ const CONFIG = {
     categories: [
 
         {
-            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Android.png' style='width:56px;height:48px;vertical-align:middle;margin-right:10px;'> Android",
+            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Android.png' style='width:72px;height:52px;vertical-align:middle;margin-right:6px;'> Android",
     
             apps: [
 
@@ -49,7 +49,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "🔥",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/happ.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Happ",
                     link: "https://github.com/Happ-proxy/happ-android/releases/latest/download/Happ.apk"
                 }
@@ -59,7 +59,7 @@ const CONFIG = {
         },
 
         {
-            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Windows.png' style='width:56px;height:56px;vertical-align:middle;margin-right:4px;'> Windows",
+            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Windows.png' style='width:60px;height:60px;vertical-align:middle;margin-right:6px;'> Windows",
 
             apps: [
 
@@ -70,7 +70,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "⚡",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Hidify.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Hiddify",
                     link: "https://github.com/hiddify/hiddify-app/releases/download/v4.1.1/Hiddify-Windows-Portable-x64.zip"
                 },
@@ -82,7 +82,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "🔥",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/happ.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Happ",
                     link: "https://github.com/Happ-proxy/happ-desktop/releases/download/3.3.6/setup-Happ.x64.exe"
                 }
@@ -92,7 +92,7 @@ const CONFIG = {
         },
 
         {
-            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/iPhone.png' style='width:56px;height:56px;vertical-align:middle;margin-right:4px;'> iPhone",
+            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/iPhone.png' style='width:72px;height:50px;vertical-align:middle;margin-right:6px;'> iPhone",
 
 
             apps: [
@@ -104,7 +104,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "⚡",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Hidify.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Hiddify",
                     link: "https://apps.apple.com/us/app/hiddify-proxy-vpn/id6596777532"
                 },
@@ -116,7 +116,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "⭐",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/InShot_20260724_032026723.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Streisand",
                     link: "https://apps.apple.com/us/app/streisand/id6450534064"
                 },
@@ -128,7 +128,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "🔥",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/happ.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Happ",
                     link: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215"
                 }
@@ -144,7 +144,7 @@ const CONFIG = {
             apps: [
 
                 {
-                    icon: "⚡",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Hidify.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Hiddify",
                     link: "https://github.com/hiddify/hiddify-app/releases/download/v4.1.1/Hiddify-Android-arm7.apk"
                 },
@@ -156,7 +156,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "🔥",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/happ.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Happ",
                     link: "https://play.google.com/store/apps/details?id=com.happproxy"
                 }
@@ -166,13 +166,13 @@ const CONFIG = {
         },
 
         {
-            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Mac%20OS.png' style='width:56px;height:56px;vertical-align:middle;margin-right:4px;'> mac OS",
+            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Mac%20OS.png' style='width:72px;height:50px;vertical-align:middle;margin-right:6px;'> mac OS",
 
 
             apps: [
 
                 {
-                    icon: "⚡",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Hidify.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Hiddify",
                     link: "https://github.com/hiddify/hiddify-app/releases/download/v4.1.1/Hiddify-MacOS.dmg"
                 },
@@ -184,7 +184,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "🔥",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/happ.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Happ",
                     link: "https://apps.apple.com/us/app/happ-proxy-utility/id6504287215?platform=mac"
                 }
@@ -206,7 +206,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "⚡",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Hidify.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Hiddify",
                     link: "https://github.com/hiddify/hiddify-app/releases/download/v4.1.1/Hiddify-Debian-x64.deb"
                 },
@@ -218,7 +218,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "🔥",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/happ.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Happ",
                     link: "https://github.com/Happ-proxy/happ-desktop/releases/latest/download/Happ.linux.x64.deb"
                 }
