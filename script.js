@@ -36,7 +36,7 @@ CONFIG.categories.forEach(category => {
 
         const icon = document.createElement("span");
         icon.className = "icon";
-        icon.innerText = app.icon;
+        icon.innerHTML = app.icon;
 
         const name = document.createElement("span");
         name.className = "name";
