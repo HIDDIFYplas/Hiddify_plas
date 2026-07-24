@@ -21,7 +21,7 @@ CONFIG.categories.forEach(category => {
     section.className = "category";
 
     const title = document.createElement("h2");
-    title.innerText = category.title;
+    title.innerHTML = category.title;
 
     section.appendChild(title);
 
