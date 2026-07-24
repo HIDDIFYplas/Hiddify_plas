@@ -14,8 +14,8 @@ const CONFIG = {
     categories: [
 
         {
-            title: "<img src='Android.png' style='width: 24px; height: 24px; vertical-align: middle; display: inline-block;'> Android",
-
+            title: "<img src="Screenshot_۲۰۲۶-۰۷-۲۳-۲۰-۵۷-۰۲-۱۶۹_com.camerasideas.instashot.png" alt="logo" style="width: 70px; height: 70px; border-radius: 50%;">
+    ۰
             apps: [
 
                 {
