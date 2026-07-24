@@ -14,7 +14,7 @@ const CONFIG = {
     categories: [
 
         {
-            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Android.png' style='width:56px;height:48px;vertical-align:middle;margin-right:10px;'>Android",
+            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Android.png' style='width:56px;height:48px;vertical-align:middle;margin-right:10px;'> Android",
     
             apps: [
 
@@ -25,25 +25,25 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "💎",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/V2rey.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "v2rayNG",
                     link: "https://github.com/2dust/v2rayNG/releases/download/2.2.6/v2rayNG_2.2.6-fdroid_armeabi-v7a.apk"
                 },
 
                 {
-                    icon: "🦊",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/karing.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Karing",
                     link: "https://github.com/KaringX/karing/releases/download/v1.2.22.2502/karing_1.2.22.2502_android_arm.apk"
                 },
 
                 {
-                    icon: "📦",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/v2box.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "V2Box",
                     link: "https://play.google.com/store/apps/details?id=dev.hexasoftware.v2box"
                 },
 
                 {
-                    icon: "🚀",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/npv%20tunnel.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "NPV Tunnel",
                     link: "https://play.google.com/store/apps/details?id=com.napsternetlabs.napsternetv"
                 },
@@ -59,12 +59,12 @@ const CONFIG = {
         },
 
         {
-            title: "💻 Windows",
+            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Windows.png' style='width:56px;height:56px;vertical-align:middle;margin-right:4px;'> Windows",
 
             apps: [
 
                 {
-                    icon: "💎",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/V2rey.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "v2rayN",
                     link: "https://github.com/2dust/v2rayN/releases/download/7.23.4/v2rayN-windows-64-desktop.zip"
                 },
@@ -76,7 +76,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "🦊",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/karing.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Karing",
                     link: "https://github.com/KaringX/karing/releases/download/v1.2.22.2502/karing_1.2.22.2502_windows_x64.exe"
                 },
@@ -92,13 +92,13 @@ const CONFIG = {
         },
 
         {
-            title: "🍎 iPhone",
+            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/iPhone.png' style='width:56px;height:56px;vertical-align:middle;margin-right:4px;'> iPhone",
 
 
             apps: [
 
                 {
-                    icon: "📦",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/v2box.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "V2Box",
                     link: "https://apps.apple.com/us/app/v2box-v2ray-client/id6446814690"
                 },
@@ -110,7 +110,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "🦊",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/karing.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Karing",
                     link: "https://apps.apple.com/us/app/karing/id6472431552"
                 },
@@ -122,7 +122,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "🚀",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/npv%20tunnel.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Npv Tunnel",
                     link: "https://apps.apple.com/us/app/npv-tunnel/id1629465476"
                 },
@@ -138,7 +138,7 @@ const CONFIG = {
         },
 
         {
-            title: "📺 Android TV",
+            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Android%20TV.png' style='width:56px;height:56px;vertical-align:middle;margin-right:4px;'> Android TV",
 
 
             apps: [
@@ -150,7 +150,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "🦊",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/karing.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Karing",
                     link: "https://github.com/KaringX/karing/releases/download/v1.2.22.2502/karing_1.2.22.2502_android_armeabi-v7a.apk"
                 },
@@ -166,7 +166,7 @@ const CONFIG = {
         },
 
         {
-            title: "🖥️ mac OS",
+            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Mac%20OS.png' style='width:56px;height:56px;vertical-align:middle;margin-right:4px;'> mac OS",
 
 
             apps: [
@@ -178,7 +178,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "🦊",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/karing.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Karing",
                     link: "https://github.com/KaringX/karing/releases/download/v1.2.22.2502/karing_1.2.22.2502_macos_universal.dmg"
                 },
@@ -194,13 +194,13 @@ const CONFIG = {
         },
 
         {
-            title: "🐧 Linux",
+            title: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/Linux.png' style='width:56px;height:56px;vertical-align:middle;margin-right:4px;'> Linux",
 
 
             apps: [
 
                 {
-                    icon: "💎",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/V2rey.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "v2rayNG",
                     link: "https://github.com/2dust/v2rayN/releases/download/7.23.4/v2rayN-linux-64.deb"
                 },
@@ -212,7 +212,7 @@ const CONFIG = {
                 },
 
                 {
-                    icon: "🦊",
+                    icon: "<img src='https://raw.githubusercontent.com/HIDDIFYplas/Hiddify_plas/main/karing.png' style='width:40px;height:40px;vertical-align:middle;'>",
                     name: "Karing",
                     link: "https://github.com/KaringX/karing/releases/download/v1.2.22.2502/karing_1.2.22.2502_linux_amd64.deb"
                 },
