@@ -14,7 +14,7 @@ const CONFIG = {
     categories: [
 
         {
-            title: "<img src='https://github.com/HIDDIFYplas/Hiddify_plas/blob/main/Android.png' style='width: 24px; height: 24px; vertical-align: middle; display: inline-block;'> Android",
+            title: "<img src='Android.png' style='width: 24px; height: 24px; vertical-align: middle; display: inline-block;'> Android",
 
             apps: [
 
