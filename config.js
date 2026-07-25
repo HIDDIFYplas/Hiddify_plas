@@ -3,12 +3,12 @@ const CONFIG = {
     // لینک‌ها
     telegram: "https://t.me/HIDDIFY_plas",
 
-    support: "https://t.me/HIDDIFY_plas",
+    support: "https://t.me/Apk_vpn1_bot",
 
     tutorial: "https://t.me/HIDDIFY_plas",
 
     // وضعیت
-    status: "🟢 تمامی سرورها فعال هستند",
+    status: "🟢 تمامی برنامه ها آپدیت هستند",
 
     // برنامه‌ها
     categories: [
