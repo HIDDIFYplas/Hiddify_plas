@@ -159,7 +159,7 @@ header p {
     transition: all 0.4s ease;
 }
 
-/* عنوان: کاملا راست‌چین (متن سمت چپ، آیکون سمت راست) */
+/* عنوان: انتقال کامل متن و آیکون به سمت راست */
 .category h2 {
     margin-bottom: 16px;
     font-size: 22px;
@@ -168,11 +168,11 @@ header p {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    flex-direction: row-reverse;
+    justify-content: flex-start;
     align-items: center;
     gap: 10px;
-    direction: rtl;
+    text-align: right;
 }
 
 /* استایل آیکون SVG سیستم‌ها */
