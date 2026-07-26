@@ -37,7 +37,7 @@ CONFIG.categories.forEach((category, index) => {
     else if (lowerText.includes("linux")) osIcon = OS_ICONS.linux;
     else if (lowerText.includes("android") || index === 0) osIcon = OS_ICONS.android;
 
-    // اول آیکون، بعد متن -> در CSS سمت راست کادر قرار می‌گیرند
+    // چیدمان: اول آیکون، بعد متن (سمت راست کادر قرار می‌گیرند)
     title.innerHTML = `${osIcon} <span>${cleanTitleText}</span>`;
     section.appendChild(title);
 
@@ -57,7 +57,7 @@ CONFIG.categories.forEach((category, index) => {
     container.appendChild(section);
 });
 
-// کلیک دکمه‌ها
+// انیمیشن کلیک دکمه‌ها
 document.querySelectorAll(".download").forEach(btn => {
     btn.addEventListener("click", function (e) {
         if (this.getAttribute("href") === "#") {
@@ -77,21 +77,84 @@ document.querySelectorAll("a").forEach(btn => {
 const year = new Date().getFullYear();
 document.querySelector("footer p").innerHTML = "© " + year + " HIDDIFY_plas";
 
-// انیمیشن کانواس
+// ==========================================
+// انیمیشن پس‌زمینه (شب: ستاره / روز: خورشید و ابر)
+// ==========================================
 const canvas = document.getElementById('bg-canvas');
 if (canvas) {
     const ctx = canvas.getContext('2d');
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
-    window.addEventListener('resize', () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; });
+    
+    window.addEventListener('resize', () => { 
+        width = canvas.width = window.innerWidth; 
+        height = canvas.height = window.innerHeight; 
+    });
 
     let isDay = false;
+
+    // لیست ستاره‌ها برای شب
     const stars = [];
-    for (let i = 0; i < 130; i++) stars.push({ x: Math.random() * width, y: Math.random() * height, radius: Math.random() * 1.5 + 0.5, alpha: Math.random(), speed: Math.random() * 0.02 + 0.005, factor: 1 });
+    for (let i = 0; i < 130; i++) {
+        stars.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 1.5 + 0.5,
+            alpha: Math.random(),
+            speed: Math.random() * 0.02 + 0.005,
+            factor: 1
+        });
+    }
+
+    // لیست ابرهای متحرک برای روز
+    const clouds = [
+        { x: width * 0.1, y: 100, scale: 0.8, speed: 0.4 },
+        { x: width * 0.6, y: 160, scale: 1.1, speed: 0.25 },
+        { x: width * 0.3, y: 240, scale: 0.6, speed: 0.5 }
+    ];
+
+    // رسم ابر
+    function drawCloud(cx, cy, scale) {
+        ctx.save();
+        ctx.fillStyle = "rgba(255, 255, 255, 0.55)";
+        ctx.beginPath();
+        ctx.arc(cx, cy, 30 * scale, Math.PI * 0.5, Math.PI * 1.5);
+        ctx.arc(cx + 35 * scale, cy - 20 * scale, 35 * scale, Math.PI * 1.0, Math.PI * 1.85);
+        ctx.arc(cx + 75 * scale, cy - 15 * scale, 28 * scale, Math.PI * 1.37, Math.PI * 1.91);
+        ctx.arc(cx + 100 * scale, cy, 30 * scale, Math.PI * 1.5, Math.PI * 0.5);
+        ctx.closePath();
+        ctx.fill();
+        ctx.restore();
+    }
+
+    // رسم خورشید
+    function drawSun() {
+        const sunX = width - 80;
+        const sunY = 90;
+        
+        ctx.save();
+        // هاله نور
+        const glow = ctx.createRadialGradient(sunX, sunY, 20, sunX, sunY, 70);
+        glow.addColorStop(0, "rgba(255, 220, 100, 0.8)");
+        glow.addColorStop(1, "rgba(255, 220, 100, 0)");
+        ctx.fillStyle = glow;
+        ctx.beginPath();
+        ctx.arc(sunX, sunY, 70, 0, Math.PI * 2);
+        ctx.fill();
+
+        // مرکز خورشید
+        ctx.fillStyle = "#ffea00";
+        ctx.beginPath();
+        ctx.arc(sunX, sunY, 32, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+    }
 
     function renderSky() {
         ctx.clearRect(0, 0, width, height);
+
         if (!isDay) {
+            // انیمیشن ستاره‌های شب
             stars.forEach(star => {
                 star.alpha += star.speed * star.factor;
                 if (star.alpha >= 1 || star.alpha <= 0.12) star.factor *= -1;
@@ -100,11 +163,22 @@ if (canvas) {
                 ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
                 ctx.fill();
             });
+        } else {
+            // رسم خورشید
+            drawSun();
+
+            // حرکت ابرهای روز
+            clouds.forEach(cloud => {
+                cloud.x += cloud.speed;
+                if (cloud.x - 120 > width) cloud.x = -150;
+                drawCloud(cloud.x, cloud.y, cloud.scale);
+            });
         }
         requestAnimationFrame(renderSky);
     }
     renderSky();
 
+    // سوئیچ تم
     const themeBtn = document.getElementById('themeToggle');
     themeBtn.addEventListener('click', () => {
         isDay = !isDay;
