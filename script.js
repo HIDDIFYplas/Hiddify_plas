@@ -37,8 +37,8 @@ CONFIG.categories.forEach((category, index) => {
     else if (lowerText.includes("linux")) osIcon = OS_ICONS.linux;
     else if (lowerText.includes("android") || index === 0) osIcon = OS_ICONS.android;
 
-    // چیدمان عنوان: متن سمت چپ و آیکون در انتهای سمت راست
-    title.innerHTML = `<span>${cleanTitleText}</span> ${osIcon}`;
+    // آیکون و متن با ترتیب صحیح جهت راست‌چین شدن
+    title.innerHTML = `${osIcon} <span>${cleanTitleText}</span>`;
     section.appendChild(title);
 
     category.apps.forEach(app => {
