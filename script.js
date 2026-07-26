@@ -37,20 +37,20 @@ CONFIG.categories.forEach((category, index) => {
     else if (lowerText.includes("linux")) osIcon = OS_ICONS.linux;
     else if (lowerText.includes("android") || index === 0) osIcon = OS_ICONS.android;
 
-    // چیدمان عنوان: متن سمت چپ و آیکون سمت راست، کل خط چسبیده به راست
-    title.innerHTML = `<span>${cleanTitleText}</span> ${osIcon}`;
+    // چیدمان عنوان: آیکون در سمت راست و متن در سمت چپ آن قرار می‌گیرد
+    title.innerHTML = `${osIcon} <span>${cleanTitleText}</span>`;
     section.appendChild(title);
 
     category.apps.forEach(app => {
         const card = document.createElement("div");
         card.className = "card";
-        // چیدمان کارت: دکمه دانلود (سمت چپ) | نام و آیکون لوگوی برنامه (سمت راست)
+        // چیدمان کارت: (راست) آیکون + اسم برنامه ---------- دکمه دانلود (چپ)
         card.innerHTML = `
-            <a class="download" href="${app.link}" target="_blank">دانلود</a>
             <div class="appInfo">
-                <span class="name">${app.name}</span>
                 <span class="icon">${app.icon}</span>
+                <span class="name">${app.name}</span>
             </div>
+            <a class="download" href="${app.link}" target="_blank">دانلود</a>
         `;
         section.appendChild(card);
     });
