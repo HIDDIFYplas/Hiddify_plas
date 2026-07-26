@@ -2,19 +2,16 @@
 // HIDDIFY_plas - script.js
 // ===========================
 
-// آیکون‌های SVG سیستم‌عامل‌ها
+// آیکون‌های SVG
 const OS_ICONS = {
-    android: `<span class="os-icon"><svg viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3c0 .55.45 1 1 1s1-.45 1-1v-3h4v3c0 .55.45 1 1 1s1-.45 1-1v-3h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zM15.53 2.16l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg></span>`,
+    android: `<span class="os-icon"><svg viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3c0 .55.45 1 1 1s1-.45 1-1v-3h4v3c0 .55.45 1 1 1s1-.45 1-1v-3h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83 1.5 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zM15.53 2.16l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg></span>`,
     windows: `<span class="os-icon"><svg viewBox="0 0 24 24"><path d="M3 5.5L10 4.5V11.5H3V5.5ZM3 12.5H10V19.5L3 18.5V12.5ZM11 4.3L21 3V11.5H11V4.3ZM11 12.5H21V21L11 19.7V12.5Z"/></svg></span>`,
     apple: `<span class="os-icon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.09c.67-.82 1.13-1.96.99-3.09-1 .04-2.22.67-2.92 1.49-.62.72-1.17 1.88-1.02 2.99 1.12.09 2.28-.57 2.95-1.39z"/></svg></span>`,
     tv: `<span class="os-icon"><svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg></span>`,
     linux: `<span class="os-icon"><svg viewBox="0 0 24 24"><path d="M12.38 2.01c-3.14 0-5.69 2.55-5.69 5.69 0 1.25.4 2.4 1.08 3.34-.14.28-.27.57-.38.87C6.67 13.88 6 16.03 6 18.5c0 .83.67 1.5 1.5 1.5h9c.83 0 1.5-.67 1.5-1.5 0-2.47-.67-4.62-1.39-6.59-.11-.3-.24-.59-.38-.87.68-.94 1.08-2.09 1.08-3.34 0-3.14-2.55-5.69-5.69-5.69zm-2.38 5c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm4.76 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"/></svg></span>`
 };
 
-// وضعیت سرورها
 document.getElementById("statusBox").innerText = CONFIG.status;
-
-// لینک دکمه‌ها
 document.getElementById("configButton").href = CONFIG.telegram;
 document.getElementById("telegramBtn").href = CONFIG.telegram;
 document.getElementById("supportBtn").href = CONFIG.support;
@@ -22,7 +19,6 @@ document.getElementById("tutorialBtn").href = CONFIG.tutorial;
 
 const container = document.getElementById("appContainer");
 
-// ساخت بخش‌ها
 CONFIG.categories.forEach((category, index) => {
     const section = document.createElement("section");
     section.className = "category";
@@ -32,7 +28,6 @@ CONFIG.categories.forEach((category, index) => {
     tempDiv.innerHTML = category.title;
     const cleanTitleText = tempDiv.textContent || tempDiv.innerText || "";
 
-    // تشخیص سیستم‌عامل
     let osIcon = "";
     const lowerText = cleanTitleText.toLowerCase();
 
@@ -42,11 +37,10 @@ CONFIG.categories.forEach((category, index) => {
     else if (lowerText.includes("linux")) osIcon = OS_ICONS.linux;
     else if (lowerText.includes("android") || index === 0) osIcon = OS_ICONS.android;
 
-    // چیدمان عنوان و آیکون
-    title.innerHTML = `<span>${cleanTitleText}</span>${osIcon}`;
+    // اول آیکون، بعد متن -> در CSS سمت راست کادر قرار می‌گیرند
+    title.innerHTML = `${osIcon} <span>${cleanTitleText}</span>`;
     section.appendChild(title);
 
-    // کارت برنامه‌ها
     category.apps.forEach(app => {
         const card = document.createElement("div");
         card.className = "card";
@@ -63,7 +57,7 @@ CONFIG.categories.forEach((category, index) => {
     container.appendChild(section);
 });
 
-// لینک‌های خالی
+// کلیک دکمه‌ها
 document.querySelectorAll(".download").forEach(btn => {
     btn.addEventListener("click", function (e) {
         if (this.getAttribute("href") === "#") {
@@ -73,7 +67,6 @@ document.querySelectorAll(".download").forEach(btn => {
     });
 });
 
-// افکت کلیک
 document.querySelectorAll("a").forEach(btn => {
     btn.addEventListener("click", () => {
         btn.style.transform = "scale(.95)";
@@ -81,11 +74,10 @@ document.querySelectorAll("a").forEach(btn => {
     });
 });
 
-// فوتر
 const year = new Date().getFullYear();
 document.querySelector("footer p").innerHTML = "© " + year + " HIDDIFY_plas";
 
-// پس‌زمینه زنده
+// انیمیشن کانواس
 const canvas = document.getElementById('bg-canvas');
 if (canvas) {
     const ctx = canvas.getContext('2d');
