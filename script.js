@@ -31,19 +31,19 @@ CONFIG.categories.forEach(category => {
 
     const title = document.createElement("h2");
     
-    // ۱. استخراج عنوان متنی بدون عکس‌های احتمالی داخل config.js
+    // ۱. استخراج عنوان متنی
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = category.title;
     const cleanTitleText = tempDiv.textContent || tempDiv.innerText || "";
 
-    // ۲. تشخیص سیستم‌عامل و انتخاب آیکون کدی
+    // ۲. تشخیص هوشمند سیستم‌عامل
     let osIcon = "";
-    const lowerText = cleanTitleText.toLowerCase();
+    const lowerText = cleanTitleText.toLowerCase().trim();
 
     if (lowerText.includes("tv")) osIcon = OS_ICONS.tv;
     else if (lowerText.includes("android")) osIcon = OS_ICONS.android;
     else if (lowerText.includes("windows")) osIcon = OS_ICONS.windows;
-    else if (lowerText.includes("iphone") || lowerText.includes("ios") || lowerText.includes("mac")) osIcon = OS_ICONS.apple;
+    else if (lowerText.includes("iphone") || lowerText.includes("ios") || lowerText.includes("mac") || lowerText.includes("apple")) osIcon = OS_ICONS.apple;
     else if (lowerText.includes("linux")) osIcon = OS_ICONS.linux;
 
     // ۳. رندر عنوان با آیکون جدید SVG
