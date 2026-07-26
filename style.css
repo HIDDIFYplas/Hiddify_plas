@@ -1,5 +1,5 @@
 /* ===========================
-   HIDDIFY_plas - Glass Style
+   HIDDIFY_plas - Premium Glass
 =========================== */
 
 * {
@@ -24,7 +24,7 @@ body {
     transition: color 0.4s ease;
 }
 
-/* دکمه تغییر تم */
+/* دکمه تغییر تم روز/شب */
 .theme-btn {
     position: fixed;
     top: 15px;
@@ -67,7 +67,7 @@ header {
     padding: 25px 10px 15px 10px;
 }
 
-/* تنظیم دقیق دایره و عکس پروفایل */
+/* تنظیم دایره و لوگو */
 .logo {
     width: 105px;
     height: 105px;
@@ -159,29 +159,30 @@ header p {
     transition: all 0.4s ease;
 }
 
-/* عنوان: انتقال کامل متن و آیکون به سمت راست */
+/* عنوان: متن و آیکون متصل به منتهی‌الیه سمت راست */
 .category h2 {
     margin-bottom: 16px;
-    font-size: 22px;
-    font-weight: 700;
+    font-size: 26px;
+    font-weight: 800;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     
     display: flex;
-    flex-direction: row-reverse;
-    justify-content: flex-start;
+    flex-direction: row;
+    justify-content: flex-end;
     align-items: center;
     gap: 10px;
-    text-align: right;
+    direction: ltr;
 }
 
-/* استایل آیکون SVG سیستم‌ها */
+/* استایل آیکون سیستم‌ها با هاله درخشان آبی */
 .os-icon {
     width: 32px;
     height: 32px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    filter: drop-shadow(0 0 6px #00d2ff);
 }
 
 .os-icon svg {
@@ -202,36 +203,50 @@ header p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     transition: all 0.4s ease;
-    direction: rtl;
+    direction: ltr; /* دانلود سمت چپ، برنامه و لوگو سمت راست */
 }
 
 .card:last-child {
     margin-bottom: 0;
 }
 
+/* بخش سمت راست کارت (اسم و آیکون) */
 .appInfo {
     display: flex;
     align-items: center;
     gap: 12px;
-}
-
-.icon {
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    direction: ltr;
 }
 
 .name {
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 700;
     color: #f8fafc;
     transition: color 0.4s ease;
 }
 
-/* دکمه دانلود */
+.icon {
+    width: 42px;
+    height: 42px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    overflow: hidden;
+}
+
+.icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+/* دکمه دانلود در سمت چپ */
 .download {
     background: linear-gradient(135deg, #0284c7, #2563eb);
     padding: 9px 20px;
@@ -281,7 +296,7 @@ footer p {
     font-size: 13px;
 }
 
-/* حالت روز */
+/* استایل حالت روز (Day Mode) */
 body.day-mode {
     color: #0f172a;
 }
@@ -313,7 +328,7 @@ body.day-mode .category h2 {
 }
 
 body.day-mode .os-icon svg {
-    fill: #ffffff;
+    fill: #0284c7;
 }
 
 body.day-mode .card {
