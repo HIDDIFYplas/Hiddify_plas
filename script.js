@@ -24,30 +24,37 @@ document.getElementById("tutorialBtn").href = CONFIG.tutorial;
 const container = document.getElementById("appContainer");
 
 // ساخت دسته‌بندی‌ها
-CONFIG.categories.forEach(category => {
+CONFIG.categories.forEach((category, index) => {
 
     const section = document.createElement("section");
     section.className = "category";
 
     const title = document.createElement("h2");
     
-    // ۱. استخراج عنوان متنی
+    // پاکسازی متون و عکس‌های احتمالی داخل config.js
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = category.title;
     const cleanTitleText = tempDiv.textContent || tempDiv.innerText || "";
 
-    // ۲. تشخیص هوشمند سیستم‌عامل
+    // تشخیص قاطعانه سیستم‌عامل (بر اساس متن یا اندیس)
     let osIcon = "";
-    const lowerText = cleanTitleText.toLowerCase().trim();
+    const lowerText = cleanTitleText.toLowerCase();
 
-    if (lowerText.includes("tv")) osIcon = OS_ICONS.tv;
-    else if (lowerText.includes("android")) osIcon = OS_ICONS.android;
-    else if (lowerText.includes("windows")) osIcon = OS_ICONS.windows;
-    else if (lowerText.includes("iphone") || lowerText.includes("ios") || lowerText.includes("mac") || lowerText.includes("apple")) osIcon = OS_ICONS.apple;
-    else if (lowerText.includes("linux")) osIcon = OS_ICONS.linux;
+    if (lowerText.includes("tv")) {
+        osIcon = OS_ICONS.tv;
+    } else if (lowerText.includes("win")) {
+        osIcon = OS_ICONS.windows;
+    } else if (lowerText.includes("ios") || lowerText.includes("iphone") || lowerText.includes("mac") || lowerText.includes("apple")) {
+        osIcon = OS_ICONS.apple;
+    } else if (lowerText.includes("linux")) {
+        osIcon = OS_ICONS.linux;
+    } else if (lowerText.includes("android") || index === 0) { 
+        // اگر اولین دسته‌بندی باشه یا کلمه اندروید رو داشته باشه
+        osIcon = OS_ICONS.android;
+    }
 
-    // ۳. رندر عنوان با آیکون جدید SVG
-    title.innerHTML = osIcon + " " + cleanTitleText;
+    // قرار دادن متن و آیکون
+    title.innerHTML = `<span>${cleanTitleText}</span> ${osIcon}`;
 
     section.appendChild(title);
 
