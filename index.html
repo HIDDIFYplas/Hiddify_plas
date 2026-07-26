@@ -1,84 +1,50 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HIDDIFY_plas</title>
-
-    <meta name="theme-color" content="#0B1220">
-    <meta name="description" content="HIDDIFY_plas Download Center">
-
-    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="style.css">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
 </head>
-
 <body>
 
-<!-- دکمه سوئیچ شب / روز -->
-<button id="themeToggle" class="theme-btn" aria-label="Toggle Theme">🌙</button>
+    <!-- دکمه تم روز/شب -->
+    <button id="themeToggle" class="theme-btn">🌙</button>
 
-<!-- کانواس پس‌زمینه زنده -->
-<canvas id="bg-canvas"></canvas>
+    <!-- پس‌زمینه زنده -->
+    <canvas id="bg-canvas"></canvas>
 
-<header>
+    <!-- هدر -->
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="HIDDIFY_plas Logo" onerror="this.src='https://via.placeholder.com/90'">
+        </div>
+        <h1>HIDDIFY_plas</h1>
+        <p>Fast • Secure • Unlimited</p>
+        <a id="configButton" href="#" class="mainButton" target="_blank">
+            ⚡ دریافت کانفیگ رایگان
+        </a>
+    </header>
 
-    <div class="logo">
-        <img src="Screenshot_۲۰۲۶-۰۷-۲۳-۲۰-۵۷-۰۲-۱۶۹_com.camerasideas.instashot.png" alt="logo">
+    <!-- وضعیت -->
+    <div class="status">
+        <div id="statusBox">در حال دریافت وضعیت...</div>
     </div>
 
-    <h1>HIDDIFY_plas</h1>
+    <!-- کانتینر اصلی برنامه‌ها -->
+    <main id="appContainer"></main>
 
-    <p>
-        Fast • Secure • Unlimited
-    </p>
+    <!-- فوتر -->
+    <footer>
+        <a id="telegramBtn" href="#" target="_blank">📢 کانال تلگرام</a>
+        <a id="supportBtn" href="#" target="_blank">💬 پشتیبانی</a>
+        <a id="tutorialBtn" href="#" target="_blank">📚 آموزش اتصال</a>
+        <p>© HIDDIFY_plas</p>
+    </footer>
 
-    <a id="configButton" class="mainButton" target="_blank">
-        ⚡ دریافت کانفیگ رایگان
-    </a>
-
-</header>
-
-<section class="status">
-
-    <div id="statusBox">
-        🟢 همه برنامه ها آپدیت هستند 
-    </div>
-
-</section>
-
-<main id="appContainer">
-
-</main>
-
-<footer>
-
-    <a id="telegramBtn" target="_blank">
-        📢 کانال تلگرام
-    </a>
-
-    <a id="supportBtn" target="_blank">
-        🤖 ربات Apk
-    </a>
-
-    <a id="tutorialBtn" target="_blank">
-        📚 آموزش اتصال
-    </a>
-
-    <p>
-        © HIDDIFY_plas
-    </p>
-
-</footer>
-
-<script src="config.js"></script>
-<script src="script.js"></script>
-
+    <!-- اسکریپت‌ها -->
+    <script src="config.js"></script>
+    <script src="script.js"></script>
 </body>
-
 </html>
