@@ -159,36 +159,41 @@ header p {
     transition: all 0.4s ease;
 }
 
-/* عنوان: متن و آیکون متصل به منتهی‌الیه سمت راست */
+/* عنوان: متن و آیکون چسبیده به سمت راست */
 .category h2 {
     margin-bottom: 16px;
-    font-size: 26px;
+    font-size: 24px;
     font-weight: 800;
     padding-bottom: 10px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    flex-direction: row-reverse; /* آیکون اول (راست) سپس متن (چپ آن) */
+    justify-content: flex-start;
     align-items: center;
-    gap: 10px;
-    direction: ltr;
+    gap: 12px;
+    direction: rtl;
 }
 
-/* استایل آیکون سیستم‌ها با هاله درخشان آبی */
+/* استایل آیکون سیستم‌ها با هاله درخشان در حاشیه */
 .os-icon {
-    width: 32px;
-    height: 32px;
+    width: 38px;
+    height: 38px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 0 6px #00d2ff);
+    background: rgba(0, 210, 255, 0.08);
+    border: 1px solid rgba(0, 210, 255, 0.4);
+    border-radius: 12px;
+    box-shadow: 0 0 12px rgba(0, 210, 255, 0.35); /* نور کم حاشیه */
+    padding: 6px;
 }
 
 .os-icon svg {
     width: 100%;
     height: 100%;
     fill: #00d2ff;
+    filter: drop-shadow(0 0 4px rgba(0, 210, 255, 0.8));
     transition: all 0.4s ease;
 }
 
@@ -205,37 +210,40 @@ header p {
     align-items: center;
     border: 1px solid rgba(255, 255, 255, 0.15);
     transition: all 0.4s ease;
-    direction: ltr; /* دانلود سمت چپ، برنامه و لوگو سمت راست */
+    direction: rtl; /* چیدمان از راست به چپ */
 }
 
 .card:last-child {
     margin-bottom: 0;
 }
 
-/* بخش سمت راست کارت (اسم و آیکون) */
+/* بخش سمت راست کارت (آیکون و اسم) */
 .appInfo {
     display: flex;
     align-items: center;
     gap: 12px;
-    direction: ltr;
+    direction: rtl;
 }
 
 .name {
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
     color: #f8fafc;
     transition: color 0.4s ease;
 }
 
+/* لوگوی برنامه‌ها با نور کم در حاشیه */
 .icon {
-    width: 42px;
-    height: 42px;
+    width: 44px;
+    height: 44px;
     font-size: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.25); /* نور خفیف دور حاشیه لوگو */
     overflow: hidden;
 }
 
@@ -327,13 +335,25 @@ body.day-mode .category h2 {
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
+body.day-mode .os-icon {
+    background: rgba(2, 132, 199, 0.1);
+    border-color: rgba(2, 132, 199, 0.4);
+    box-shadow: 0 0 10px rgba(2, 132, 199, 0.3);
+}
+
 body.day-mode .os-icon svg {
     fill: #0284c7;
+    filter: none;
 }
 
 body.day-mode .card {
     background: rgba(255, 255, 255, 0.75);
     border: 1px solid rgba(255, 255, 255, 0.8);
+}
+
+body.day-mode .icon {
+    border-color: rgba(2, 132, 199, 0.3);
+    box-shadow: 0 0 8px rgba(2, 132, 199, 0.2);
 }
 
 body.day-mode .name {
