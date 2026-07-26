@@ -159,7 +159,7 @@ header p {
     transition: all 0.4s ease;
 }
 
-/* عنوان: متن و آیکون چسبیده به سمت راست */
+/* عنوان سیستم‌عامل‌ها: اول آیکون سمت راست، بعد متن جلوش */
 .category h2 {
     margin-bottom: 16px;
     font-size: 24px;
@@ -168,14 +168,15 @@ header p {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     
     display: flex;
-    flex-direction: row-reverse; /* آیکون اول (راست) سپس متن (چپ آن) */
+    flex-direction: row;
     justify-content: flex-start;
     align-items: center;
     gap: 12px;
     direction: rtl;
+    text-align: right;
 }
 
-/* استایل آیکون سیستم‌ها با هاله درخشان در حاشیه */
+/* استایل آیکون سیستم‌ها با هاله درخشان */
 .os-icon {
     width: 38px;
     height: 38px;
@@ -185,8 +186,9 @@ header p {
     background: rgba(0, 210, 255, 0.08);
     border: 1px solid rgba(0, 210, 255, 0.4);
     border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0, 210, 255, 0.35); /* نور کم حاشیه */
+    box-shadow: 0 0 12px rgba(0, 210, 255, 0.35);
     padding: 6px;
+    flex-shrink: 0;
 }
 
 .os-icon svg {
@@ -210,7 +212,7 @@ header p {
     align-items: center;
     border: 1px solid rgba(255, 255, 255, 0.15);
     transition: all 0.4s ease;
-    direction: rtl; /* چیدمان از راست به چپ */
+    direction: rtl;
 }
 
 .card:last-child {
@@ -243,7 +245,7 @@ header p {
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.05);
     border: 1px solid rgba(0, 210, 255, 0.3);
-    box-shadow: 0 0 10px rgba(0, 210, 255, 0.25); /* نور خفیف دور حاشیه لوگو */
+    box-shadow: 0 0 10px rgba(0, 210, 255, 0.25);
     overflow: hidden;
 }
 
