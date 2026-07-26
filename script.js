@@ -24,9 +24,9 @@ CONFIG.categories.forEach((category, index) => {
     section.className = "category";
 
     const title = document.createElement("h2");
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = category.title;
-    const cleanTitleText = tempDiv.textContent || tempDiv.innerText || "";
+    
+    // دریافت متن عنوان پاک‌سازی‌شده
+    const cleanTitleText = category.title.trim();
 
     let osIcon = "";
     const lowerText = cleanTitleText.toLowerCase();
@@ -37,14 +37,13 @@ CONFIG.categories.forEach((category, index) => {
     else if (lowerText.includes("linux")) osIcon = OS_ICONS.linux;
     else if (lowerText.includes("android") || index === 0) osIcon = OS_ICONS.android;
 
-    // چیدمان عنوان: آیکون در سمت راست و متن در سمت چپ آن قرار می‌گیرد
+    // چیدمان: اول آیکون سیستم‌عامل (سمت راست)، سپس متن عنوان جلوش
     title.innerHTML = `${osIcon} <span>${cleanTitleText}</span>`;
     section.appendChild(title);
 
     category.apps.forEach(app => {
         const card = document.createElement("div");
         card.className = "card";
-        // چیدمان کارت: (راست) آیکون + اسم برنامه ---------- دکمه دانلود (چپ)
         card.innerHTML = `
             <div class="appInfo">
                 <span class="icon">${app.icon}</span>
