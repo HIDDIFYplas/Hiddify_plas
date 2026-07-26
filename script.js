@@ -1,8 +1,8 @@
 // ===========================
-// HIDDIFY_plas
+// HIDDIFY_plas - script.js
 // ===========================
 
-// آیکون‌های کدی سیستم‌عامل‌ها (SVG)
+// آیکون‌های SVG
 const OS_ICONS = {
     android: `<span class="os-icon"><svg viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3c0 .55.45 1 1 1s1-.45 1-1v-3h4v3c0 .55.45 1 1 1s1-.45 1-1v-3h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zM15.53 2.16l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg></span>`,
     windows: `<span class="os-icon"><svg viewBox="0 0 24 24"><path d="M3 5.5L10 4.5V11.5H3V5.5ZM3 12.5H10V19.5L3 18.5V12.5ZM11 4.3L21 3V11.5H11V4.3ZM11 12.5H21V21L11 19.7V12.5Z"/></svg></span>`,
@@ -11,254 +11,110 @@ const OS_ICONS = {
     linux: `<span class="os-icon"><svg viewBox="0 0 24 24"><path d="M12.38 2.01c-3.14 0-5.69 2.55-5.69 5.69 0 1.25.4 2.4 1.08 3.34-.14.28-.27.57-.38.87C6.67 13.88 6 16.03 6 18.5c0 .83.67 1.5 1.5 1.5h9c.83 0 1.5-.67 1.5-1.5 0-2.47-.67-4.62-1.39-6.59-.11-.3-.24-.59-.38-.87.68-.94 1.08-2.09 1.08-3.34 0-3.14-2.55-5.69-5.69-5.69zm-2.38 5c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm4.76 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"/></svg></span>`
 };
 
-// وضعیت سرورها
+// تنظیمات اولیه
 document.getElementById("statusBox").innerText = CONFIG.status;
-
-// لینک دکمه‌ها
 document.getElementById("configButton").href = CONFIG.telegram;
 document.getElementById("telegramBtn").href = CONFIG.telegram;
 document.getElementById("supportBtn").href = CONFIG.support;
 document.getElementById("tutorialBtn").href = CONFIG.tutorial;
 
-// محل نمایش برنامه‌ها
 const container = document.getElementById("appContainer");
 
-// ساخت دسته‌بندی‌ها
+// ساخت بخش‌ها
 CONFIG.categories.forEach((category, index) => {
-
     const section = document.createElement("section");
     section.className = "category";
 
     const title = document.createElement("h2");
-    
-    // پاکسازی متون و عکس‌های احتمالی داخل config.js
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = category.title;
     const cleanTitleText = tempDiv.textContent || tempDiv.innerText || "";
 
-    // تشخیص قاطعانه سیستم‌عامل (بر اساس متن یا اندیس)
+    // تشخیص آیکون
     let osIcon = "";
     const lowerText = cleanTitleText.toLowerCase();
 
-    if (lowerText.includes("tv")) {
-        osIcon = OS_ICONS.tv;
-    } else if (lowerText.includes("win")) {
-        osIcon = OS_ICONS.windows;
-    } else if (lowerText.includes("ios") || lowerText.includes("iphone") || lowerText.includes("mac") || lowerText.includes("apple")) {
-        osIcon = OS_ICONS.apple;
-    } else if (lowerText.includes("linux")) {
-        osIcon = OS_ICONS.linux;
-    } else if (lowerText.includes("android") || index === 0) { 
-        // اگر اولین دسته‌بندی باشه یا کلمه اندروید رو داشته باشه
-        osIcon = OS_ICONS.android;
-    }
+    if (lowerText.includes("tv")) osIcon = OS_ICONS.tv;
+    else if (lowerText.includes("win")) osIcon = OS_ICONS.windows;
+    else if (lowerText.includes("ios") || lowerText.includes("iphone") || lowerText.includes("mac") || lowerText.includes("apple")) osIcon = OS_ICONS.apple;
+    else if (lowerText.includes("linux")) osIcon = OS_ICONS.linux;
+    else if (lowerText.includes("android") || index === 0) osIcon = OS_ICONS.android;
 
-    // قرار دادن متن و آیکون
-    title.innerHTML = `<span>${cleanTitleText}</span> ${osIcon}`;
-
+    // چیدمان: آیکون در سمت راست، متن در سمت چپ
+    title.innerHTML = `${osIcon} <span>${cleanTitleText}</span>`;
     section.appendChild(title);
 
-    // ساخت کارت هر برنامه
+    // کارت برنامه‌ها
     category.apps.forEach(app => {
-
         const card = document.createElement("div");
         card.className = "card";
-
-        const left = document.createElement("div");
-        left.className = "appInfo";
-
-        const icon = document.createElement("span");
-        icon.className = "icon";
-        icon.innerHTML = app.icon;
-
-        const name = document.createElement("span");
-        name.className = "name";
-        name.innerText = app.name;
-
-        left.appendChild(icon);
-        left.appendChild(name);
-
-        const button = document.createElement("a");
-        button.className = "download";
-        button.innerText = "دانلود";
-
-        button.href = app.link;
-        button.target = "_blank";
-
-        card.appendChild(left);
-        card.appendChild(button);
-
+        card.innerHTML = `
+            <div class="appInfo">
+                <span class="icon">${app.icon}</span>
+                <span class="name">${app.name}</span>
+            </div>
+            <a class="download" href="${app.link}" target="_blank">دانلود</a>
+        `;
         section.appendChild(card);
-
     });
 
     container.appendChild(section);
-
 });
 
-// اگر لینک وارد نشده باشد
+// مدیریت کلیک‌ها
 document.querySelectorAll(".download").forEach(btn => {
-
     btn.addEventListener("click", function (e) {
-
         if (this.getAttribute("href") === "#") {
-
             e.preventDefault();
-
             alert("لینک دانلود هنوز اضافه نشده است.");
-
         }
-
     });
-
 });
 
-// افکت کلیک دکمه‌ها
 document.querySelectorAll("a").forEach(btn => {
-
     btn.addEventListener("click", () => {
-
         btn.style.transform = "scale(.95)";
-
-        setTimeout(() => {
-
-            btn.style.transform = "scale(1)";
-
-        }, 120);
-
+        setTimeout(() => btn.style.transform = "scale(1)", 120);
     });
-
 });
 
-// سال فوتر
+// فوتر
 const year = new Date().getFullYear();
-const footer = document.querySelector("footer p");
-footer.innerHTML = "© " + year + " HIDDIFY_plas";
+document.querySelector("footer p").innerHTML = "© " + year + " HIDDIFY_plas";
 
-
-// ==========================================
-// انیمیشن پس‌زمینه زنده (شب و روز)
-// ==========================================
+// انیمیشن پس‌زمینه
 const canvas = document.getElementById('bg-canvas');
 if (canvas) {
     const ctx = canvas.getContext('2d');
-
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
-
-    window.addEventListener('resize', () => {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-    });
+    window.addEventListener('resize', () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; });
 
     let isDay = false;
-
-    // متغیرهای ستاره‌ها
     const stars = [];
-    for (let i = 0; i < 130; i++) {
-        stars.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            radius: Math.random() * 1.5 + 0.5,
-            alpha: Math.random(),
-            speed: Math.random() * 0.02 + 0.005,
-            factor: 1
-        });
-    }
-
-    // متغیرهای ابرها
-    const clouds = [
-        { x: width * 0.1, y: 80, scale: 0.8, speed: 0.3 },
-        { x: width * 0.5, y: 140, scale: 1.2, speed: 0.2 },
-        { x: width * 0.8, y: 60, scale: 0.9, speed: 0.25 }
-    ];
-
-    function drawCloud(cx, cy, scale) {
-        ctx.save();
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
-        ctx.beginPath();
-        ctx.arc(cx, cy, 25 * scale, Math.PI * 0.5, Math.PI * 1.5);
-        ctx.arc(cx + 25 * scale, cy - 20 * scale, 25 * scale, Math.PI * 1, Math.PI * 1.85);
-        ctx.arc(cx + 60 * scale, cy - 15 * scale, 20 * scale, Math.PI * 1.37, Math.PI * 1.91);
-        ctx.arc(cx + 70 * scale, cy, 20 * scale, Math.PI * 1.5, Math.PI * 0.5);
-        ctx.moveTo(cx + 70 * scale, cy + 20 * scale);
-        ctx.lineTo(cx, cy + 20 * scale);
-        ctx.fill();
-        ctx.restore();
-    }
+    for (let i = 0; i < 130; i++) stars.push({ x: Math.random() * width, y: Math.random() * height, radius: Math.random() * 1.5 + 0.5, alpha: Math.random(), speed: Math.random() * 0.02 + 0.005, factor: 1 });
 
     function renderSky() {
         ctx.clearRect(0, 0, width, height);
-
         if (!isDay) {
-            // آسمان شب
             stars.forEach(star => {
                 star.alpha += star.speed * star.factor;
-                if (star.alpha >= 1) {
-                    star.alpha = 1;
-                    star.factor = -1;
-                } else if (star.alpha <= 0.12) {
-                    star.alpha = 0.12;
-                    star.factor = 1;
-                }
-
+                if (star.alpha >= 1 || star.alpha <= 0.12) star.factor *= -1;
                 ctx.beginPath();
                 ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
-                ctx.shadowBlur = star.radius * 3;
-                ctx.shadowColor = '#ffffff';
                 ctx.fill();
             });
-        } else {
-            // خورشید
-            const sunX = width - 80;
-            const sunY = 90;
-
-            ctx.save();
-            const sunGlow = ctx.createRadialGradient(sunX, sunY, 10, sunX, sunY, 70);
-            sunGlow.addColorStop(0, 'rgba(255, 223, 100, 1)');
-            sunGlow.addColorStop(0.4, 'rgba(255, 180, 50, 0.6)');
-            sunGlow.addColorStop(1, 'rgba(255, 180, 50, 0)');
-            ctx.fillStyle = sunGlow;
-            ctx.beginPath();
-            ctx.arc(sunX, sunY, 70, 0, Math.PI * 2);
-            ctx.fill();
-
-            ctx.fillStyle = '#ffea79';
-            ctx.beginPath();
-            ctx.arc(sunX, sunY, 28, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.restore();
-
-            // ابرها
-            clouds.forEach(cloud => {
-                cloud.x += cloud.speed;
-                if (cloud.x - 100 > width) {
-                    cloud.x = -100;
-                }
-                drawCloud(cloud.x, cloud.y, cloud.scale);
-            });
         }
-
         requestAnimationFrame(renderSky);
     }
-
     renderSky();
 
-    // سوئیچ تم
     const themeBtn = document.getElementById('themeToggle');
-    if (themeBtn) {
-        themeBtn.addEventListener('click', () => {
-            isDay = !isDay;
-            document.body.classList.toggle('day-mode', isDay);
-
-            if (isDay) {
-                themeBtn.innerText = '☀️';
-                canvas.style.background = 'linear-gradient(to bottom, #38bdf8, #818cf8, #bae6fd)';
-            } else {
-                themeBtn.innerText = '🌙';
-                canvas.style.background = 'radial-gradient(ellipse at bottom, #111a2e 0%, #050811 100%)';
-            }
-        });
-    }
+    themeBtn.addEventListener('click', () => {
+        isDay = !isDay;
+        document.body.classList.toggle('day-mode', isDay);
+        themeBtn.innerText = isDay ? '☀️' : '🌙';
+        canvas.style.background = isDay ? 'linear-gradient(to bottom, #38bdf8, #818cf8)' : 'radial-gradient(ellipse at bottom, #111a2e 0%, #050811 100%)';
+    });
 }
