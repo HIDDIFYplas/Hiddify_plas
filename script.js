@@ -37,19 +37,20 @@ CONFIG.categories.forEach((category, index) => {
     else if (lowerText.includes("linux")) osIcon = OS_ICONS.linux;
     else if (lowerText.includes("android") || index === 0) osIcon = OS_ICONS.android;
 
-    // آیکون و متن با ترتیب صحیح جهت راست‌چین شدن
-    title.innerHTML = `${osIcon} <span>${cleanTitleText}</span>`;
+    // چیدمان عنوان: متن سمت چپ و آیکون سمت راست، کل خط چسبیده به راست
+    title.innerHTML = `<span>${cleanTitleText}</span> ${osIcon}`;
     section.appendChild(title);
 
     category.apps.forEach(app => {
         const card = document.createElement("div");
         card.className = "card";
+        // چیدمان کارت: دکمه دانلود (سمت چپ) | نام و آیکون لوگوی برنامه (سمت راست)
         card.innerHTML = `
-            <div class="appInfo">
-                <span class="icon">${app.icon}</span>
-                <span class="name">${app.name}</span>
-            </div>
             <a class="download" href="${app.link}" target="_blank">دانلود</a>
+            <div class="appInfo">
+                <span class="name">${app.name}</span>
+                <span class="icon">${app.icon}</span>
+            </div>
         `;
         section.appendChild(card);
     });
@@ -133,7 +134,6 @@ if (canvas) {
         const sunY = 90;
         
         ctx.save();
-        // هاله نور خورشید
         const glow = ctx.createRadialGradient(sunX, sunY, 20, sunX, sunY, 70);
         glow.addColorStop(0, "rgba(255, 220, 100, 0.8)");
         glow.addColorStop(1, "rgba(255, 220, 100, 0)");
@@ -142,7 +142,6 @@ if (canvas) {
         ctx.arc(sunX, sunY, 70, 0, Math.PI * 2);
         ctx.fill();
 
-        // مرکز خورشید
         ctx.fillStyle = "#ffea00";
         ctx.beginPath();
         ctx.arc(sunX, sunY, 32, 0, Math.PI * 2);
@@ -154,7 +153,6 @@ if (canvas) {
         ctx.clearRect(0, 0, width, height);
 
         if (!isDay) {
-            // انیمیشن ستاره‌های شب
             stars.forEach(star => {
                 star.alpha += star.speed * star.factor;
                 if (star.alpha >= 1 || star.alpha <= 0.12) star.factor *= -1;
@@ -164,10 +162,7 @@ if (canvas) {
                 ctx.fill();
             });
         } else {
-            // رسم خورشید
             drawSun();
-
-            // حرکت ابرهای روز
             clouds.forEach(cloud => {
                 cloud.x += cloud.speed;
                 if (cloud.x - 120 > width) cloud.x = -150;
