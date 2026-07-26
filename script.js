@@ -1,350 +1,123 @@
-/* ===========================
-   HIDDIFY_plas - Glass Style
-=========================== */
+// ===========================
+// HIDDIFY_plas - script.js
+// ===========================
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Vazirmatn", sans-serif;
-}
+// آیکون‌های SVG سیستم‌عامل‌ها
+const OS_ICONS = {
+    android: `<span class="os-icon"><svg viewBox="0 0 24 24"><path d="M6 18c0 .55.45 1 1 1h1v3c0 .55.45 1 1 1s1-.45 1-1v-3h4v3c0 .55.45 1 1 1s1-.45 1-1v-3h1c.55 0 1-.45 1-1V8H6v10zM3.5 8C2.67 8 2 8.67 2 9.5v7c0 .83.67 1.5 1.5 1.5S5 17.33 5 16.5v-7C5 8.67 4.33 8 3.5 8zm17 0c-.83 0-1.5.67-1.5 1.5v7c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5v-7c0-.83-.67-1.5-1.5-1.5zM15.53 2.16l1.3-1.3c.2-.2.2-.51 0-.71-.2-.2-.51-.2-.71 0l-1.48 1.48C13.85 1.23 12.95 1 12 1c-.96 0-1.86.23-2.66.63L7.85.15c-.2-.2-.51-.2-.71 0-.2.2-.2.51 0 .71l1.31 1.31C6.97 3.26 6 5.01 6 7h12c0-1.99-.97-3.75-2.47-4.84zM10 5H9V4h1v1zm5 0h-1V4h1v1z"/></svg></span>`,
+    windows: `<span class="os-icon"><svg viewBox="0 0 24 24"><path d="M3 5.5L10 4.5V11.5H3V5.5ZM3 12.5H10V19.5L3 18.5V12.5ZM11 4.3L21 3V11.5H11V4.3ZM11 12.5H21V21L11 19.7V12.5Z"/></svg></span>`,
+    apple: `<span class="os-icon"><svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.09c.67-.82 1.13-1.96.99-3.09-1 .04-2.22.67-2.92 1.49-.62.72-1.17 1.88-1.02 2.99 1.12.09 2.28-.57 2.95-1.39z"/></svg></span>`,
+    tv: `<span class="os-icon"><svg viewBox="0 0 24 24"><path d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg></span>`,
+    linux: `<span class="os-icon"><svg viewBox="0 0 24 24"><path d="M12.38 2.01c-3.14 0-5.69 2.55-5.69 5.69 0 1.25.4 2.4 1.08 3.34-.14.28-.27.57-.38.87C6.67 13.88 6 16.03 6 18.5c0 .83.67 1.5 1.5 1.5h9c.83 0 1.5-.67 1.5-1.5 0-2.47-.67-4.62-1.39-6.59-.11-.3-.24-.59-.38-.87.68-.94 1.08-2.09 1.08-3.34 0-3.14-2.55-5.69-5.69-5.69zm-2.38 5c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm4.76 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1z"/></svg></span>`
+};
 
-html {
-    scroll-behavior: smooth;
-}
+// وضعیت سرورها
+document.getElementById("statusBox").innerText = CONFIG.status;
 
-body {
-    background: #060913;
-    color: white;
-    padding: 20px 15px;
-    max-width: 500px;
-    margin: auto;
-    position: relative;
-    min-height: 100vh;
-    transition: color 0.4s ease;
-}
+// لینک دکمه‌ها
+document.getElementById("configButton").href = CONFIG.telegram;
+document.getElementById("telegramBtn").href = CONFIG.telegram;
+document.getElementById("supportBtn").href = CONFIG.support;
+document.getElementById("tutorialBtn").href = CONFIG.tutorial;
 
-/* دکمه تغییر تم */
-.theme-btn {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 99;
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    font-size: 20px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-}
+const container = document.getElementById("appContainer");
 
-.theme-btn:active {
-    transform: scale(0.9);
-}
+// ساخت بخش‌ها
+CONFIG.categories.forEach((category, index) => {
+    const section = document.createElement("section");
+    section.className = "category";
 
-/* Canvas Background */
-#bg-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    transition: background 0.6s ease;
-}
+    const title = document.createElement("h2");
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = category.title;
+    const cleanTitleText = tempDiv.textContent || tempDiv.innerText || "";
 
-/* Header */
-header {
-    text-align: center;
-    padding: 25px 10px 15px 10px;
-}
+    // تشخیص سیستم‌عامل
+    let osIcon = "";
+    const lowerText = cleanTitleText.toLowerCase();
 
-.logo {
-    width: 90px;
-    height: 90px;
-    margin: auto;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid #00d2ff;
-    box-shadow: 0 0 20px rgba(0, 210, 255, 0.3);
-    margin-bottom: 15px;
-    padding: 3px;
-}
+    if (lowerText.includes("tv")) osIcon = OS_ICONS.tv;
+    else if (lowerText.includes("win")) osIcon = OS_ICONS.windows;
+    else if (lowerText.includes("ios") || lowerText.includes("iphone") || lowerText.includes("mac") || lowerText.includes("apple")) osIcon = OS_ICONS.apple;
+    else if (lowerText.includes("linux")) osIcon = OS_ICONS.linux;
+    else if (lowerText.includes("android") || index === 0) osIcon = OS_ICONS.android;
 
-.logo img {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-}
+    // چیدمان عنوان و آیکون
+    title.innerHTML = `<span>${cleanTitleText}</span>${osIcon}`;
+    section.appendChild(title);
 
-header h1 {
-    font-size: 30px;
-    font-weight: 900;
-    margin-bottom: 6px;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-}
+    // کارت برنامه‌ها
+    category.apps.forEach(app => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+            <div class="appInfo">
+                <span class="icon">${app.icon}</span>
+                <span class="name">${app.name}</span>
+            </div>
+            <a class="download" href="${app.link}" target="_blank">دانلود</a>
+        `;
+        section.appendChild(card);
+    });
 
-header p {
-    color: #94a3b8;
-    margin-bottom: 25px;
-    font-size: 14px;
-    transition: color 0.4s ease;
-}
+    container.appendChild(section);
+});
 
-/* دکمه اصلی دریافت کانفیگ */
-.mainButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: linear-gradient(135deg, #0088cc, #0055ff);
-    padding: 16px;
-    border-radius: 20px;
-    text-decoration: none;
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    box-shadow: 0 8px 25px rgba(0, 136, 204, 0.4);
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
+// لینک‌های خالی
+document.querySelectorAll(".download").forEach(btn => {
+    btn.addEventListener("click", function (e) {
+        if (this.getAttribute("href") === "#") {
+            e.preventDefault();
+            alert("لینک دانلود هنوز اضافه نشده است.");
+        }
+    });
+});
 
-.mainButton:hover {
-    box-shadow: 0 10px 30px rgba(0, 136, 204, 0.6);
-}
+// افکت کلیک
+document.querySelectorAll("a").forEach(btn => {
+    btn.addEventListener("click", () => {
+        btn.style.transform = "scale(.95)";
+        setTimeout(() => btn.style.transform = "scale(1)", 120);
+    });
+});
 
-/* وضعیت */
-.status {
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
+// فوتر
+const year = new Date().getFullYear();
+document.querySelector("footer p").innerHTML = "© " + year + " HIDDIFY_plas";
 
-#statusBox {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 14px;
-    border-radius: 20px;
-    text-align: center;
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    font-size: 14px;
-    color: #cbd5e1;
-    transition: all 0.4s ease;
-}
+// پس‌زمینه زنده
+const canvas = document.getElementById('bg-canvas');
+if (canvas) {
+    const ctx = canvas.getContext('2d');
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
+    window.addEventListener('resize', () => { width = canvas.width = window.innerWidth; height = canvas.height = window.innerHeight; });
 
-/* قاب اصلی سیستم‌عامل‌ها */
-.category {
-    margin-top: 25px;
-    background: rgba(255, 255, 255, 0.04);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 26px;
-    padding: 20px 16px;
-    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-    transition: all 0.4s ease;
-}
+    let isDay = false;
+    const stars = [];
+    for (let i = 0; i < 130; i++) stars.push({ x: Math.random() * width, y: Math.random() * height, radius: Math.random() * 1.5 + 0.5, alpha: Math.random(), speed: Math.random() * 0.02 + 0.005, factor: 1 });
 
-/* اصلاحیه جهت قرارگیری آیکون سمت راست متن */
-.category h2 {
-    margin-bottom: 16px;
-    font-size: 22px;
-    font-weight: 700;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    display: flex;
-    flex-direction: row-reverse;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 12px;
-}
-
-/* استایل آیکون‌های سیستم‌عامل (کد SVG) */
-.os-icon {
-    width: 32px;
-    height: 32px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.os-icon svg {
-    width: 100%;
-    height: 100%;
-    fill: #00d2ff;
-    filter: drop-shadow(0 0 8px rgba(0, 210, 255, 0.8));
-    transition: all 0.4s ease;
-}
-
-/* کارت برنامه‌ها */
-.card {
-    background: rgba(20, 28, 45, 0.65);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 12px 14px;
-    margin-bottom: 12px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-    transition: all 0.4s ease;
-}
-
-.card:last-child {
-    margin-bottom: 0;
-}
-
-.appInfo {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-
-.icon {
-    font-size: 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.name {
-    font-size: 16px;
-    font-weight: 600;
-    color: #f8fafc;
-    transition: color 0.4s ease;
-}
-
-/* دکمه دانلود */
-.download {
-    background: linear-gradient(135deg, #0284c7, #2563eb);
-    padding: 9px 20px;
-    border-radius: 16px;
-    text-decoration: none;
-    color: white;
-    font-size: 14px;
-    font-weight: 700;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4);
-    transition: all 0.25s ease;
-    white-space: nowrap;
-}
-
-.download:hover {
-    background: linear-gradient(135deg, #0ea5e9, #3b82f6);
-    box-shadow: 0 6px 20px rgba(56, 189, 248, 0.6);
-}
-
-/* Footer */
-footer {
-    margin-top: 40px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-footer a {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 14px;
-    border-radius: 18px;
-    text-decoration: none;
-    color: white;
-    text-align: center;
-    font-weight: 600;
-    font-size: 15px;
-    transition: all 0.4s ease;
-}
-
-footer p {
-    text-align: center;
-    color: #8A94A6;
-    margin-top: 10px;
-    font-size: 13px;
-}
-
-/* ==========================================
-   تغییرات حالت روز (Day Mode)
-========================================== */
-body.day-mode {
-    color: #0f172a;
-}
-
-body.day-mode header p {
-    color: #334155;
-}
-
-body.day-mode .theme-btn {
-    background: rgba(255, 255, 255, 0.4);
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-body.day-mode #statusBox {
-    background: rgba(255, 255, 255, 0.45);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    color: #1e293b;
-}
-
-body.day-mode .category {
-    background: rgba(255, 255, 255, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.12);
-}
-
-body.day-mode .category h2 {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-}
-
-body.day-mode .os-icon svg {
-    fill: #ffffff;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
-}
-
-body.day-mode .card {
-    background: rgba(255, 255, 255, 0.75);
-    border: 1px solid rgba(255, 255, 255, 0.8);
-}
-
-body.day-mode .name {
-    color: #0f172a;
-}
-
-body.day-mode footer a {
-    background: rgba(255, 255, 255, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    color: #0f172a;
-}
-
-/* موبایل */
-@media(max-width: 480px) {
-    body {
-        padding: 15px 10px;
+    function renderSky() {
+        ctx.clearRect(0, 0, width, height);
+        if (!isDay) {
+            stars.forEach(star => {
+                star.alpha += star.speed * star.factor;
+                if (star.alpha >= 1 || star.alpha <= 0.12) star.factor *= -1;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+                ctx.fill();
+            });
+        }
+        requestAnimationFrame(renderSky);
     }
+    renderSky();
 
-    header h1 {
-        font-size: 26px;
-    }
-
-    .card {
-        padding: 10px 12px;
-    }
-
-    .download {
-        padding: 8px 16px;
-        font-size: 13px;
-    }
+    const themeBtn = document.getElementById('themeToggle');
+    themeBtn.addEventListener('click', () => {
+        isDay = !isDay;
+        document.body.classList.toggle('day-mode', isDay);
+        themeBtn.innerText = isDay ? '☀️' : '🌙';
+        canvas.style.background = isDay ? 'linear-gradient(to bottom, #38bdf8, #818cf8)' : 'radial-gradient(ellipse at bottom, #111a2e 0%, #050811 100%)';
+    });
 }
