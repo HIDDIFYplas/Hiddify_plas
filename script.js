@@ -31,7 +31,8 @@ CONFIG.categories.forEach((category, index) => {
     if (lowerText.includes("tv")) osIcon = OS_ICONS.tv;
     else if (lowerText.includes("win")) osIcon = OS_ICONS.windows;
     else if (lowerText.includes("linux")) osIcon = OS_ICONS.linux;
-    else if (lowerText.includes("ios") || lowerText.includes("iphone") || lowerText.includes("mac") || lowerText.includes("apple")) osIcon = OS_ICONS.apple;
+    else if (lowerText.includes("iphone") || lowerText.includes("ios")) osIcon = OS_ICONS.apple.replace("os-icon--apple", "os-icon--iphone");
+    else if (lowerText.includes("mac") || lowerText.includes("apple")) osIcon = OS_ICONS.apple.replace("os-icon--apple", "os-icon--mac");
     else if (lowerText.includes("android") || index === 0) osIcon = OS_ICONS.android;
 
     title.innerHTML = `${osIcon} <span>${cleanTitleText}</span>`;
@@ -71,359 +72,398 @@ document.querySelectorAll("a").forEach(link => {
 const year = new Date().getFullYear();
 document.querySelector("footer p").textContent = `© ${year} HIDDIFY_plas`;
 
-// ================================================
-// پس‌زمینهٔ زنده: حالت اصلی + جلوه‌های فصلی هالووین
-// ================================================
+// =====================================================
+// پس‌زمینهٔ سینمایی و واکنش‌گرا: هالووین + حالت عادی
+// =====================================================
 const canvas = document.getElementById("bg-canvas");
 if (canvas && canvas.getContext) {
     const ctx = canvas.getContext("2d", { alpha: true });
-    let width = 0;
-    let height = 0;
-    let isDay = false;
+    let width = 0, height = 0, isDay = false, lastFrame = 0;
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
     let reducedMotion = motionQuery.matches;
-    const nowDate = new Date();
-    const month = nowDate.getMonth(); // 0 = January
-    const day = nowDate.getDate();
-    const isHalloweenSeason = (month === 9 && day >= 25) || (month === 10 && day <= 1);
+    const today = new Date();
+    const month = today.getMonth();
+    const date = today.getDate();
+    const isHalloweenSeason = (month === 9 && date >= 25) || (month === 10 && date <= 1);
     document.body.classList.toggle("halloween-theme", isHalloweenSeason);
+    const rand = (min, max) => min + Math.random() * (max - min);
+    const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
+
+    const stars = Array.from({ length: 170 }, () => ({
+        x: Math.random(), y: Math.random() * .78,
+        r: rand(.45, 1.65), alpha: rand(.24, .95), speed: rand(.004, .018),
+        dir: Math.random() < .5 ? -1 : 1, twinkle: Math.random() * Math.PI * 2
+    }));
+    const clouds = Array.from({ length: 7 }, (_, i) => ({
+        x: (i / 7) * 1.35 - .12, y: rand(.08, .48), scale: rand(.56, 1.55),
+        speed: rand(.00013, .00031) * (i % 2 ? 1 : .78), phase: rand(0, 8)
+    }));
+    const leaves = Array.from({ length: 58 }, () => ({
+        x: Math.random(), y: Math.random(), size: rand(4, 10), speed: rand(.00013, .00058),
+        drift: rand(-.0004, .0004), spin: rand(0, Math.PI * 2), spinSpeed: rand(-.035, .035),
+        color: ["#f58a27", "#ffc04d", "#b94824", "#d96721", "#9d4c24", "#ffdb77"][Math.floor(Math.random() * 6)]
+    }));
+    const bats = Array.from({ length: 14 }, (_, i) => ({
+        x: Math.random(), y: rand(.07, .66), vx: rand(.00010, .00031) * (Math.random() < .25 ? -1 : 1),
+        vy: rand(-.00008, .00008), scale: rand(.62, 1.45), phase: rand(0, 10),
+        angle: rand(-.3, .3), turn: rand(-.0012, .0012), type: i % 3
+    }));
+    const motes = Array.from({ length: 55 }, () => ({
+        x: Math.random(), y: rand(.2, 1), r: rand(.7, 2.2), phase: rand(0, 10),
+        speed: rand(.004, .018), lift: rand(.00003, .00012)
+    }));
+    let nextLightningAt = performance.now() + rand(8500, 11500);
+    let lightningStartedAt = -10000;
+    let lightningX = .5;
 
     function resizeCanvas() {
         const dpr = Math.min(window.devicePixelRatio || 1, 1.7);
-        width = window.innerWidth;
-        height = window.innerHeight;
+        width = Math.max(1, window.innerWidth);
+        height = Math.max(1, window.innerHeight);
         canvas.width = Math.round(width * dpr);
         canvas.height = Math.round(height * dpr);
-        canvas.style.width = `${width}px`;
-        canvas.style.height = `${height}px`;
+        canvas.style.width = width + "px";
+        canvas.style.height = height + "px";
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        clouds.forEach((cloud, i) => {
-            if (cloud.x > width + 200) cloud.x = (i + 1) * width / 4;
-        });
         renderSky(performance.now());
     }
-
-    const stars = Array.from({ length: 105 }, () => ({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        radius: Math.random() * 1.25 + 0.4,
-        alpha: Math.random() * 0.75 + 0.2,
-        speed: Math.random() * 0.012 + 0.003,
-        direction: Math.random() < 0.5 ? -1 : 1
-    }));
-    const clouds = [
-        { x: window.innerWidth * 0.1, y: 100, scale: 0.8, speed: 0.34 },
-        { x: window.innerWidth * 0.6, y: 160, scale: 1.05, speed: 0.22 },
-        { x: window.innerWidth * 0.3, y: 240, scale: 0.62, speed: 0.43 }
-    ];
-    const leaves = Array.from({ length: 22 }, () => ({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        size: 4 + Math.random() * 7,
-        speed: 0.35 + Math.random() * 1.15,
-        drift: (Math.random() - 0.5) * 0.9,
-        spin: Math.random() * Math.PI * 2,
-        spinSpeed: (Math.random() - 0.5) * 0.065,
-        color: ["#e87928", "#f59e0b", "#b45309", "#c2410c", "#d97706"][Math.floor(Math.random() * 5)]
-    }));
-    const bats = Array.from({ length: 4 }, (_, i) => ({
-        x: Math.random() * window.innerWidth,
-        y: 70 + Math.random() * Math.min(250, window.innerHeight * 0.4),
-        scale: 0.55 + Math.random() * 0.65,
-        speed: 0.35 + Math.random() * 0.65,
-        phase: i * 1.7,
-        visible: Math.random() > 0.15
-    }));
-    const motes = Array.from({ length: 26 }, () => ({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        r: 0.7 + Math.random() * 1.7,
-        phase: Math.random() * Math.PI * 2,
-        speed: 0.006 + Math.random() * 0.018
-    }));
-
-    let nextLightningAt = performance.now() + 8500 + Math.random() * 4500;
-    let lightningStartedAt = -10000;
-    let lastFrame = 0;
 
     function setSkyBackground() {
         if (isHalloweenSeason) {
             canvas.style.background = isDay
-                ? "linear-gradient(180deg, #77b9e8 0%, #c9b7a4 62%, #e3a36b 100%)"
-                : "radial-gradient(ellipse at 78% 24%, #30264b 0%, #17172f 42%, #080b19 100%)";
+                ? "linear-gradient(180deg,#75b8ea 0%,#a9c5d7 43%,#efbf8b 100%)"
+                : "radial-gradient(ellipse at 75% 17%,#3b315f 0%,#1a1835 42%,#080b19 100%)";
         } else {
             canvas.style.background = isDay
-                ? "linear-gradient(to bottom, #38bdf8, #818cf8)"
-                : "radial-gradient(ellipse at bottom, #111a2e 0%, #050811 100%)";
+                ? "linear-gradient(180deg,#38bdf8 0%,#818cf8 100%)"
+                : "radial-gradient(ellipse at 70% 22%,#17213d 0%,#050811 82%)";
         }
     }
 
-    function drawCloud(cx, cy, scale, alpha = 0.55) {
+    function roundedGlow(x, y, radius, inner, outer) {
+        const g = ctx.createRadialGradient(x, y, 0, x, y, radius);
+        g.addColorStop(0, inner); g.addColorStop(1, outer);
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, radius, 0, Math.PI * 2); ctx.fill();
+    }
+
+    function drawCloud(cloud, time, alpha = .68) {
+        const x = cloud.x * width;
+        const y = cloud.y * height + Math.sin(time * .00015 + cloud.phase) * 8;
+        const scale = cloud.scale * clamp(width / 1150, .62, 1.45);
         ctx.save();
-        ctx.fillStyle = `rgba(255,255,255,${alpha})`;
+        ctx.translate(x, y); ctx.scale(scale, scale); ctx.globalAlpha = alpha;
+        // سایهٔ سرد در لبهٔ پایین و لایه‌های پرحجم ابر
+        const shade = ctx.createLinearGradient(0, -36, 0, 35);
+        shade.addColorStop(0, "rgba(255,255,255,.96)");
+        shade.addColorStop(.53, isDay ? "rgba(248,246,255,.82)" : "rgba(170,170,214,.26)");
+        shade.addColorStop(1, isDay ? "rgba(126,147,183,.43)" : "rgba(55,52,94,.22)");
+        ctx.fillStyle = shade;
         ctx.beginPath();
-        ctx.arc(cx, cy, 30 * scale, Math.PI * 0.5, Math.PI * 1.5);
-        ctx.arc(cx + 35 * scale, cy - 20 * scale, 35 * scale, Math.PI, Math.PI * 1.85);
-        ctx.arc(cx + 75 * scale, cy - 15 * scale, 28 * scale, Math.PI * 1.37, Math.PI * 1.91);
-        ctx.arc(cx + 100 * scale, cy, 30 * scale, Math.PI * 1.5, Math.PI * 0.5);
-        ctx.closePath();
+        ctx.ellipse(0, 4, 53, 18, 0, 0, Math.PI * 2);
+        ctx.ellipse(-26, -5, 27, 22, 0, 0, Math.PI * 2);
+        ctx.ellipse(1, -18, 31, 31, 0, 0, Math.PI * 2);
+        ctx.ellipse(29, -8, 34, 25, 0, 0, Math.PI * 2);
+        ctx.ellipse(52, 3, 27, 17, 0, 0, Math.PI * 2);
         ctx.fill();
+        ctx.strokeStyle = isDay ? "rgba(255,255,255,.38)" : "rgba(208,197,255,.14)";
+        ctx.lineWidth = 1.4; ctx.beginPath(); ctx.ellipse(4, -12, 27, 25, -.1, Math.PI * 1.05, Math.PI * 1.9); ctx.stroke();
         ctx.restore();
     }
 
     function drawSun(time) {
-        const sunX = width - Math.max(74, width * 0.14);
-        const sunY = Math.max(76, height * 0.16);
-        const pulse = 0.93 + Math.sin(time * 0.00045) * 0.07;
-        ctx.save();
-        const glow = ctx.createRadialGradient(sunX, sunY, 8, sunX, sunY, 95 * pulse);
-        glow.addColorStop(0, isHalloweenSeason ? "rgba(255,190,105,.54)" : "rgba(255,220,100,.8)");
-        glow.addColorStop(1, "rgba(255,190,100,0)");
-        ctx.fillStyle = glow;
-        ctx.beginPath(); ctx.arc(sunX, sunY, 95 * pulse, 0, Math.PI * 2); ctx.fill();
-        ctx.fillStyle = isHalloweenSeason ? "#ffd18a" : "#ffea00";
-        ctx.beginPath(); ctx.arc(sunX, sunY, 29 * pulse, 0, Math.PI * 2); ctx.fill();
-        ctx.restore();
+        const x = width * .79, y = height * .18, pulse = .96 + Math.sin(time * .00045) * .04;
+        roundedGlow(x, y, Math.min(180, width * .2), "rgba(255,222,139,.58)", "rgba(255,188,108,0)");
+        ctx.save(); ctx.translate(x, y); ctx.rotate(time * .000025);
+        ctx.strokeStyle = "rgba(255,231,166,.42)"; ctx.lineWidth = 2;
+        for (let i = 0; i < 16; i++) {
+            ctx.rotate(Math.PI / 8); ctx.beginPath(); ctx.moveTo(36 * pulse, 0); ctx.lineTo(49 * pulse, 0); ctx.stroke();
+        }
+        const g = ctx.createRadialGradient(-10, -12, 2, 0, 0, 39 * pulse);
+        g.addColorStop(0, "#fff4bb"); g.addColorStop(.7, "#ffca67"); g.addColorStop(1, "#f79a45");
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(0, 0, 31 * pulse, 0, Math.PI * 2); ctx.fill(); ctx.restore();
     }
 
     function drawMoon(time) {
-        const x = width - Math.max(84, width * 0.19);
-        const y = Math.max(102, height * 0.17);
-        const r = Math.min(57, Math.max(40, width * 0.105));
+        const x = width * .755, y = Math.max(100, height * .19), r = clamp(Math.min(width * .055, height * .105), 43, 78);
+        roundedGlow(x, y, r * 3.1, "rgba(197,190,255,.24)", "rgba(135,110,230,0)");
         ctx.save();
-        const halo = ctx.createRadialGradient(x, y, r * 0.5, x, y, r * 2.5);
-        halo.addColorStop(0, "rgba(220,205,255,.19)");
-        halo.addColorStop(1, "rgba(150,120,220,0)");
-        ctx.fillStyle = halo; ctx.beginPath(); ctx.arc(x, y, r * 2.5, 0, Math.PI * 2); ctx.fill();
-        const moon = ctx.createRadialGradient(x - r * 0.3, y - r * 0.28, 2, x, y, r);
-        moon.addColorStop(0, "#fff6db"); moon.addColorStop(0.76, "#ded6e9"); moon.addColorStop(1, "#a8a1c3");
-        ctx.fillStyle = moon; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill();
-        // حفره‌های ظریف ماه
-        ctx.fillStyle = "rgba(100,87,128,.14)";
-        [[-.28,-.08,.13],[.25,.3,.09],[.1,-.43,.07],[-.42,.35,.06]].forEach(([dx,dy,rr]) => {
-            ctx.beginPath(); ctx.arc(x + dx * r, y + dy * r, rr * r, 0, Math.PI * 2); ctx.fill();
+        // حلقهٔ هالهٔ ماه
+        ctx.strokeStyle = "rgba(213,205,255,.12)"; ctx.lineWidth = 1.2;
+        ctx.beginPath(); ctx.arc(x, y, r * 1.23 + Math.sin(time * .0004) * 2, 0, Math.PI * 2); ctx.stroke();
+        const g = ctx.createRadialGradient(x - r * .32, y - r * .38, 1, x, y, r * 1.08);
+        g.addColorStop(0, "#fffdf1"); g.addColorStop(.48, "#f3efff"); g.addColorStop(.82, "#d4d5ef"); g.addColorStop(1, "#8989b6");
+        ctx.shadowColor = "rgba(214,202,255,.52)"; ctx.shadowBlur = 24;
+        ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fill(); ctx.shadowBlur = 0;
+        // لکه‌ها و دهانه‌های ماه داخل محدودهٔ دایره
+        ctx.save(); ctx.beginPath(); ctx.arc(x, y, r - 1, 0, Math.PI * 2); ctx.clip();
+        [[-.33,-.14,.15],[.24,.26,.105],[.05,-.45,.075],[-.47,.34,.055],[.42,-.24,.045],[-.08,.15,.07]].forEach(([dx,dy,rr]) => {
+            ctx.fillStyle = "rgba(115,112,156,.14)"; ctx.beginPath(); ctx.arc(x + dx * r, y + dy * r, rr * r, 0, Math.PI * 2); ctx.fill();
+            ctx.strokeStyle = "rgba(255,255,255,.19)"; ctx.lineWidth = 1; ctx.stroke();
         });
-        ctx.restore();
+        ctx.restore(); ctx.restore();
     }
 
     function drawBat(bat, time) {
-        if (!bat.visible) return;
-        const flap = Math.sin(time * 0.012 + bat.phase) * 5;
-        ctx.save(); ctx.translate(bat.x, bat.y + Math.sin(time * 0.001 + bat.phase) * 7); ctx.scale(bat.scale, bat.scale);
-        ctx.fillStyle = "rgba(10,8,22,.94)";
+        const flap = Math.sin(time * .015 + bat.phase) * 10;
+        const x = bat.x * width, y = bat.y * height + Math.sin(time * .0017 + bat.phase) * 24;
+        ctx.save(); ctx.translate(x, y); ctx.rotate(bat.angle + Math.sin(time * .0008 + bat.phase) * .13); ctx.scale(bat.scale, bat.scale);
+        ctx.fillStyle = "rgba(9,6,22,.96)"; ctx.strokeStyle = "rgba(86,53,117,.7)"; ctx.lineWidth = 1.1;
         ctx.beginPath();
-        ctx.moveTo(-20, -2); ctx.quadraticCurveTo(-13, -13 - flap, -5, -3);
-        ctx.quadraticCurveTo(0, -11, 5, -3); ctx.quadraticCurveTo(14, -14 + flap, 21, -2);
-        ctx.lineTo(12, 2); ctx.lineTo(8, 8); ctx.lineTo(2, 3); ctx.lineTo(-3, 8); ctx.lineTo(-8, 2); ctx.closePath(); ctx.fill();
-        ctx.beginPath(); ctx.ellipse(0, 0, 4.2, 5.5, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.moveTo(-30, 0); ctx.quadraticCurveTo(-49, -19 - flap, -58, -11 - flap * .4);
+        ctx.lineTo(-50, 7); ctx.lineTo(-39, 1); ctx.lineTo(-34, 14); ctx.lineTo(-23, 6);
+        ctx.quadraticCurveTo(-13, -7, -5, -2); ctx.lineTo(0, -7);
+        ctx.lineTo(5, -2); ctx.quadraticCurveTo(14, -9, 24, 6);
+        ctx.lineTo(36, 14); ctx.lineTo(40, 1); ctx.lineTo(51, 7); ctx.lineTo(59, -11 - flap * .4);
+        ctx.quadraticCurveTo(46, -22 + flap, 30, 0); ctx.quadraticCurveTo(14, -7, 4, -3);
+        ctx.lineTo(0, 11); ctx.lineTo(-6, 17); ctx.lineTo(-12, 9); ctx.lineTo(-19, 17); ctx.lineTo(-22, 6); ctx.closePath();
+        ctx.fill(); ctx.stroke();
+        ctx.beginPath(); ctx.ellipse(0, 1, 5.5, 8, 0, 0, Math.PI * 2); ctx.fill();
         if (isHalloweenSeason) {
-            ctx.fillStyle = "rgba(255,113,75,.75)";
-            ctx.fillRect(-2.4, -1, 1.2, 1.2); ctx.fillRect(1.2, -1, 1.2, 1.2);
+            ctx.fillStyle = "#ff9b55"; ctx.shadowColor = "#ff602e"; ctx.shadowBlur = 7;
+            ctx.beginPath(); ctx.ellipse(-2.5, 0, 1.5, 2.1, 0, 0, Math.PI * 2); ctx.ellipse(2.5, 0, 1.5, 2.1, 0, 0, Math.PI * 2); ctx.fill();
         }
         ctx.restore();
     }
 
-    function drawPumpkin(x, y, scale, time, alpha = 1) {
-        const flicker = 0.78 + 0.22 * (0.5 + 0.5 * Math.sin(time * 0.013 + x * 0.07)) * (0.8 + 0.2 * Math.sin(time * 0.031 + y));
-        ctx.save(); ctx.translate(x, y); ctx.scale(scale, scale); ctx.globalAlpha = alpha;
-        const glow = ctx.createRadialGradient(0, -8, 2, 0, -8, 55 * flicker);
-        glow.addColorStop(0, `rgba(255,132,38,${0.30 * flicker})`); glow.addColorStop(1, "rgba(255,90,20,0)");
-        ctx.fillStyle = glow; ctx.beginPath(); ctx.arc(0, -8, 55 * flicker, 0, Math.PI * 2); ctx.fill();
-        const orange = ctx.createLinearGradient(-22, -26, 24, 25);
-        orange.addColorStop(0, "#ffb044"); orange.addColorStop(.5, "#f47719"); orange.addColorStop(1, "#a83d13");
-        ctx.fillStyle = orange;
-        for (let i = -2; i <= 2; i++) {
-            ctx.beginPath(); ctx.ellipse(i * 8, 0, 8.5, 18 - Math.abs(i) * 1.2, 0, 0, Math.PI * 2); ctx.fill();
+    function drawHauntedHouse(cx, ground, scale, time, foreground = false) {
+        ctx.save(); ctx.translate(cx, ground); ctx.scale(scale, scale);
+        const wall = isDay ? "rgba(73,61,83,.66)" : "rgba(7,7,23,.94)";
+        const roof = isDay ? "rgba(49,39,64,.76)" : "rgba(5,4,18,.99)";
+        ctx.fillStyle = wall; ctx.strokeStyle = isDay ? "rgba(255,210,150,.28)" : "rgba(103,76,138,.35)"; ctx.lineWidth = 1.2;
+        // عمارت مرکزی
+        ctx.fillRect(-55, -102, 112, 102);
+        ctx.beginPath(); ctx.moveTo(-70, -102); ctx.lineTo(0, -160); ctx.lineTo(70, -102); ctx.closePath(); ctx.fillStyle = roof; ctx.fill();
+        // برجک‌های نامتقارن
+        ctx.fillStyle = wall; ctx.fillRect(-76, -125, 28, 125); ctx.fillRect(48, -137, 30, 137);
+        ctx.fillStyle = roof;
+        ctx.beginPath(); ctx.moveTo(-83,-125); ctx.lineTo(-62,-169); ctx.lineTo(-46,-125); ctx.closePath(); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(41,-137); ctx.lineTo(63,-190); ctx.lineTo(84,-137); ctx.closePath(); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(-18,-145); ctx.lineTo(0,-184); ctx.lineTo(18,-145); ctx.closePath(); ctx.fill();
+        ctx.strokeStyle = "rgba(255,163,77,.24)"; ctx.beginPath(); ctx.moveTo(0,-184); ctx.lineTo(0,-202); ctx.stroke();
+        // پنجره‌های درخشان
+        const glow = .72 + .2 * Math.sin(time * .003 + cx);
+        ctx.shadowColor = isDay ? "rgba(255,189,91,.55)" : "rgba(255,122,51,.8)"; ctx.shadowBlur = foreground ? 9 : 14;
+        ctx.fillStyle = `rgba(255,165,71,${isDay ? .62 : glow})`;
+        [[-45,-84,10,17],[-6,-81,12,19],[29,-82,10,18],[-69,-106,8,12],[57,-116,9,13],[ -7,-129,8,12]].forEach(([x,y,w,h]) => {
+            ctx.fillRect(x,y,w,h); ctx.fillRect(x + w/2 - .7,y,1.4,h);
+        });
+        ctx.shadowBlur = 0;
+        // در و نردهٔ جلوی عمارت
+        ctx.fillStyle = isDay ? "rgba(24,20,37,.8)" : "rgba(3,3,14,.97)";
+        ctx.beginPath(); ctx.moveTo(-13,0); ctx.lineTo(-13,-38); ctx.quadraticCurveTo(0,-54,13,-38); ctx.lineTo(13,0); ctx.closePath(); ctx.fill();
+        if (foreground) {
+            ctx.strokeStyle = "rgba(12,8,21,.88)"; ctx.lineWidth = 3;
+            for (let i=-125;i<=125;i+=22) { ctx.beginPath(); ctx.moveTo(i, -1); ctx.lineTo(i,-24-(i%44===0?7:0)); ctx.stroke(); }
+            ctx.beginPath(); ctx.moveTo(-135,-16); ctx.lineTo(135,-16); ctx.stroke();
         }
-        ctx.fillStyle = "#4f6b32"; ctx.beginPath(); ctx.ellipse(1, -20, 4, 8, .25, 0, Math.PI * 2); ctx.fill();
-        ctx.shadowColor = "#ffd35a"; ctx.shadowBlur = 10 * flicker; ctx.fillStyle = `rgba(255,238,136,${flicker})`;
-        ctx.beginPath(); ctx.moveTo(-12,-6); ctx.lineTo(-5,1); ctx.lineTo(-13,3); ctx.closePath(); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(5,1); ctx.lineTo(13,-6); ctx.lineTo(13,3); ctx.closePath(); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(-9,8); ctx.lineTo(9,8); ctx.lineTo(5,14); ctx.lineTo(-5,14); ctx.closePath(); ctx.fill();
         ctx.restore();
     }
 
-    function drawCastle() {
-        const base = height * 0.88;
+    function drawTree(x, ground, scale, lean = 0) {
+        ctx.save(); ctx.translate(x, ground); ctx.scale(scale, scale); ctx.rotate(lean);
+        ctx.fillStyle = isDay ? "rgba(48,43,53,.76)" : "rgba(4,5,17,.96)";
+        ctx.beginPath(); ctx.moveTo(-7,0); ctx.lineTo(-3,-75); ctx.lineTo(-30,-106); ctx.lineTo(-12,-98); ctx.lineTo(-37,-137); ctx.lineTo(-9,-119); ctx.lineTo(0,-167); ctx.lineTo(8,-119); ctx.lineTo(34,-145); ctx.lineTo(15,-104); ctx.lineTo(34,-110); ctx.lineTo(6,-74); ctx.lineTo(10,0); ctx.closePath(); ctx.fill();
+        ctx.strokeStyle = isDay ? "rgba(255,153,77,.16)" : "rgba(109,75,139,.25)"; ctx.lineWidth = 1.5;
+        ctx.beginPath(); ctx.moveTo(0,-3); ctx.lineTo(0,-105); ctx.moveTo(0,-83); ctx.lineTo(-22,-119); ctx.moveTo(0,-64); ctx.lineTo(20,-106); ctx.stroke(); ctx.restore();
+    }
+
+    function drawHills() {
+        const gy = height * .88;
         ctx.save();
-        const grd = ctx.createLinearGradient(0, base - 120, 0, height);
-        grd.addColorStop(0, isDay ? "rgba(66,50,65,.30)" : "rgba(7,7,20,.95)");
-        grd.addColorStop(1, isDay ? "rgba(53,42,48,.63)" : "rgba(3,4,13,.98)");
-        ctx.fillStyle = grd;
-        ctx.beginPath();
-        ctx.moveTo(0, height); ctx.lineTo(0, base - 22);
-        ctx.lineTo(width * .12, base - 22); ctx.lineTo(width * .12, base - 73);
-        ctx.lineTo(width * .16, base - 96); ctx.lineTo(width * .20, base - 73); ctx.lineTo(width * .20, base - 35);
-        ctx.lineTo(width * .35, base - 35); ctx.lineTo(width * .35, base - 72);
-        ctx.lineTo(width * .39, base - 96); ctx.lineTo(width * .43, base - 72); ctx.lineTo(width * .43, base - 18);
-        ctx.lineTo(width * .58, base - 18); ctx.lineTo(width * .58, base - 63);
-        ctx.lineTo(width * .62, base - 86); ctx.lineTo(width * .66, base - 63); ctx.lineTo(width * .66, base - 32);
-        ctx.lineTo(width * .8, base - 32); ctx.lineTo(width * .8, base - 81);
-        ctx.lineTo(width * .84, base - 105); ctx.lineTo(width * .88, base - 81); ctx.lineTo(width * .88, base - 20);
-        ctx.lineTo(width, base - 20); ctx.lineTo(width, height); ctx.closePath(); ctx.fill();
-        if (isDay) {
-            ctx.fillStyle = "rgba(255,198,105,.55)";
-            [[.16,.76],[.39,.79],[.62,.81],[.84,.75]].forEach(([xp,yp]) => {
-                ctx.fillRect(width * xp - 3, height * yp, 5, 9);
-            });
-        } else {
-            ctx.fillStyle = "rgba(255,166,75,.78)";
-            [[.16,.78],[.39,.80],[.62,.82],[.84,.76]].forEach(([xp,yp]) => {
-                ctx.fillRect(width * xp - 2, height * yp, 4, 7);
-            });
+        const g = ctx.createLinearGradient(0, height * .62, 0, height);
+        g.addColorStop(0, isDay ? "rgba(79,77,91,.13)" : "rgba(13,10,30,.5)");
+        g.addColorStop(1, isDay ? "rgba(47,45,55,.65)" : "rgba(3,4,15,.96)");
+        ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(0,gy);
+        ctx.quadraticCurveTo(width*.15,height*.72,width*.32,height*.84);
+        ctx.quadraticCurveTo(width*.52,height*.67,width*.68,height*.83);
+        ctx.quadraticCurveTo(width*.84,height*.71,width,height*.84);
+        ctx.lineTo(width,height); ctx.lineTo(0,height); ctx.closePath(); ctx.fill(); ctx.restore();
+    }
+
+    function drawPumpkin(x, y, scale, time, alpha = 1, variant = 0) {
+        // نور نامنظم شبیه شعلهٔ واقعی، نه ضربان یکنواخت
+        const wave = Math.sin(time * (.008 + variant * .001) + x * .019) * .5 + .5;
+        const irregular = Math.sin(time * .027 + y * .17 + variant) * .12 + Math.sin(time * .041 + x) * .07;
+        const flicker = clamp(.74 + wave * .24 + irregular, .48, 1.08);
+        ctx.save(); ctx.translate(x, y); ctx.scale(scale, scale); ctx.globalAlpha = alpha;
+        roundedGlow(0, -8, 75 * flicker, `rgba(255,106,28,${.31*flicker})`, "rgba(255,91,27,0)");
+        const body = ctx.createLinearGradient(-32,-24,31,31);
+        body.addColorStop(0,"#ffb64d"); body.addColorStop(.35,"#ff7b1d"); body.addColorStop(.72,"#e95813"); body.addColorStop(1,"#8d2c18");
+        ctx.fillStyle = body; ctx.strokeStyle = "rgba(111,43,17,.64)"; ctx.lineWidth = 1.1;
+        for (let i=-2;i<=2;i++) {
+            ctx.beginPath(); ctx.ellipse(i*12, 0, 12.3 - Math.abs(i)*.65, 22 - Math.abs(i)*1.1, 0, 0, Math.PI*2); ctx.fill(); ctx.stroke();
         }
-        ctx.restore();
+        // ساقه
+        ctx.fillStyle = "#56682d"; ctx.beginPath(); ctx.moveTo(-5,-20); ctx.quadraticCurveTo(-9,-34,-1,-38); ctx.quadraticCurveTo(5,-31,3,-21); ctx.closePath(); ctx.fill();
+        ctx.strokeStyle = "rgba(255,184,78,.55)"; ctx.lineWidth = 1;
+        ctx.beginPath(); ctx.moveTo(-25,-10); ctx.quadraticCurveTo(-20,6,-22,14); ctx.moveTo(25,-10); ctx.quadraticCurveTo(20,6,22,14); ctx.stroke();
+        // چهرهٔ حک‌شده با نور از داخل
+        ctx.shadowColor = "#ffcf56"; ctx.shadowBlur = 14 * flicker; ctx.fillStyle = `rgba(255,238,134,${flicker})`;
+        ctx.beginPath(); ctx.moveTo(-20,-7); ctx.lineTo(-7,-2); ctx.lineTo(-14,5); ctx.closePath(); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(7,-2); ctx.lineTo(20,-7); ctx.lineTo(14,5); ctx.closePath(); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(-15,8); ctx.lineTo(-8,11); ctx.lineTo(-3,8); ctx.lineTo(2,12); ctx.lineTo(8,8); ctx.lineTo(15,8); ctx.lineTo(10,18); ctx.lineTo(-10,18); ctx.closePath(); ctx.fill();
+        ctx.shadowBlur = 0; ctx.restore();
+    }
+
+    function drawPumpkinPatch(time) {
+        const scaleBase = clamp(width / 1000, .56, 1.22);
+        const row = [
+            [.035, .965, 1.18], [.105, .985, .69], [.185, .972, .46],
+            [.81, .978, .55], [.895, .984, .88], [.965, .962, 1.28],
+            [.27, .986, .35], [.72, .99, .39]
+        ];
+        row.forEach((p,i) => drawPumpkin(width*p[0], height*p[1], p[2]*scaleBase, time, i % 3 === 1 ? .78 : .98, i));
+        // کدوهای کوچک‌تر میان بوته‌ها برای عمق صحنه
+        for (let i=0;i<5;i++) {
+            const x = width * (.31 + i * .095), y = height * (.953 + (i%2)*.018);
+            drawPumpkin(x,y,scaleBase*(.27 + (i%3)*.06),time,.72,i+9);
+        }
     }
 
     function drawFog(time) {
-        for (let i = 0; i < 3; i++) {
-            const y = height * (0.78 + i * 0.065);
-            const drift = (time * (0.008 + i * 0.003)) % (width + 220) - 110;
-            const fog = ctx.createLinearGradient(drift - 170, y, drift + 240, y + 25);
-            fog.addColorStop(0, "rgba(180,168,210,0)"); fog.addColorStop(.45, `rgba(173,163,200,${0.055 + i * .012})`); fog.addColorStop(1, "rgba(180,168,210,0)");
-            ctx.fillStyle = fog;
-            ctx.beginPath(); ctx.ellipse(drift + width * .2, y, width * .43, 17 + i * 6, 0, 0, Math.PI * 2); ctx.fill();
-            ctx.beginPath(); ctx.ellipse((drift + width * .75) % (width + 200), y + 8, width * .32, 13 + i * 4, 0, 0, Math.PI * 2); ctx.fill();
+        for (let i=0;i<5;i++) {
+            const y = height*(.72 + i*.061);
+            const travel = ((time*(.006 + i*.0017)) % (width+450)) - 220;
+            ctx.save(); ctx.globalAlpha = .74;
+            const g = ctx.createLinearGradient(travel-230,y,travel+260,y+10);
+            g.addColorStop(0,"rgba(184,173,220,0)"); g.addColorStop(.43, isDay ? "rgba(255,225,194,.17)" : "rgba(178,167,216,.13)"); g.addColorStop(1,"rgba(184,173,220,0)");
+            ctx.fillStyle=g;
+            ctx.beginPath(); ctx.ellipse(travel+width*.23,y,width*.35,14+i*4,.02,0,Math.PI*2); ctx.fill();
+            ctx.beginPath(); ctx.ellipse(((travel+width*.74)%(width+450)),y+9,width*.28,12+i*3,-.03,0,Math.PI*2); ctx.fill(); ctx.restore();
         }
+    }
+
+    function drawLeaves() {
+        leaves.forEach(leaf => {
+            if (!reducedMotion) {
+                leaf.y += leaf.speed; leaf.x += leaf.drift + Math.sin(leaf.y*15)*.00035; leaf.spin += leaf.spinSpeed;
+                if (leaf.y > 1.04) { leaf.y = -.04; leaf.x = Math.random(); }
+                if (leaf.x < -.04) leaf.x = 1.04; if (leaf.x > 1.04) leaf.x = -.04;
+            }
+            const x=leaf.x*width,y=leaf.y*height;
+            ctx.save(); ctx.translate(x,y); ctx.rotate(leaf.spin); ctx.fillStyle=leaf.color; ctx.globalAlpha=.84;
+            ctx.beginPath(); ctx.moveTo(0,-leaf.size); ctx.lineTo(leaf.size*.56,-leaf.size*.28); ctx.lineTo(leaf.size*1.03,0); ctx.lineTo(leaf.size*.43,leaf.size*.23); ctx.lineTo(0,leaf.size); ctx.lineTo(-leaf.size*.52,leaf.size*.27); ctx.lineTo(-leaf.size,0); ctx.lineTo(-leaf.size*.48,-leaf.size*.3); ctx.closePath(); ctx.fill();
+            ctx.strokeStyle="rgba(255,226,166,.75)"; ctx.lineWidth=.7; ctx.beginPath(); ctx.moveTo(0,-leaf.size*.72); ctx.lineTo(0,leaf.size*.72); ctx.stroke(); ctx.restore();
+        });
+    }
+
+    function drawWitch(time) {
+        const cycle = (time * .000027) % 2;
+        const path = cycle < 1 ? cycle : 2 - cycle;
+        const x = (path * 1.16 - .08) * width;
+        const y = height * (.29 + Math.sin(time*.0012)*.055);
+        const scale = clamp(width/1100, .56, 1.05);
+        ctx.save(); ctx.translate(x,y); ctx.scale(scale,scale); ctx.rotate(-.08 + Math.sin(time*.001)*.025);
+        ctx.fillStyle="rgba(35,23,44,.94)"; ctx.strokeStyle="rgba(255,192,124,.24)"; ctx.lineWidth=1.1;
+        // جارو و رشته‌های انتهایی
+        ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(-42,18); ctx.lineTo(46,8); ctx.stroke();
+        ctx.lineWidth=1.7; for (let i=0;i<5;i++){ctx.beginPath();ctx.moveTo(40,8);ctx.lineTo(53+i*2,1+i*4);ctx.stroke();}
+        // بدن و شنل
+        ctx.beginPath(); ctx.moveTo(-7,-12); ctx.quadraticCurveTo(3,-3,12,1); ctx.lineTo(27,15); ctx.lineTo(-10,18); ctx.lineTo(-18,7); ctx.closePath(); ctx.fill(); ctx.stroke();
+        // سر و مو
+        ctx.beginPath(); ctx.arc(-8,-17,7,0,Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(-14,-21); ctx.quadraticCurveTo(-25,-13,-15,-9); ctx.lineTo(-6,-13); ctx.closePath(); ctx.fill();
+        // کلاه نوک‌تیز
+        ctx.beginPath(); ctx.moveTo(-23,-22); ctx.lineTo(-5,-49); ctx.lineTo(2,-23); ctx.closePath(); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(-11,-22,17,3.2,-.12,0,Math.PI*2); ctx.fill();
+        // دست و پا در حال پرواز
+        ctx.lineWidth=3; ctx.beginPath(); ctx.moveTo(-2,-8); ctx.lineTo(14,-1); ctx.moveTo(4,15); ctx.lineTo(-9,25); ctx.moveTo(16,14); ctx.lineTo(28,20); ctx.stroke();
+        // رد جادویی
+        ctx.strokeStyle="rgba(255,192,107,.62)"; ctx.lineWidth=1.6; ctx.setLineDash([3,6]); ctx.beginPath(); ctx.moveTo(-56,27); ctx.quadraticCurveTo(-24,35,3,24); ctx.stroke(); ctx.setLineDash([]);
+        ctx.restore();
+    }
+
+    function drawMotes(time) {
+        motes.forEach(m => {
+            if (!reducedMotion) m.y -= m.lift;
+            if (m.y < .05) m.y = 1.02;
+            const a=.12+(Math.sin(time*m.speed+m.phase)+1)*.19;
+            roundedGlow(m.x*width,m.y*height, m.r*3, `rgba(255,178,93,${a*.45})`, "rgba(255,140,55,0)");
+            ctx.fillStyle=`rgba(255,205,133,${a})`; ctx.beginPath(); ctx.arc(m.x*width,m.y*height,m.r,0,Math.PI*2); ctx.fill();
+        });
     }
 
     function drawLightning(time) {
         if (time >= nextLightningAt) {
-            lightningStartedAt = time;
-            nextLightningAt = time + 9500 + Math.random() * 5500;
+            lightningStartedAt = time; lightningX = rand(.18,.82); nextLightningAt = time + rand(8500,11500);
         }
-        const elapsed = time - lightningStartedAt;
-        if (elapsed < 0 || elapsed > 175) return;
-        const strength = elapsed < 42 ? 0.20 : elapsed < 86 ? 0.075 : 0.025;
-        ctx.fillStyle = `rgba(208,220,255,${strength})`;
-        ctx.fillRect(0, 0, width, height);
-        if (elapsed < 85) {
-            const startX = width * (.24 + Math.random() * .52);
-            ctx.save(); ctx.strokeStyle = `rgba(240,237,255,${0.88 * (1 - elapsed / 110)})`; ctx.lineWidth = 2.2; ctx.shadowColor = "#b7baff"; ctx.shadowBlur = 18;
-            ctx.beginPath(); ctx.moveTo(startX, 0);
-            let x = startX, y = 0;
-            while (y < height * .48) {
-                x += (Math.random() - .5) * 42; y += 20 + Math.random() * 32; ctx.lineTo(x, y);
-            }
-            ctx.stroke(); ctx.restore();
+        const elapsed=time-lightningStartedAt;
+        if(elapsed<0 || elapsed>210) return;
+        const flash=elapsed<36?.22:elapsed<78?.07:elapsed<112?.025:0;
+        if(flash>0){ctx.fillStyle=`rgba(215,220,255,${flash})`;ctx.fillRect(0,0,width,height);}
+        if(elapsed<95){
+            ctx.save(); ctx.strokeStyle=`rgba(235,232,255,${.92-elapsed/130})`; ctx.lineWidth=2.4; ctx.shadowColor="#b7baff"; ctx.shadowBlur=19;
+            ctx.beginPath(); let x=lightningX*width,y=0; ctx.moveTo(x,y);
+            while(y<height*.48){x+=rand(-34,34);y+=rand(18,38);ctx.lineTo(x,y);} ctx.stroke(); ctx.restore();
         }
-    }
-
-    function drawAutumnLeaves() {
-        leaves.forEach(leaf => {
-            leaf.y += leaf.speed; leaf.x += leaf.drift + Math.sin(leaf.y * .017) * .35; leaf.spin += leaf.spinSpeed;
-            if (leaf.y > height + 15) { leaf.y = -15; leaf.x = Math.random() * width; }
-            if (leaf.x < -20) leaf.x = width + 15; if (leaf.x > width + 20) leaf.x = -15;
-            ctx.save(); ctx.translate(leaf.x, leaf.y); ctx.rotate(leaf.spin); ctx.fillStyle = leaf.color; ctx.globalAlpha = .78;
-            ctx.beginPath(); ctx.moveTo(0, -leaf.size); ctx.quadraticCurveTo(leaf.size * 1.1, -leaf.size * .3, 0, leaf.size); ctx.quadraticCurveTo(-leaf.size * 1.1, -leaf.size * .3, 0, -leaf.size); ctx.fill();
-            ctx.strokeStyle = "rgba(255,220,160,.7)"; ctx.lineWidth = .6; ctx.beginPath(); ctx.moveTo(0,-leaf.size*.65); ctx.lineTo(0,leaf.size*.65); ctx.stroke(); ctx.restore();
-        });
-    }
-
-    function drawMotes(time) {
-        motes.forEach(mote => {
-            const alpha = .18 + (Math.sin(time * mote.speed + mote.phase) + 1) * .20;
-            ctx.fillStyle = `rgba(255,174,89,${alpha})`;
-            ctx.beginPath(); ctx.arc(mote.x, mote.y, mote.r, 0, Math.PI * 2); ctx.fill();
-        });
     }
 
     function renderSky(time = performance.now()) {
-        ctx.clearRect(0, 0, width, height);
+        if (!width || !height) return;
+        ctx.clearRect(0,0,width,height);
+        if (isHalloweenSeason && !isDay) {
+            stars.forEach(star=>{
+                if(!reducedMotion){star.alpha+=star.speed*star.dir;if(star.alpha>.98||star.alpha<.17)star.dir*=-1;}
+                ctx.globalAlpha=star.alpha; ctx.fillStyle="#fff6e8"; ctx.beginPath();ctx.arc(star.x*width,star.y*height,star.r,0,Math.PI*2);ctx.fill();
+                if(star.r>1.3){ctx.strokeStyle=`rgba(255,242,222,${star.alpha*.34})`;ctx.lineWidth=.7;ctx.beginPath();ctx.moveTo(star.x*width-3,star.y*height);ctx.lineTo(star.x*width+3,star.y*height);ctx.moveTo(star.x*width,star.y*height-3);ctx.lineTo(star.x*width,star.y*height+3);ctx.stroke();}
+            }); ctx.globalAlpha=1;
+            drawMoon(time);
+        } else if (isDay) drawSun(time);
+        else {
+            stars.slice(0,120).forEach(star=>{ctx.fillStyle=`rgba(255,255,255,${star.alpha*.78})`;ctx.beginPath();ctx.arc(star.x*width,star.y*height,star.r,0,Math.PI*2);ctx.fill();});
+        }
+
+        // خانه و جنگل فقط در بازهٔ فصلی نمایش داده می‌شوند تا تم عادی دست‌نخورده بماند.
         if (isHalloweenSeason) {
-            if (isDay) {
-                drawSun(time);
-                clouds.forEach(cloud => {
-                    cloud.x += cloud.speed * (reducedMotion ? 0 : 1);
-                    if (cloud.x - 130 > width) cloud.x = -160;
-                    drawCloud(cloud.x, cloud.y, cloud.scale, .42);
-                });
-                drawCastle();
-                if (!reducedMotion) drawAutumnLeaves();
-                bats.forEach((bat, i) => {
-                    bat.x += (reducedMotion ? 0 : bat.speed * .55);
-                    if (bat.x > width + 50) bat.x = -50;
-                    if (i < 2) drawBat(bat, time);
-                });
-                drawMotes(time);
-                drawPumpkin(46, height - 32, .73, time, .65);
-                drawPumpkin(width - 48, height - 32, .69, time, .65);
-            } else {
-                stars.forEach(star => {
-                    if (!reducedMotion) {
-                        star.alpha += star.speed * star.direction;
-                        if (star.alpha >= .95 || star.alpha <= .18) star.direction *= -1;
-                    }
-                    ctx.beginPath(); ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255,244,226,${star.alpha})`; ctx.fill();
-                });
-                drawMoon(time);
-                // ابرها عمداً پس از ماه رسم می‌شوند تا جلوی آن حرکت کنند.
-                clouds.forEach((cloud, i) => {
-                    cloud.x += (reducedMotion ? 0 : cloud.speed * .55);
-                    if (cloud.x - 130 > width) cloud.x = -160;
-                    drawCloud(cloud.x, cloud.y + i * 13, cloud.scale * 1.05, .12 + i * .025);
-                });
-                bats.forEach(bat => {
-                    bat.x += (reducedMotion ? 0 : bat.speed);
-                    if (bat.x > width + 50) bat.x = -45;
-                    drawBat(bat, time);
-                });
-                drawCastle(); drawFog(time); drawMotes(time);
-                drawPumpkin(48, height - 35, .93, time, .96);
-                drawPumpkin(width - 48, height - 35, .88, time, .94);
-                if (!reducedMotion) drawLightning(time);
-            }
-        } else if (!isDay) {
-            stars.forEach(star => {
-                if (!reducedMotion) {
-                    star.alpha += star.speed * star.direction;
-                    if (star.alpha >= .95 || star.alpha <= .15) star.direction *= -1;
-                }
-                ctx.beginPath(); ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255,255,255,${star.alpha})`; ctx.fill();
+            drawHills();
+            const ground=height*.89;
+            drawTree(width*.035,ground,clamp(width/1000,.56,1.28),-.1);
+            drawTree(width*.13,ground+8,clamp(width/1250,.48,1.0),.08);
+            drawTree(width*.91,ground+4,clamp(width/1050,.58,1.15),-.08);
+            drawTree(width*.985,ground,clamp(width/900,.62,1.35),.12);
+            drawHauntedHouse(width*.76,ground+18,clamp(width/1100,.48,1.12),time,true);
+            drawHauntedHouse(width*.34,ground+28,clamp(width/1900,.34,.68),time,false);
+        }
+
+        // ابرها در روز عادی و در هر دو حالتِ تم هالووین نمایش داده می‌شوند.
+        if (isHalloweenSeason || isDay) {
+            clouds.forEach((cloud,i)=>{
+                if(!reducedMotion){cloud.x+=cloud.speed*(isDay?1:.72);if(cloud.x>1.42)cloud.x=-.24;}
+                drawCloud(cloud,time,isDay?(.3+(i%3)*.10):(.11+(i%3)*.045));
             });
-        } else {
-            drawSun(time);
-            clouds.forEach(cloud => {
-                cloud.x += reducedMotion ? 0 : cloud.speed;
-                if (cloud.x - 120 > width) cloud.x = -150;
-                drawCloud(cloud.x, cloud.y, cloud.scale);
+        }
+
+        if(isHalloweenSeason){
+            bats.forEach((bat,i)=>{
+                if(!reducedMotion){bat.x+=bat.vx*(isDay?.7:1);bat.y+=bat.vy;bat.angle+=bat.turn;
+                    if(bat.x>1.13)bat.x=-.13;if(bat.x<-.13)bat.x=1.13;if(bat.y<.04||bat.y>.68)bat.vy*=-1;}
+                if(!isDay || i<5) drawBat(bat,time);
             });
+            if(isDay){drawWitch(time);drawLeaves();}
+            else {drawFog(time);drawLightning(time);}
+            drawMotes(time); drawPumpkinPatch(time);
         }
     }
 
     function animate(time) {
-        // محدود کردن نرخ نقاشی روی دستگاه‌های ضعیف‌تر
-        if (!lastFrame || time - lastFrame >= 28) {
-            renderSky(time);
-            lastFrame = time;
-        }
-        if (!reducedMotion) requestAnimationFrame(animate);
+        if(!lastFrame || time-lastFrame>=30){renderSky(time);lastFrame=time;}
+        if(!reducedMotion) requestAnimationFrame(animate);
     }
 
-    const themeBtn = document.getElementById("themeToggle");
-    function updateTheme() {
-        document.body.classList.toggle("day-mode", isDay);
-        themeBtn.innerText = isDay ? "☀️" : "🌙";
-        themeBtn.setAttribute("aria-label", isDay ? "تغییر به حالت شب" : "تغییر به حالت روز");
-        themeBtn.setAttribute("title", isDay ? "حالت شب" : "حالت روز");
-        setSkyBackground();
-        renderSky(performance.now());
+    const themeBtn=document.getElementById("themeToggle");
+    function updateTheme(){
+        document.body.classList.toggle("day-mode",isDay);
+        themeBtn.textContent=isDay?"☀️":"🌙";
+        themeBtn.setAttribute("aria-label",isDay?"تغییر به حالت شب":"تغییر به حالت روز");
+        themeBtn.setAttribute("title",isDay?"حالت شب":"حالت روز");
+        setSkyBackground(); renderSky(performance.now());
     }
-    themeBtn.addEventListener("click", () => {
-        isDay = !isDay;
-        updateTheme();
+    if(themeBtn) themeBtn.addEventListener("click",()=>{isDay=!isDay;updateTheme();});
+    window.addEventListener("resize",resizeCanvas,{passive:true});
+    if(motionQuery.addEventListener) motionQuery.addEventListener("change",event=>{
+        reducedMotion=event.matches;
+        if(!reducedMotion){lastFrame=0;requestAnimationFrame(animate);} else renderSky(performance.now());
     });
-    window.addEventListener("resize", resizeCanvas, { passive: true });
-    if (motionQuery.addEventListener) {
-        motionQuery.addEventListener("change", event => {
-            reducedMotion = event.matches;
-            if (!reducedMotion) { lastFrame = 0; requestAnimationFrame(animate); }
-            else renderSky(performance.now());
-        });
-    }
-    setSkyBackground();
-    resizeCanvas();
-    if (!reducedMotion) requestAnimationFrame(animate);
+    setSkyBackground(); resizeCanvas();
+    if(!reducedMotion) requestAnimationFrame(animate);
 }
