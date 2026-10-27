@@ -780,3 +780,41 @@ body.halloween-theme.day-mode .os-icon { background: rgba(255,247,237,.19); bord
 @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* هالووین سینمایی: چهرهٔ مستقل و برجسته برای هر آیکون سیستم‌عامل */
+body.halloween-theme .os-icon {
+  border-radius: 15px;
+  background: radial-gradient(circle at 50% 20%, rgba(255,174,83,.28), rgba(37,18,63,.52) 58%, rgba(7,6,23,.72));
+  border: 1px solid rgba(255,184,112,.72);
+  box-shadow: 0 0 0 2px rgba(111,62,158,.22), 0 0 20px rgba(255,104,39,.3), 0 0 28px rgba(128,74,220,.2), inset 0 1px 0 rgba(255,255,255,.35);
+}
+body.halloween-theme .os-icon svg { overflow: visible; }
+body.halloween-theme .os-icon--android svg { fill:#8dff68; filter: drop-shadow(0 0 4px #ff6b24) drop-shadow(0 0 10px rgba(255,111,37,.9)); }
+body.halloween-theme .os-icon--windows svg { fill:#65d8ff; filter: drop-shadow(0 0 4px #ff7a2d) drop-shadow(0 0 10px rgba(78,163,255,.75)); }
+body.halloween-theme .os-icon--iphone svg,
+body.halloween-theme .os-icon--mac svg { fill:#fff2ff; filter: drop-shadow(0 0 5px #b477ff) drop-shadow(0 0 10px rgba(255,99,45,.8)); }
+body.halloween-theme .os-icon--linux svg { fill:#ffd36b; filter: drop-shadow(0 0 5px #ff6a28) drop-shadow(0 0 10px rgba(255,155,44,.85)); }
+/* چشمان ترسناک، دندان‌ها و نمادهای جادویی روی فرم اصلی آیکون */
+body.halloween-theme .os-icon--windows::after {
+  content:""; position:absolute; width:5px; height:5px; border-radius:50%; top:39%; left:29%;
+  background:#fff6a5; box-shadow:12px 0 0 #fff6a5, 0 0 7px 3px #ff642c, 12px 0 7px 3px #ff642c; pointer-events:none; z-index:3;
+}
+body.halloween-theme .os-icon--iphone::after,
+body.halloween-theme .os-icon--mac::after {
+  content:""; position:absolute; width:16px; height:8px; left:calc(50% - 8px); top:58%;
+  border-bottom:2px solid #ff9a45; border-radius:0 0 50% 50%; filter:drop-shadow(0 0 4px #ff6a2c); pointer-events:none; z-index:3;
+}
+body.halloween-theme .os-icon--linux::after {
+  content:""; position:absolute; left:35%; top:35%; width:4px; height:4px; border-radius:50%;
+  background:#ff4a27; box-shadow:9px 0 0 #ff4a27, 0 0 7px 3px rgba(255,79,33,.9), 9px 0 7px 3px rgba(255,79,33,.9); z-index:3; pointer-events:none;
+}
+body.halloween-theme .os-icon--android::after {
+  width:4px; height:4px; left:36%; top:31%; border-radius:50%;
+  box-shadow:10px 0 0 #fff6a5, 0 0 7px 3px #ff5c27, 10px 0 7px 3px #ff5c27;
+}
+body.halloween-theme .os-icon--tv::after {
+  content:"✦"; position:absolute; right:3px; top:0; color:#ffb45c; font-size:14px; text-shadow:0 0 8px #ff632d; z-index:3;
+}
+body.halloween-theme .os-icon:hover { transform: translateY(-3px) rotate(-2deg) scale(1.035); box-shadow:0 0 24px rgba(255,107,42,.48), 0 0 32px rgba(150,87,255,.3); }
+/* خانه‌ها و موجودات پس‌زمینه پررنگ‌تر اما پشت محتوا */
+body.halloween-theme #bg-canvas { filter: saturate(1.18) contrast(1.08); }
