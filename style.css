@@ -386,3 +386,252 @@ body.day-mode footer a {
         font-size: 13px;
     }
 }
+
+/* =====================================================
+   لایهٔ تکمیلی: شیشهٔ شفاف و تم فصلی هالووین
+   تم هالووین فقط وقتی فعال است که کلاس به body اضافه شود.
+===================================================== */
+#bg-canvas {
+    z-index: 0;
+    pointer-events: none;
+}
+
+header,
+.status,
+main,
+footer {
+    position: relative;
+    z-index: 1;
+}
+
+/* شیشه‌مات سبک: شفافیت بالا و محوشدگی کم */
+#statusBox,
+.category,
+.card,
+footer a,
+.theme-btn {
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+}
+
+.category {
+    background: rgba(17, 23, 42, 0.13);
+    border-color: rgba(238, 232, 255, 0.19);
+    box-shadow: 0 10px 34px rgba(2, 4, 16, 0.16), inset 0 1px 0 rgba(255,255,255,.08);
+}
+
+.card {
+    background: rgba(14, 19, 36, 0.17);
+    border-color: rgba(255, 255, 255, 0.17);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.075), 0 5px 18px rgba(2,4,16,.08);
+}
+
+#statusBox,
+footer a {
+    background: rgba(15, 20, 36, 0.12);
+    border-color: rgba(255, 255, 255, 0.18);
+}
+
+.category h2 {
+    text-shadow: 0 1px 8px rgba(0,0,0,.15);
+}
+
+.os-icon {
+    position: relative;
+}
+
+/* تنظیمات ظاهری برای دستگاه‌های لمسی و حرکت کمتر */
+@media (hover: hover) and (pointer: fine) {
+    .category:hover {
+        border-color: rgba(255, 177, 116, 0.3);
+        box-shadow: 0 12px 36px rgba(2,4,16,.2), inset 0 1px 0 rgba(255,255,255,.1);
+    }
+    .card:hover {
+        transform: translateY(-1px);
+        border-color: rgba(255, 174, 100, 0.3);
+        box-shadow: 0 8px 22px rgba(3, 4, 18, 0.15), 0 0 18px rgba(143, 87, 190, 0.07);
+    }
+}
+
+/* هالووین */
+body.halloween-theme {
+    background: #080b19;
+}
+
+body.halloween-theme .logo {
+    border-color: #ff9b54;
+    box-shadow: 0 0 15px rgba(255, 126, 54, .46), 0 0 30px rgba(137, 83, 194, .25), inset 0 0 8px rgba(255, 126, 54, .22);
+}
+
+body.halloween-theme header h1 {
+    color: #fff4e8;
+    text-shadow: 0 0 15px rgba(184, 115, 235, .23), 0 2px 12px rgba(0,0,0,.35);
+}
+
+body.halloween-theme header p {
+    color: #c2b8d6;
+}
+
+body.halloween-theme .mainButton {
+    background: linear-gradient(125deg, #bd5422 0%, #e77c2d 43%, #6941a5 100%);
+    box-shadow: 0 8px 24px rgba(204, 91, 34, .25), 0 0 18px rgba(130, 77, 185, .18);
+    border: 1px solid rgba(255, 222, 190, .28);
+}
+
+body.halloween-theme .mainButton:hover {
+    box-shadow: 0 10px 28px rgba(204, 91, 34, .36), 0 0 24px rgba(130, 77, 185, .24);
+}
+
+body.halloween-theme #statusBox {
+    color: #f1e9f8;
+    background: rgba(15, 12, 30, .21);
+    border-color: rgba(220, 192, 255, .2);
+    text-shadow: 0 1px 5px rgba(0,0,0,.35);
+}
+
+body.halloween-theme .category {
+    background: rgba(16, 13, 31, .15);
+    border-color: rgba(220, 197, 255, .2);
+    box-shadow: 0 12px 36px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.09);
+}
+
+body.halloween-theme .category h2 {
+    border-bottom-color: rgba(244, 183, 129, .22);
+    color: #fff0e3;
+}
+
+body.halloween-theme .card {
+    background: rgba(13, 12, 29, .19);
+    border-color: rgba(255, 231, 211, .17);
+}
+
+body.halloween-theme .name {
+    color: #fff6ed;
+    text-shadow: 0 1px 5px rgba(0,0,0,.42);
+}
+
+body.halloween-theme .icon {
+    background: rgba(20, 13, 34, .2);
+    border-color: rgba(222, 157, 255, .27);
+    box-shadow: 0 0 10px rgba(154, 93, 220, .13), inset 0 1px 0 rgba(255,255,255,.07);
+}
+
+body.halloween-theme .download {
+    background: linear-gradient(135deg, rgba(173, 72, 27, .96), rgba(106, 63, 159, .96));
+    border-color: rgba(255, 225, 204, .25);
+    box-shadow: 0 4px 13px rgba(135, 65, 105, .22);
+}
+
+body.halloween-theme footer a {
+    color: #fff1e6;
+    background: rgba(15, 12, 29, .15);
+    border-color: rgba(220, 197, 255, .19);
+}
+
+body.halloween-theme footer p {
+    color: #b9abc9;
+}
+
+/* رنگ برندها حفظ می‌شود؛ فقط هاله و جزئیات فصلی اضافه می‌شوند. */
+body.halloween-theme .os-icon {
+    background: rgba(23, 15, 39, .24);
+    border-color: rgba(235, 174, 255, .38);
+    box-shadow: 0 0 13px rgba(160, 91, 211, .19), inset 0 1px 0 rgba(255,255,255,.12);
+}
+
+body.halloween-theme .os-icon svg {
+    filter: drop-shadow(0 0 4px rgba(242, 139, 72, .22));
+}
+
+body.halloween-theme .os-icon--android svg { fill: #76d66d; filter: drop-shadow(0 0 5px rgba(255,143,68,.45)); }
+body.halloween-theme .os-icon--android::after {
+    content: "";
+    position: absolute;
+    width: 3px; height: 3px;
+    left: 44%; top: 28%;
+    border-radius: 50%;
+    background: #ffb65b;
+    box-shadow: 7px 0 0 #ffb65b, 0 0 5px #ff8e38, 7px 0 5px #ff8e38;
+    pointer-events: none;
+}
+body.halloween-theme .os-icon--windows svg { fill: #5aa9ff; filter: drop-shadow(0 0 5px rgba(255,139,66,.4)); }
+body.halloween-theme .os-icon--apple svg { fill: #e4e3ed; filter: drop-shadow(0 0 5px rgba(177,129,255,.42)); }
+body.halloween-theme .os-icon--linux svg { fill: #f7bd55; filter: drop-shadow(0 0 5px rgba(255,117,44,.45)); }
+body.halloween-theme .os-icon--tv svg { fill: #e8dcf8; filter: drop-shadow(0 0 5px rgba(255,139,66,.4)); }
+
+body.halloween-theme.day-mode {
+    background: #c8b5a5;
+}
+
+body.halloween-theme.day-mode header h1 { color: #2b183b; text-shadow: 0 1px 8px rgba(255,255,255,.25); }
+body.halloween-theme.day-mode header p { color: #48354e; }
+body.halloween-theme.day-mode #statusBox {
+    color: #32263d;
+    background: rgba(255, 247, 235, .15);
+    border-color: rgba(255,255,255,.34);
+    text-shadow: 0 1px 2px rgba(255,255,255,.2);
+}
+body.halloween-theme.day-mode .category {
+    background: rgba(255, 243, 227, .17);
+    border-color: rgba(255, 255, 255, .38);
+}
+body.halloween-theme.day-mode .category h2 { color: #392345; border-bottom-color: rgba(80,43,67,.2); text-shadow: none; }
+body.halloween-theme.day-mode .card {
+    background: rgba(255, 247, 238, .2);
+    border-color: rgba(255,255,255,.4);
+}
+body.halloween-theme.day-mode .name { color: #2b2031; text-shadow: 0 1px 1px rgba(255,255,255,.22); }
+body.halloween-theme.day-mode footer a {
+    color: #34243d;
+    background: rgba(255, 244, 232, .18);
+    border-color: rgba(255,255,255,.37);
+}
+body.halloween-theme.day-mode footer p { color: #46364c; }
+body.halloween-theme.day-mode .os-icon {
+    background: rgba(255, 245, 233, .2);
+    border-color: rgba(111, 65, 122, .3);
+}
+
+@media (max-width: 480px) {
+    body.halloween-theme .category { padding: 18px 13px; }
+    body.halloween-theme .category h2 { font-size: 21px; gap: 10px; }
+    body.halloween-theme .card { gap: 8px; }
+    body.halloween-theme .appInfo { gap: 9px; min-width: 0; }
+    body.halloween-theme .name { font-size: 15px; }
+    body.halloween-theme .download { padding: 8px 12px; font-size: 12px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+/* در حالت روز عادی هم شیشه باید شفاف بماند؛ خوانایی متن حفظ می‌شود. */
+body.day-mode #statusBox {
+    background: rgba(255, 255, 255, 0.16);
+    border-color: rgba(255, 255, 255, 0.42);
+    color: #1e293b;
+}
+
+body.day-mode .category {
+    background: rgba(255, 255, 255, 0.13);
+    border-color: rgba(255, 255, 255, 0.43);
+    box-shadow: 0 10px 34px rgba(31, 38, 135, 0.10), inset 0 1px 0 rgba(255,255,255,.27);
+}
+
+body.day-mode .card {
+    background: rgba(255, 255, 255, 0.20);
+    border-color: rgba(255, 255, 255, 0.44);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.3), 0 5px 18px rgba(31,38,135,.06);
+}
+
+body.day-mode footer a {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.42);
+    color: #0f172a;
+}
+
+body.day-mode .theme-btn {
+    background: rgba(255, 255, 255, 0.22);
+    border-color: rgba(255, 255, 255, 0.52);
+}
