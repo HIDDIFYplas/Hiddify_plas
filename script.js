@@ -4,94 +4,132 @@
 
 // آیکون‌های SVG سیستم‌عامل‌ها؛ فرم اصلی آیکون‌ها حفظ شده است.
 const OS_ICONS = {
-    // آیکون‌های هالووینی SVG؛ نور داخل خود شکل است (بدون فیلتر و سایهٔ سنگین) تا روی همهٔ دستگاه‌ها روان بماند.
+    // آیکون‌های هالووینی SVG: خط‌دور تیره، گرادیان، بازتاب نور و هالهٔ داخلی؛ بدون فیلتر و سایهٔ سنگین تا روی همهٔ دستگاه‌ها سبک بماند.
     android: `<span class="os-icon os-icon--android" aria-hidden="true"><svg viewBox="0 0 64 64" role="img">
       <defs>
-        <linearGradient id="adBody" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c4f979"/><stop offset=".55" stop-color="#5fbf3f"/><stop offset="1" stop-color="#26763a"/></linearGradient>
-        <linearGradient id="adHat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8a52c9"/><stop offset="1" stop-color="#2a1448"/></linearGradient>
+        <linearGradient id="adBody" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d2fb86"/><stop offset=".5" stop-color="#62c640"/><stop offset="1" stop-color="#23723a"/></linearGradient>
+        <linearGradient id="adHat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9560d6"/><stop offset="1" stop-color="#2b1250"/></linearGradient>
         <radialGradient id="adGlow"><stop stop-color="#ff8a2a" stop-opacity=".5"/><stop offset="1" stop-color="#ff8a2a" stop-opacity="0"/></radialGradient>
       </defs>
-      <circle cx="32" cy="38" r="30" fill="url(#adGlow)"/>
-      <rect x="22" y="46" width="7" height="12" rx="3.5" fill="#4aa838"/><rect x="35" y="46" width="7" height="12" rx="3.5" fill="#4aa838"/>
-      <rect x="8.5" y="33" width="7" height="16" rx="3.5" fill="#76d54c"/><rect x="48.5" y="33" width="7" height="16" rx="3.5" fill="#76d54c"/>
-      <path d="M17 33H47V46Q47 50 43 50H21Q17 50 17 46Z" fill="url(#adBody)" stroke="#dcffa8" stroke-width="1"/>
-      <path d="M16 33Q16 15 32 15T48 33Z" fill="url(#adBody)" stroke="#dcffa8" stroke-width="1"/>
-      <path d="M20.5 28 29 24.5 28 31Z M43.5 28 35 24.5 36 31Z" fill="#ffc23a" stroke="#fff3a8" stroke-width=".7" stroke-linejoin="round"/>
-      <path d="M23 38l3 3 3-3 3 3 3-3 3 3 3-3" fill="none" stroke="#1f4a1c" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
-      <path d="M20.5 16Q28 11 29.5 5Q31 -.5 40.5 3.5Q35.5 6.5 43.5 16Z" fill="url(#adHat)" stroke="#c4a0f5" stroke-width="1" stroke-linejoin="round"/>
-      <ellipse cx="32" cy="16.5" rx="19.5" ry="4" fill="#3a1c63" stroke="#c4a0f5" stroke-width="1"/>
-      <path d="M22.5 14.4Q32 17.6 41.5 14.4L42 11.8Q32 14.8 22 11.8Z" fill="#ff8a2a"/><rect x="30" y="12.2" width="4" height="3.4" rx=".6" fill="#ffd27a"/>
+      <circle cx="32" cy="38" r="31" fill="url(#adGlow)"/>
+      <g stroke="#14240f" stroke-width="1.6" stroke-linejoin="round">
+        <rect x="22" y="46" width="7" height="12" rx="3.500" fill="#4aa838"/><rect x="35" y="46" width="7" height="12" rx="3.500" fill="#4aa838"/>
+        <rect x="8.500" y="33" width="7" height="16" rx="3.500" fill="#7ada50"/><rect x="48.500" y="33" width="7" height="16" rx="3.500" fill="#7ada50"/>
+        <path d="M17 33H47V46Q47 50 43 50H21Q17 50 17 46Z" fill="url(#adBody)"/>
+        <path d="M16 33Q16 15 32 15T48 33Z" fill="url(#adBody)"/>
+      </g>
+      <path d="M20.500 27Q22 21 28 18.500" fill="none" stroke="#fff" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/>
+      <path d="M20 28 29 24.500 28 31.500Z M44 28 35 24.500 36 31.500Z" fill="#ffc23a" stroke="#14240f" stroke-width="1.200" stroke-linejoin="round"/>
+      <path d="M26 28.200 28 27 27.600 29.600Z M38 28.200 36 27 36.400 29.600Z" fill="#c2350e"/>
+      <rect x="22" y="36" width="20" height="5.500" rx="1.500" fill="#14240f"/>
+      <path d="M23.500 36 25.500 40 27.500 36M29.500 36 31.500 40 33.500 36M35.500 36 37.500 40 39.500 36" fill="#fff6d0"/>
+      <path d="M20.500 16Q28 11 29.500 5Q31 -.5 40.500 3.500Q35.500 6.500 43.500 16Z" fill="url(#adHat)" stroke="#14052b" stroke-width="1.500" stroke-linejoin="round"/>
+      <ellipse cx="32" cy="16.500" rx="19.500" ry="4" fill="#4a2380" stroke="#14052b" stroke-width="1.500"/>
+      <path d="M22.500 14.400Q32 17.600 41.500 14.400L42 11.800Q32 14.800 22 11.800Z" fill="#ff8a2a"/><rect x="30" y="12.200" width="4" height="3.400" rx=".6" fill="#ffd27a" stroke="#14052b" stroke-width=".6"/>
+      <path d="M33 6.500l.9 2 2.200.3-1.600 1.500.4 2.200-1.900-1.100-1.900 1.100.4-2.200-1.600-1.500 2.200-.3Z" fill="#ffd978" opacity=".95"/>
+      <path d="M57 14l1-2.300 2.300-1-2.300-1L57 7.400 56 9.700l-2.300 1 2.300 1Z" fill="#ffe19c"/>
     </svg></span>`,
     windows: `<span class="os-icon os-icon--windows" aria-hidden="true"><svg viewBox="0 0 64 64" role="img">
       <defs>
-        <linearGradient id="wnWall" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#47307d"/><stop offset="1" stop-color="#170c30"/></linearGradient>
-        <linearGradient id="wnRoof" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6a3aa6"/><stop offset="1" stop-color="#1f0e3b"/></linearGradient>
-        <linearGradient id="wnPane" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffe88a"/><stop offset=".55" stop-color="#ff9b30"/><stop offset="1" stop-color="#ff5a1c"/></linearGradient>
-        <radialGradient id="wnGlow"><stop stop-color="#ff7a24" stop-opacity=".5"/><stop offset="1" stop-color="#ff7a24" stop-opacity="0"/></radialGradient>
+        <linearGradient id="wnWall" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#5a3d98"/><stop offset="1" stop-color="#1a0d36"/></linearGradient>
+        <linearGradient id="wnRoof" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7f48c6"/><stop offset="1" stop-color="#25104a"/></linearGradient>
+        <linearGradient id="wnPane" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff0a0"/><stop offset=".5" stop-color="#ffa132"/><stop offset="1" stop-color="#ff5a1c"/></linearGradient>
+        <radialGradient id="wnGlow"><stop stop-color="#ff7a24" stop-opacity=".55"/><stop offset="1" stop-color="#ff7a24" stop-opacity="0"/></radialGradient>
       </defs>
-      <circle cx="32" cy="38" r="30" fill="url(#wnGlow)"/>
-      <path d="M43 20V7h6.5v16Z" fill="#2b1650" stroke="#a07ae0" stroke-width=".9"/><path d="M42 7h8.5" stroke="#a07ae0" stroke-width="1.4"/>
-      <rect x="11" y="29" width="42" height="28" fill="url(#wnWall)" stroke="#a98ae6" stroke-width="1"/>
-      <path d="M5.5 32Q23 26 32 6Q41 26 58.5 32Z" fill="url(#wnRoof)" stroke="#d2b4ff" stroke-width="1.1" stroke-linejoin="round"/>
-      <rect x="15.5" y="35" width="15" height="9.5" rx=".8" fill="url(#wnPane)"/><rect x="33.5" y="35" width="15" height="9.5" rx=".8" fill="url(#wnPane)"/>
-      <rect x="15.5" y="47" width="15" height="9" rx=".8" fill="url(#wnPane)"/><rect x="33.5" y="47" width="15" height="9" rx=".8" fill="url(#wnPane)"/>
-      <path d="M32 34V57M14 45.8H50" stroke="#190c32" stroke-width="2"/>
-      <ellipse cx="32" cy="58.5" rx="22" ry="2.8" fill="#ff7b32" opacity=".3"/>
+      <circle cx="32" cy="38" r="31" fill="url(#wnGlow)"/>
+      <g stroke="#12082a" stroke-width="1.600" stroke-linejoin="round">
+        <path d="M43 20V6.500h7V23Z" fill="#35205e"/>
+        <rect x="11" y="29" width="42" height="28" fill="url(#wnWall)"/>
+        <path d="M5 32.500Q23 26 32 5.500Q41 26 59 32.500Z" fill="url(#wnRoof)"/>
+      </g>
+      <path d="M32 7Q40 25 56 31" fill="none" stroke="#e4ccff" stroke-opacity=".6" stroke-width="1.300" stroke-linecap="round"/>
+      <g stroke="#12082a" stroke-width="1.200">
+        <rect x="15.500" y="35" width="15" height="9.500" rx=".8" fill="url(#wnPane)"/><rect x="33.500" y="35" width="15" height="9.500" rx=".8" fill="url(#wnPane)"/>
+        <rect x="15.500" y="47" width="15" height="9" rx=".8" fill="url(#wnPane)"/><rect x="33.500" y="47" width="15" height="9" rx=".8" fill="url(#wnPane)"/>
+      </g>
+      <path d="M17 36.500H29M35 36.500H47" stroke="#fff" stroke-opacity=".5" stroke-width="1" stroke-linecap="round"/>
+      <path d="M6 18c1.600-2.600 3.400-2.600 4.600-.6 1.200-2 3-2 4.600.6-1.800-.6-2.800.2-4.600 2.400C8.800 17.600 7.800 17.400 6 18Z" fill="#12082a"/>
+      <path d="M52 14l.9-2 2-.9-2-.9L52 8.200l-.9 2-2 .9 2 .9Z" fill="#ffe19c"/>
+      <ellipse cx="32" cy="58.500" rx="22" ry="2.600" fill="#ff7b32" opacity=".32"/>
     </svg></span>`,
     iphone: `<span class="os-icon os-icon--iphone" aria-hidden="true"><svg viewBox="0 0 64 64" role="img">
       <defs>
-        <linearGradient id="ipFruit" x1=".2" y1="0" x2=".8" y2="1"><stop stop-color="#ffcb66"/><stop offset=".45" stop-color="#ff7e1f"/><stop offset="1" stop-color="#b8330f"/></linearGradient>
+        <linearGradient id="ipFruit" x1=".15" y1="0" x2=".85" y2="1"><stop stop-color="#ffd06a"/><stop offset=".42" stop-color="#ff7e1f"/><stop offset="1" stop-color="#b32d0c"/></linearGradient>
         <radialGradient id="ipGlow"><stop stop-color="#ff7a24" stop-opacity=".55"/><stop offset="1" stop-color="#ff7a24" stop-opacity="0"/></radialGradient>
-        <mask id="ipBite"><rect width="64" height="64" fill="#fff"/><circle cx="56.5" cy="26" r="7.5" fill="#000"/></mask>
+        <mask id="ipBite"><rect width="64" height="64" fill="#fff"/><circle cx="57" cy="26" r="7.500" fill="#000"/></mask>
       </defs>
-      <circle cx="32" cy="38" r="30" fill="url(#ipGlow)"/>
+      <circle cx="32" cy="38" r="31" fill="url(#ipGlow)"/>
       <g mask="url(#ipBite)">
-        <path d="M31 18C24 12 12 17 10 30 8 44 17 56 26 55c3 0 4-2 6-2s3 2 6 2c9 1 17-11 14-25-2-10-11-15-19-12Z" fill="url(#ipFruit)" stroke="#ffd68a" stroke-width="1"/>
-        <path d="M32 19Q24 35 30 54M32 19Q41 35 36 54M32 19Q16 30 21 50M32 19Q48 30 43 50" fill="none" stroke="#7a2508" stroke-width=".9" opacity=".4"/>
+        <path d="M31 18C24 12 12 17 10 30 8 44 17 56 26 55c3 0 4-2 6-2s3 2 6 2c9 1 17-11 14-25-2-10-11-15-19-12Z" fill="url(#ipFruit)" stroke="#5a1706" stroke-width="1.700" stroke-linejoin="round"/>
+        <path d="M32 19Q24 35 30 54M32 19Q41 35 36 54M32 19Q16 30 21 50M32 19Q48 30 43 50" fill="none" stroke="#7a2508" stroke-width="1" opacity=".38"/>
+        <path d="M17 26Q19 21 25 20" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="2.200" stroke-linecap="round"/>
       </g>
-      <path d="M32 18Q30.5 10 36 5" fill="none" stroke="#5a3a1a" stroke-width="3" stroke-linecap="round"/>
-      <path d="M34 12Q43 5 50 10Q43 17 34 15Z" fill="#7ad14e" stroke="#c9ffa4" stroke-width=".9" stroke-linejoin="round"/>
-      <path d="M16 31 26.5 34 19.5 40Z M44 31 33.5 34 40.5 40Z" fill="#fff0a0" stroke="#ffb838" stroke-width=".6" stroke-linejoin="round"/>
-      <path d="M17 44 23 42 27.5 46 32 42 36.5 46 41 42 47 44 42 51.5 36.5 49 32 53 27.5 49 22 51.5Z" fill="#fff0a0" stroke="#ffb838" stroke-width=".6" stroke-linejoin="round"/>
+      <path d="M32 18Q30.500 10 36 5" fill="none" stroke="#2e1a0a" stroke-width="4.200" stroke-linecap="round"/><path d="M32 18Q30.500 10 36 5" fill="none" stroke="#7a4a22" stroke-width="2.400" stroke-linecap="round"/>
+      <path d="M34 12Q43 5 51 10Q43 17 34 15Z" fill="#7ad14e" stroke="#1f4a14" stroke-width="1.200" stroke-linejoin="round"/>
+      <path d="M36 12.500Q42 9.500 47 11" fill="none" stroke="#c9ffa4" stroke-width=".8" stroke-linecap="round"/>
+      <path d="M16 31 26.500 34 19.500 40Z M44 31 33.500 34 40.500 40Z" fill="#fff0a0" stroke="#7a2508" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M17 44 23 42 27.500 46 32 42 36.500 46 41 42 47 44 42 51.500 36.500 49 32 53 27.500 49 22 51.500Z" fill="#fff0a0" stroke="#7a2508" stroke-width="1" stroke-linejoin="round"/>
     </svg></span>`,
     mac: `<span class="os-icon os-icon--mac" aria-hidden="true"><svg viewBox="0 0 64 64" role="img">
       <defs>
-        <linearGradient id="macFruit" x1=".15" y1="0" x2=".85" y2="1"><stop stop-color="#e6bcff"/><stop offset=".45" stop-color="#8e55d8"/><stop offset="1" stop-color="#241766"/></linearGradient>
-        <radialGradient id="macGlow"><stop stop-color="#b57cff" stop-opacity=".55"/><stop offset="1" stop-color="#b57cff" stop-opacity="0"/></radialGradient>
-        <mask id="macBite"><rect width="64" height="64" fill="#fff"/><circle cx="56.5" cy="26" r="7.5" fill="#000"/></mask>
+        <linearGradient id="macFruit" x1=".15" y1="0" x2=".85" y2="1"><stop stop-color="#ebc6ff"/><stop offset=".45" stop-color="#8e55d8"/><stop offset="1" stop-color="#1f1460"/></linearGradient>
+        <radialGradient id="macGlow"><stop stop-color="#b57cff" stop-opacity=".6"/><stop offset="1" stop-color="#b57cff" stop-opacity="0"/></radialGradient>
+        <mask id="macBite"><rect width="64" height="64" fill="#fff"/><circle cx="57" cy="26" r="7.500" fill="#000"/></mask>
       </defs>
-      <circle cx="32" cy="38" r="30" fill="url(#macGlow)"/>
+      <circle cx="32" cy="38" r="31" fill="url(#macGlow)"/>
+      <ellipse cx="32" cy="37" rx="30" ry="8.500" fill="none" stroke="#d7b3ff" stroke-opacity=".55" stroke-width=".9" transform="rotate(-18 32 37)"/>
       <g mask="url(#macBite)">
-        <path d="M31 18C24 12 12 17 10 30 8 44 17 56 26 55c3 0 4-2 6-2s3 2 6 2c9 1 17-11 14-25-2-10-11-15-19-12Z" fill="url(#macFruit)" stroke="#f1d8ff" stroke-width="1"/>
+        <path d="M31 18C24 12 12 17 10 30 8 44 17 56 26 55c3 0 4-2 6-2s3 2 6 2c9 1 17-11 14-25-2-10-11-15-19-12Z" fill="url(#macFruit)" stroke="#120a3a" stroke-width="1.700" stroke-linejoin="round"/>
+        <path d="M17 26Q19 21 25 20" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="2.200" stroke-linecap="round"/>
+        <path d="M24 49Q32 56 41 50" fill="none" stroke="#c9a0ff" stroke-opacity=".35" stroke-width="1.500" stroke-linecap="round"/>
       </g>
-      <path d="M32 18Q30 9 36 4Q40 11 35 18" fill="#ff9a3c" stroke="#ffd9a0" stroke-width=".9" stroke-linejoin="round"/>
-      <path d="M35 12Q44 6 50 11Q43 17 35 15Z" fill="#8fe47b" stroke="#d7ffac" stroke-width=".8" stroke-linejoin="round"/>
-      <path d="M16.5 32 27 33.5 20 38.5Z M44 32 33.5 33.5 40.5 38.5Z" fill="#f6ecff" stroke="#fff" stroke-width=".5" stroke-linejoin="round"/>
-      <path d="M20 43Q32 52 43 43" fill="none" stroke="#ffb46a" stroke-width="2" stroke-linecap="round"/>
-      <path d="M9 15l1.6-3.6L14 10l-3.4-1.4L9 5 7.4 8.6 4 10l3.4 1.4Z M53 52l1.2-2.6L57 48.4l-2.8-1.2L53 44.6l-1.2 2.6-2.8 1.2 2.8 1.2Z" fill="#ffe19c"/>
+      <path d="M32 18Q30 9 36 4Q40.500 11 35 18Z" fill="#ff9a3c" stroke="#5a2a0a" stroke-width="1.200" stroke-linejoin="round"/>
+      <path d="M35 12Q44 6 51 11Q43 17 35 15Z" fill="#8fe47b" stroke="#1f4a14" stroke-width="1.200" stroke-linejoin="round"/>
+      <path d="M16.500 32 27 33.500 20 38.500Z M44 32 33.500 33.500 40.500 38.500Z" fill="#f6ecff" stroke="#120a3a" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M20 43Q32 52 43 43" fill="none" stroke="#ffb46a" stroke-width="2.200" stroke-linecap="round"/>
+      <path d="M9 15l1.600-3.600L14 10l-3.400-1.400L9 5 7.400 8.600 4 10l3.400 1.400Z M54 55l1.200-2.600L58 51.200l-2.800-1.200L54 47.400l-1.200 2.600-2.800 1.200 2.800 1.200Z M57 14l.9-2 2-.9-2-.9-.9-2-.9 2-2 .9 2 .9Z" fill="#ffe19c"/>
     </svg></span>`,
     tv: `<span class="os-icon os-icon--tv" aria-hidden="true"><svg viewBox="0 0 64 64" role="img">
-      <defs><radialGradient id="tvGlow"><stop stop-color="#ff7a24" stop-opacity=".4"/><stop offset="1" stop-color="#ff7a24" stop-opacity="0"/></radialGradient></defs>
-      <circle cx="32" cy="36" r="30" fill="url(#tvGlow)"/>
-      <rect x="7" y="13" width="50" height="36" rx="4" fill="#261b46" stroke="#c7b7ff" stroke-width="2"/><rect x="11" y="17" width="42" height="28" rx="2" fill="#354c81"/><path d="M12 41 24 28 31 35 40 23 53 40Z" fill="#11152e"/><path d="M28 38V28L34 22 40 28V38Z" fill="#ff9d4a"/><path d="M31 38V31H37V38" fill="#fff0a1"/><circle cx="45" cy="23" r="4" fill="#fff0a1"/><path d="M24 12l8-6 8 6" fill="none" stroke="#bca2ff" stroke-width="2"/><path d="M20 54H44" stroke="#ffad60" stroke-width="3" stroke-linecap="round"/>
+      <defs>
+        <linearGradient id="tvBody" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6a4fb0"/><stop offset="1" stop-color="#241446"/></linearGradient>
+        <linearGradient id="tvScreen" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#2a3f7a"/><stop offset="1" stop-color="#0d1230"/></linearGradient>
+        <radialGradient id="tvGlow"><stop stop-color="#ff7a24" stop-opacity=".45"/><stop offset="1" stop-color="#ff7a24" stop-opacity="0"/></radialGradient>
+      </defs>
+      <circle cx="32" cy="38" r="31" fill="url(#tvGlow)"/>
+      <path d="M22 13 28 6M42 13 36 6" stroke="#12082a" stroke-width="3.200" stroke-linecap="round"/><path d="M22 13 28 6M42 13 36 6" stroke="#bca2ff" stroke-width="1.400" stroke-linecap="round"/>
+      <rect x="6" y="13" width="52" height="37" rx="5" fill="url(#tvBody)" stroke="#12082a" stroke-width="1.700"/>
+      <rect x="10.500" y="17.500" width="43" height="28" rx="2.500" fill="url(#tvScreen)" stroke="#12082a" stroke-width="1.200"/>
+      <path d="M11 41 22 30 29 36 39 25 53 41Z" fill="#0b0f26"/>
+      <path d="M26 43V30Q26 22 32 22Q38 22 38 30V43L35.500 40.500 33.500 43 31.500 40.500 29.500 43 27.500 40.500Z" fill="#f4eeff" stroke="#12082a" stroke-width="1"/>
+      <circle cx="30" cy="29" r="1.500" fill="#12082a"/><circle cx="35" cy="29" r="1.500" fill="#12082a"/><ellipse cx="32.500" cy="33.500" rx="1.600" ry="2" fill="#12082a"/>
+      <circle cx="47" cy="23" r="3.600" fill="#fff0a1"/>
+      <path d="M14 22.500Q16 20 20 19.500" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="1.500" stroke-linecap="round"/>
+      <path d="M22 54H42" stroke="#12082a" stroke-width="4.500" stroke-linecap="round"/><path d="M22 54H42" stroke="#ffad60" stroke-width="2.400" stroke-linecap="round"/>
     </svg></span>`,
     linux: `<span class="os-icon os-icon--linux" aria-hidden="true"><svg viewBox="0 0 64 64" role="img">
       <defs>
-        <linearGradient id="pgBody" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5d5478"/><stop offset=".5" stop-color="#1b1632"/><stop offset="1" stop-color="#07081a"/></linearGradient>
-        <linearGradient id="pgBelly" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff8e8"/><stop offset="1" stop-color="#d9d3ef"/></linearGradient>
-        <linearGradient id="pgHat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8a52c9"/><stop offset="1" stop-color="#2a1448"/></linearGradient>
-        <radialGradient id="pgGlow"><stop stop-color="#ffa03a" stop-opacity=".45"/><stop offset="1" stop-color="#ffa03a" stop-opacity="0"/></radialGradient>
+        <linearGradient id="pgBody" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6a6088"/><stop offset=".5" stop-color="#1d1836"/><stop offset="1" stop-color="#07081a"/></linearGradient>
+        <linearGradient id="pgBelly" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fffaf0"/><stop offset="1" stop-color="#d6cfee"/></linearGradient>
+        <linearGradient id="pgHat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9560d6"/><stop offset="1" stop-color="#2b1250"/></linearGradient>
+        <radialGradient id="pgGlow"><stop stop-color="#ffa03a" stop-opacity=".5"/><stop offset="1" stop-color="#ffa03a" stop-opacity="0"/></radialGradient>
       </defs>
-      <circle cx="32" cy="38" r="30" fill="url(#pgGlow)"/>
-      <path d="M18 32Q13 15 32 15Q51 15 46 32L50 49Q48 58 32 58Q16 58 14 49Z" fill="url(#pgBody)" stroke="#9b8cc2" stroke-width="1.1"/>
-      <path d="M24 33Q32 26 40 33L42 50Q39 55 32 55Q25 55 22 50Z" fill="url(#pgBelly)" stroke="#fff5df" stroke-width=".7"/>
-      <path d="M18 32 8.5 45 13.5 49 22 39Z M46 32 55.5 45 50.5 49 42 39Z" fill="#2b2447" stroke="#8277a6" stroke-width="1" stroke-linejoin="round"/>
-      <circle cx="27" cy="27" r="3.4" fill="#fff"/><circle cx="37" cy="27" r="3.4" fill="#fff"/><circle cx="27.4" cy="27.4" r="1.7" fill="#ff5a1c"/><circle cx="36.6" cy="27.4" r="1.7" fill="#ff5a1c"/>
-      <path d="M28 31.5H36L32 37Z" fill="#ff9a2f" stroke="#ffd37a" stroke-width=".7" stroke-linejoin="round"/>
-      <path d="M21 57 15 61H27L28.5 58ZM43 57 49 61H37L35.5 58Z" fill="#ffab35" stroke="#ffe08a" stroke-width=".6" stroke-linejoin="round"/>
-      <path d="M21.5 17Q28.5 11.500 30 5.500Q31.500 0 40.500 3.500Q35.500 6.500 43 17Z" fill="url(#pgHat)" stroke="#c4a0f5" stroke-width="1" stroke-linejoin="round"/>
-      <ellipse cx="32" cy="17.500" rx="18" ry="3.800" fill="#3a1c63" stroke="#c4a0f5" stroke-width="1"/>
-      <path d="M23.500 15.600Q32 18.600 40.500 15.600L41 13Q32 15.800 23 13Z" fill="#ff8a2a"/><rect x="30" y="13.300" width="4" height="3.300" rx=".6" fill="#ffd27a"/>
+      <circle cx="32" cy="38" r="31" fill="url(#pgGlow)"/>
+      <g stroke="#0a0818" stroke-width="1.600" stroke-linejoin="round">
+        <path d="M21 57 15 61H27L28.500 58ZM43 57 49 61H37L35.500 58Z" fill="#ffab35"/>
+        <path d="M18 32 8.500 45 13.500 49 22 39Z M46 32 55.500 45 50.500 49 42 39Z" fill="#2f2750"/>
+        <path d="M18 32Q13 15 32 15Q51 15 46 32L50 49Q48 58 32 58Q16 58 14 49Z" fill="url(#pgBody)"/>
+        <path d="M24 33Q32 26 40 33L42 50Q39 55 32 55Q25 55 22 50Z" fill="url(#pgBelly)" stroke-width="1"/>
+      </g>
+      <path d="M22 39Q32 45 42 39L42 43.500Q32 49.500 22 43.500Z" fill="#ff8a2a" stroke="#5a2a0a" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M38 44 41 53 35.500 51.500Z" fill="#ff8a2a" stroke="#5a2a0a" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M20.500 24Q22 19 27 17.500" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="2" stroke-linecap="round"/>
+      <circle cx="27" cy="27" r="3.600" fill="#fff" stroke="#0a0818" stroke-width="1"/><circle cx="37" cy="27" r="3.600" fill="#fff" stroke="#0a0818" stroke-width="1"/>
+      <circle cx="27.400" cy="27.400" r="1.800" fill="#ff5a1c"/><circle cx="36.600" cy="27.400" r="1.800" fill="#ff5a1c"/>
+      <path d="M28 31.500H36L32 37Z" fill="#ff9a2f" stroke="#5a2a0a" stroke-width="1" stroke-linejoin="round"/>
+      <path d="M21.500 17Q28.500 11.500 30 5.500Q31.500 0 40.500 3.500Q35.500 6.500 43 17Z" fill="url(#pgHat)" stroke="#14052b" stroke-width="1.500" stroke-linejoin="round"/>
+      <ellipse cx="32" cy="17.500" rx="18" ry="3.800" fill="#4a2380" stroke="#14052b" stroke-width="1.500"/>
+      <path d="M23.500 15.600Q32 18.600 40.500 15.600L41 13Q32 15.800 23 13Z" fill="#ff8a2a"/><rect x="30" y="13.300" width="4" height="3.300" rx=".6" fill="#ffd27a" stroke="#14052b" stroke-width=".6"/>
+      <path d="M52 20l.9-2 2-.9-2-.9-.9-2-.9 2-2 .9 2 .9Z" fill="#ffe19c"/>
     </svg></span>`
 };
 
