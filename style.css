@@ -924,3 +924,77 @@ body.halloween-theme.day-mode .category h2 > span:not(.os-icon) {
     body.halloween-theme .category h2 { font-size: inherit; gap: 11px; }
     body.halloween-theme .category h2 > span:not(.os-icon) { font-size: 32px; }
 }
+
+
+/* ==========================================================
+   لایهٔ حرفه‌ای‌سازی: ورود نرم، درخشش دکمه‌ها، عنوان گرادیانی
+   فقط transform و opacity انیمیت می‌شوند تا روی همه‌ی دستگاه‌ها سبک بماند.
+========================================================== */
+::selection { background: rgba(255, 138, 53, .55); color: #fff; }
+a:focus-visible, button:focus-visible { outline: 2px solid #ffb45d; outline-offset: 3px; }
+html { scrollbar-width: thin; scrollbar-color: rgba(255, 150, 60, .55) transparent; }
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-thumb { background: rgba(255, 150, 60, .5); border-radius: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+
+/* ورود مرحله‌ای عناصر */
+@keyframes riseIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+header { animation: riseIn .7s ease both; }
+.status { animation: riseIn .7s .12s ease both; }
+.category { animation: riseIn .7s ease both; }
+.category:nth-child(1) { animation-delay: .2s; }
+.category:nth-child(2) { animation-delay: .3s; }
+.category:nth-child(3) { animation-delay: .4s; }
+.category:nth-child(4) { animation-delay: .5s; }
+.category:nth-child(n+5) { animation-delay: .6s; }
+footer { animation: riseIn .7s .5s ease both; }
+
+/* عنوان اصلی با گرادیان و نور هالووینی */
+body.halloween-theme header h1 {
+    background: linear-gradient(180deg, #fff6e6 0%, #ffd08a 55%, #ff8f3a 100%);
+    -webkit-background-clip: text; background-clip: text;
+    color: transparent; -webkit-text-fill-color: transparent;
+    text-shadow: none;
+    filter: drop-shadow(0 2px 10px rgba(255, 120, 40, .35)) drop-shadow(0 0 22px rgba(150, 90, 230, .25));
+    letter-spacing: .03em;
+}
+body.halloween-theme.day-mode header h1 {
+    background-image: linear-gradient(180deg, #4a2370 0%, #8a3a1a 100%);
+    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, .6));
+}
+header p { letter-spacing: .14em; }
+
+/* دکمهٔ اصلی: درخشش عبوری */
+.mainButton { position: relative; overflow: hidden; isolation: isolate; font-size: 18px; }
+.mainButton::after {
+    content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 45%; z-index: -1;
+    background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .28), transparent);
+    transform: translateX(-130%) skewX(-18deg);
+    animation: btnShine 4.5s 1.2s ease-in-out infinite;
+}
+@keyframes btnShine { 0% { transform: translateX(-130%) skewX(-18deg); } 38%, 100% { transform: translateX(330%) skewX(-18deg); } }
+.mainButton:active { transform: scale(.98); }
+
+/* عنوان بخش‌ها: خط جداکنندهٔ محو شونده */
+body.halloween-theme .category h2 {
+    border-bottom: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent, rgba(255, 160, 70, .6), rgba(160, 100, 240, .45), transparent) 1;
+}
+
+/* دکمه‌ی دانلود با فلش */
+.download { display: inline-flex; align-items: center; gap: 6px; }
+.download::before { content: "⬇"; font-size: .85em; line-height: 1; }
+@media (hover: hover) and (pointer: fine) {
+    .download:hover { transform: translateY(-1px); filter: brightness(1.1); }
+    footer a:hover { transform: translateY(-2px); border-color: rgba(255, 177, 111, .45); }
+    .mainButton:hover { transform: translateY(-2px); }
+}
+.download:active, footer a:active { transform: scale(.97); }
+
+/* آیکون برنامه‌ها: قاب نرم‌تر */
+body.halloween-theme .icon { border-radius: 14px; }
+body.halloween-theme .icon img { border-radius: 12px; }
+
+/* کارت وضعیت: کمی برجسته‌تر */
+#statusBox { font-weight: 600; letter-spacing: .01em; }
+body.halloween-theme #statusBox { border-color: rgba(120, 220, 140, .3); }
