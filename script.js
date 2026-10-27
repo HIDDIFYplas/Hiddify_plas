@@ -508,12 +508,95 @@ if (canvas && canvas.getContext) {
         ctx.restore();
     }
 
-    function drawTree(x, ground, scale, lean = 0) {
-        ctx.save(); ctx.translate(x, ground); ctx.scale(scale, scale); ctx.rotate(lean);
-        ctx.fillStyle = isDay ? "rgba(48,43,53,.76)" : "rgba(4,5,17,.96)";
-        ctx.beginPath(); ctx.moveTo(-7,0); ctx.lineTo(-3,-75); ctx.lineTo(-30,-106); ctx.lineTo(-12,-98); ctx.lineTo(-37,-137); ctx.lineTo(-9,-119); ctx.lineTo(0,-167); ctx.lineTo(8,-119); ctx.lineTo(34,-145); ctx.lineTo(15,-104); ctx.lineTo(34,-110); ctx.lineTo(6,-74); ctx.lineTo(10,0); ctx.closePath(); ctx.fill();
-        ctx.strokeStyle = isDay ? "rgba(255,153,77,.16)" : "rgba(109,75,139,.25)"; ctx.lineWidth = 1.5;
-        ctx.beginPath(); ctx.moveTo(0,-3); ctx.lineTo(0,-105); ctx.moveTo(0,-83); ctx.lineTo(-22,-119); ctx.moveTo(0,-64); ctx.lineTo(20,-106); ctx.stroke(); ctx.restore();
+    function drawTree(x, ground, scale, lean = 0, c = ctx) {
+        c.save(); c.translate(x, ground); c.scale(scale, scale); c.rotate(lean);
+        c.fillStyle = isDay ? "rgba(48,43,53,.76)" : "rgba(4,5,17,.96)";
+        c.beginPath(); c.moveTo(-7,0); c.lineTo(-3,-75); c.lineTo(-30,-106); c.lineTo(-12,-98); c.lineTo(-37,-137); c.lineTo(-9,-119); c.lineTo(0,-167); c.lineTo(8,-119); c.lineTo(34,-145); c.lineTo(15,-104); c.lineTo(34,-110); c.lineTo(6,-74); c.lineTo(10,0); c.closePath(); c.fill();
+        c.strokeStyle = isDay ? "rgba(255,153,77,.16)" : "rgba(109,75,139,.25)"; c.lineWidth = 1.5;
+        c.beginPath(); c.moveTo(0,-3); c.lineTo(0,-105); c.moveTo(0,-83); c.lineTo(-22,-119); c.moveTo(0,-64); c.lineTo(20,-106); c.stroke(); c.restore();
+    }
+
+    // صحنهٔ اصلی: عمارتی بالای تپه با جادهٔ پیچ‌درپیچ؛ بخش ثابت یک‌بار در بوم جدا کش می‌شود تا سبک بماند.
+    let sceneCache = null;
+    function houseLayout() {
+        const mobile = width < 700;
+        return {
+            mobile,
+            hs: clamp(width / 820, .5, 1.15),
+            hx: mobile ? width * .32 : width * .77,
+            hy: mobile ? height * .50 : height * .58
+        };
+    }
+    function paintScene(c, L) {
+        const { mobile, hs, hx, hy } = L, W = width, H = height;
+        const hillTop = () => {
+            c.beginPath(); c.moveTo(-20, H * .88);
+            c.bezierCurveTo(W * .22, H * .86, hx - 260 * hs, hy + 16 * hs, hx, hy + 4 * hs);
+            c.bezierCurveTo(hx + 260 * hs, hy + 16 * hs, W * .92, H * .80, W + 20, H * .85);
+        };
+        // تپه‌های دوردست
+        c.fillStyle = isDay ? "rgba(120,100,140,.3)" : "rgba(38,29,72,.55)";
+        c.beginPath(); c.moveTo(-20, H * .80); c.quadraticCurveTo(W * .2, H * .62, W * .5, H * .77);
+        c.quadraticCurveTo(W * .78, H * .64, W + 20, H * .79); c.lineTo(W + 20, H); c.lineTo(-20, H); c.closePath(); c.fill();
+        // تپهٔ اصلی زیر عمارت
+        const g = c.createLinearGradient(0, hy, 0, H);
+        g.addColorStop(0, isDay ? "#5d5070" : "#1b1438"); g.addColorStop(1, isDay ? "#352c46" : "#05040f");
+        hillTop(); c.lineTo(W + 20, H); c.lineTo(-20, H); c.closePath(); c.fillStyle = g; c.fill();
+        hillTop(); c.strokeStyle = isDay ? "rgba(255,214,160,.45)" : "rgba(190,150,255,.38)"; c.lineWidth = 1.6; c.stroke();
+        // جاده: از پایین صفحه تا در عمارت، باریک‌شونده برای عمق
+        const N = 48, pts = [];
+        const bx = clamp(hx + (mobile ? W * .30 : -W * .22), W * .1, W * .9);
+        const wB = clamp(W * .085, 36, 118), wT = 9 * hs, topY = hy + 5 * hs, botY = H + 14;
+        for (let i = 0; i <= N; i++) {
+            const t = i / N, k = 1 - t;
+            pts.push({
+                x: hx + (bx - hx) * k + Math.sin(t * 5.2 + .4) * k * W * .11,
+                y: topY + (botY - topY) * Math.pow(k, 1.55),
+                w: wT + (wB - wT) * Math.pow(k, 1.3), k
+            });
+        }
+        const rg = c.createLinearGradient(0, topY, 0, H);
+        rg.addColorStop(0, isDay ? "#a8979f" : "#5a4a86"); rg.addColorStop(1, isDay ? "#6f5f78" : "#2a2150");
+        c.beginPath(); c.moveTo(pts[0].x - pts[0].w, pts[0].y);
+        pts.forEach(q => c.lineTo(q.x - q.w, q.y)); for (let i = N; i >= 0; i--) c.lineTo(pts[i].x + pts[i].w, pts[i].y);
+        c.closePath(); c.fillStyle = rg; c.fill();
+        c.strokeStyle = isDay ? "rgba(255,230,200,.35)" : "rgba(200,165,255,.3)"; c.lineWidth = 1.2;
+        c.beginPath(); pts.forEach((q, i) => i ? c.lineTo(q.x - q.w, q.y) : c.moveTo(q.x - q.w, q.y)); c.stroke();
+        c.beginPath(); pts.forEach((q, i) => i ? c.lineTo(q.x + q.w, q.y) : c.moveTo(q.x + q.w, q.y)); c.stroke();
+        // خط‌چین وسط جاده
+        c.fillStyle = isDay ? "rgba(255,255,255,.55)" : "rgba(255,170,90,.5)";
+        for (let i = 2; i < N - 3; i += 4) {
+            const a = pts[i], b = pts[i + 1], wa = a.w * .08, wb = b.w * .08;
+            c.beginPath(); c.moveTo(a.x - wa, a.y); c.lineTo(a.x + wa, a.y); c.lineTo(b.x + wb, b.y); c.lineTo(b.x - wb, b.y); c.closePath(); c.fill();
+        }
+        // درخت‌های خشک اطراف عمارت و دو درخت کناری قاب
+        drawTree(hx - 170 * hs, hy + 30 * hs, .85 * hs, -.08, c);
+        drawTree(hx + 190 * hs, hy + 34 * hs, .7 * hs, .1, c);
+        drawTree(W * .03, H * .84, clamp(W / 1000, .56, 1.2), -.1, c);
+        drawTree(W * .985, H * .84, clamp(W / 1000, .56, 1.2), .12, c);
+        // فانوس‌های کنار جاده
+        [13, 25, 37].forEach(i => {
+            const q = pts[i], sc = .3 + q.k * .9, px = q.x - q.w - 6 * sc, ph = 48 * sc;
+            c.strokeStyle = isDay ? "#2a2036" : "#0b0818"; c.lineWidth = 2.4 * sc + .6;
+            c.beginPath(); c.moveTo(px, q.y); c.lineTo(px, q.y - ph); c.stroke();
+            const gl = c.createRadialGradient(px, q.y - ph, 0, px, q.y - ph, 26 * sc);
+            gl.addColorStop(0, "rgba(255,190,90,.75)"); gl.addColorStop(1, "rgba(255,140,50,0)");
+            c.fillStyle = gl; c.beginPath(); c.arc(px, q.y - ph, 26 * sc, 0, Math.PI * 2); c.fill();
+            c.fillStyle = "#ffd98a"; c.beginPath(); c.arc(px, q.y - ph, 3.2 * sc + .6, 0, Math.PI * 2); c.fill();
+        });
+    }
+    function drawHouseScene(time) {
+        const L = houseLayout(), dpr = Math.min(window.devicePixelRatio || 1, 1.15);
+        const key = width + "x" + height + "|" + isDay + "|" + dpr;
+        if (!sceneCache || sceneCache.key !== key) {
+            const off = document.createElement("canvas");
+            off.width = Math.round(width * dpr); off.height = Math.round(height * dpr);
+            const c = off.getContext("2d"); c.scale(dpr, dpr);
+            paintScene(c, L);
+            sceneCache = { key, canvas: off };
+        }
+        ctx.drawImage(sceneCache.canvas, 0, 0, width, height);
+        drawHauntedHouse(L.hx, L.hy, L.hs, time, false);
     }
 
     function drawHills() {
@@ -711,19 +794,8 @@ if (canvas && canvas.getContext) {
             stars.slice(0,120).forEach(star=>{ctx.fillStyle=`rgba(255,255,255,${star.alpha*.78})`;ctx.beginPath();ctx.arc(star.x*width,star.y*height,star.r,0,Math.PI*2);ctx.fill();});
         }
 
-        // خانه و جنگل فقط در بازهٔ فصلی نمایش داده می‌شوند تا تم عادی دست‌نخورده بماند.
-        if (isHalloweenSeason) {
-            drawHills();
-            const ground=height*.77;
-            // در موبایل هم عمارت وسط قاب می‌ماند و پشت کارت‌ها گم نمی‌شود.
-            drawTree(width*.035,ground+18,clamp(width/1000,.56,1.2),-.1);
-            drawTree(width*.13,ground+22,clamp(width/1250,.46,.92),.08);
-            drawTree(width*.91,ground+15,clamp(width/1050,.54,1.08),-.08);
-            drawTree(width*.985,ground+12,clamp(width/900,.58,1.22),.12);
-            drawHauntedHouse(width*.78,ground+10,clamp(width/660,.68,1.38),time,true);
-            drawHauntedHouse(width*.23,ground+22,clamp(width/1200,.44,.84),time,false);
-            drawHauntedHouse(width*.52,ground+26,clamp(width/1750,.32,.58),time,false);
-        }
+        // عمارت بالای تپه با جادهٔ منتهی به آن؛ فقط در بازهٔ فصلی نمایش داده می‌شود تا تم عادی دست‌نخورده بماند.
+        if (isHalloweenSeason) drawHouseScene(time);
 
         // ابرها در روز عادی و در هر دو حالتِ تم هالووین نمایش داده می‌شوند.
         if (isHalloweenSeason || isDay) {
