@@ -879,3 +879,48 @@ body.halloween-theme .os-icon--tv svg { fill: initial !important; }
 @media (prefers-reduced-motion: reduce) {
     body.halloween-theme .os-icon svg { transition: none !important; }
 }
+
+
+/* ==========================================================
+   لایهٔ نهایی هالووین: آیکون‌های بزرگ‌تر و فونت ترسناک عنوان‌ها
+========================================================== */
+body.halloween-theme .os-icon,
+body.halloween-theme .os-icon:hover { width: 58px; height: 58px; }
+body.halloween-theme .category h2 { gap: 14px; padding-bottom: 8px; }
+
+body.halloween-theme .category h2 > span:not(.os-icon) {
+    font-family: "Creepster", "Vazirmatn", cursive;
+    font-weight: 400;
+    font-size: clamp(30px, 3.2vw, 40px);
+    letter-spacing: .07em;
+    line-height: 1.1;
+    direction: ltr;
+    background: linear-gradient(180deg, #ffe08a 0%, #ff9a2f 52%, #d4470f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 0 rgba(58, 14, 92, .95)) drop-shadow(0 0 7px rgba(255, 110, 30, .35));
+}
+/* اپل‌ها: نارنجی به بنفش جادویی */
+body.halloween-theme .category h2:has(.os-icon--mac) > span:not(.os-icon),
+body.halloween-theme .category h2:has(.os-icon--iphone) > span:not(.os-icon) {
+    background-image: linear-gradient(180deg, #ffd9a0 0%, #ff8a3a 45%, #9b5cf0 100%);
+}
+body.halloween-theme .category h2:has(.os-icon--windows) > span:not(.os-icon) {
+    background-image: linear-gradient(180deg, #fff0a0 0%, #ffa43a 55%, #e24e16 100%);
+}
+body.halloween-theme .category h2:has(.os-icon--android) > span:not(.os-icon),
+body.halloween-theme .category h2:has(.os-icon--linux) > span:not(.os-icon) {
+    background-image: linear-gradient(180deg, #ffe58c 0%, #ff8f2a 50%, #b83a12 100%);
+}
+body.halloween-theme.day-mode .category h2 > span:not(.os-icon) {
+    background-image: linear-gradient(180deg, #d9620b 0%, #a43a0c 50%, #5b2a86 100%);
+    filter: drop-shadow(0 1px 0 rgba(255, 255, 255, .55));
+}
+@media (max-width: 620px) {
+    body.halloween-theme .os-icon,
+    body.halloween-theme .os-icon:hover { width: 50px; height: 50px; }
+    body.halloween-theme .category h2 { font-size: inherit; gap: 11px; }
+    body.halloween-theme .category h2 > span:not(.os-icon) { font-size: 32px; }
+}
