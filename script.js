@@ -89,26 +89,26 @@ if (canvas && canvas.getContext) {
     const rand = (min, max) => min + Math.random() * (max - min);
     const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
 
-    const stars = Array.from({ length: 170 }, () => ({
+    const stars = Array.from({ length: 110 }, () => ({
         x: Math.random(), y: Math.random() * .78,
         r: rand(.45, 1.65), alpha: rand(.24, .95), speed: rand(.004, .018),
         dir: Math.random() < .5 ? -1 : 1, twinkle: Math.random() * Math.PI * 2
     }));
-    const clouds = Array.from({ length: 7 }, (_, i) => ({
-        x: (i / 7) * 1.35 - .12, y: rand(.08, .48), scale: rand(.56, 1.55),
+    const clouds = Array.from({ length: 5 }, (_, i) => ({
+        x: (i / 5) * 1.35 - .12, y: rand(.08, .48), scale: rand(.56, 1.55),
         speed: rand(.00013, .00031) * (i % 2 ? 1 : .78), phase: rand(0, 8)
     }));
-    const leaves = Array.from({ length: 58 }, () => ({
+    const leaves = Array.from({ length: 28 }, () => ({
         x: Math.random(), y: Math.random(), size: rand(4, 10), speed: rand(.00013, .00058),
         drift: rand(-.0004, .0004), spin: rand(0, Math.PI * 2), spinSpeed: rand(-.035, .035),
         color: ["#f58a27", "#ffc04d", "#b94824", "#d96721", "#9d4c24", "#ffdb77"][Math.floor(Math.random() * 6)]
     }));
-    const bats = Array.from({ length: 26 }, (_, i) => ({
-        x: Math.random(), y: rand(.07, .66), vx: rand(.00010, .00031) * (Math.random() < .25 ? -1 : 1),
-        vy: rand(-.00008, .00008), scale: rand(.78, 1.9), phase: rand(0, 10),
-        angle: rand(-.3, .3), turn: rand(-.0012, .0012), type: i % 3
+    const bats = Array.from({ length: 8 }, (_, i) => ({
+        x: Math.random(), y: rand(.09, .62), vx: rand(.000055, .00017) * (Math.random() < .25 ? -1 : 1),
+        vy: rand(-.000035, .000035), scale: rand(.58, 1.22), phase: rand(0, 10),
+        angle: rand(-.2, .2), turn: rand(-.00055, .00055), type: i % 3
     }));
-    const motes = Array.from({ length: 55 }, () => ({
+    const motes = Array.from({ length: 22 }, () => ({
         x: Math.random(), y: rand(.2, 1), r: rand(.7, 2.2), phase: rand(0, 10),
         speed: rand(.004, .018), lift: rand(.00003, .00012)
     }));
@@ -117,7 +117,7 @@ if (canvas && canvas.getContext) {
     let lightningX = .5;
 
     function resizeCanvas() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 1.7);
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.25);
         width = Math.max(1, window.innerWidth);
         height = Math.max(1, window.innerHeight);
         canvas.width = Math.round(width * dpr);
@@ -204,9 +204,9 @@ if (canvas && canvas.getContext) {
     }
 
     function drawBat(bat, time) {
-        const flap = Math.sin(time * .019 + bat.phase) * 16;
-        const x = bat.x * width, y = bat.y * height + Math.sin(time * .0017 + bat.phase) * 24;
-        ctx.save(); ctx.translate(x, y); ctx.rotate(bat.angle + Math.sin(time * .0008 + bat.phase) * .13); ctx.scale(bat.scale, bat.scale);
+        const flap = Math.sin(time * .009 + bat.phase) * 11;
+        const x = bat.x * width, y = bat.y * height + Math.sin(time * .00085 + bat.phase) * 15;
+        ctx.save(); ctx.translate(x, y); ctx.rotate(bat.angle + Math.sin(time * .00045 + bat.phase) * .08); ctx.scale(bat.scale, bat.scale);
         ctx.fillStyle = "rgba(5,3,18,.99)"; ctx.strokeStyle = "rgba(139,77,174,.9)"; ctx.lineWidth = 1.7; ctx.shadowColor = "rgba(115,63,170,.45)"; ctx.shadowBlur = 8;
         ctx.beginPath();
         ctx.moveTo(-30, 0); ctx.quadraticCurveTo(-49, -19 - flap, -58, -11 - flap * .4);
@@ -224,6 +224,51 @@ if (canvas && canvas.getContext) {
             ctx.beginPath(); ctx.ellipse(-2.5, 0, 1.5, 2.1, 0, 0, Math.PI * 2); ctx.ellipse(2.5, 0, 1.5, 2.1, 0, 0, Math.PI * 2); ctx.fill();
         }
         ctx.restore();
+    }
+
+    // ارواح کم‌تعداد و سبک؛ حرکت آرام برای حفظ روانی صفحه
+    const ghosts = [
+        { x: .19, y: .57, size: .74, phase: .4, alpha: .74 },
+        { x: .66, y: .49, size: .62, phase: 2.2, alpha: .62 },
+        { x: .88, y: .63, size: .82, phase: 4.1, alpha: .7 }
+    ];
+
+    function drawGhost(ghost, time) {
+        const bob = reducedMotion ? 0 : Math.sin(time * .00042 + ghost.phase) * 9;
+        const x = width * ghost.x + Math.sin(time * .00018 + ghost.phase) * 8;
+        const y = height * ghost.y + bob;
+        const s = ghost.size * clamp(width / 1050, .72, 1.08);
+        ctx.save();
+        ctx.translate(x, y); ctx.scale(s, s);
+        ctx.globalAlpha = ghost.alpha;
+        ctx.shadowColor = isDay ? "rgba(255,226,192,.45)" : "rgba(190,178,255,.6)";
+        ctx.shadowBlur = 12;
+        const body = ctx.createLinearGradient(0, -31, 0, 38);
+        body.addColorStop(0, "rgba(255,255,255,.94)");
+        body.addColorStop(.68, isDay ? "rgba(250,237,255,.8)" : "rgba(207,207,239,.83)");
+        body.addColorStop(1, "rgba(165,159,208,.12)");
+        ctx.fillStyle = body;
+        ctx.beginPath();
+        ctx.moveTo(-19, 28);
+        ctx.lineTo(-19, -4);
+        ctx.bezierCurveTo(-20, -23, -11, -34, 0, -34);
+        ctx.bezierCurveTo(13, -34, 20, -22, 19, -4);
+        ctx.lineTo(19, 27);
+        ctx.quadraticCurveTo(12, 21, 6, 29);
+        ctx.quadraticCurveTo(0, 36, -6, 29);
+        ctx.quadraticCurveTo(-13, 22, -19, 28);
+        ctx.closePath(); ctx.fill();
+        ctx.shadowBlur = 0;
+        // چهرهٔ سادهٔ روح
+        ctx.fillStyle = "rgba(39,24,62,.92)";
+        ctx.beginPath(); ctx.ellipse(-6, -9, 2.6, 4.4, -.1, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(6, -9, 2.6, 4.4, .1, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(0, 3, 3.1, 4.3, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.restore();
+    }
+
+    function drawGhosts(time) {
+        ghosts.forEach(ghost => drawGhost(ghost, time));
     }
 
     function drawHauntedHouse(cx, ground, scale, time, foreground = false) {
@@ -283,8 +328,8 @@ if (canvas && canvas.getContext) {
 
     function drawPumpkin(x, y, scale, time, alpha = 1, variant = 0) {
         // نور نامنظم شبیه شعلهٔ واقعی، نه ضربان یکنواخت
-        const wave = Math.sin(time * (.008 + variant * .001) + x * .019) * .5 + .5;
-        const irregular = Math.sin(time * .027 + y * .17 + variant) * .12 + Math.sin(time * .041 + x) * .07;
+        const wave = Math.sin(time * (.0035 + variant * .00035) + x * .019) * .5 + .5;
+        const irregular = Math.sin(time * .011 + y * .17 + variant) * .12 + Math.sin(time * .017 + x) * .07;
         const flicker = clamp(.74 + wave * .24 + irregular, .48, 1.08);
         ctx.save(); ctx.translate(x, y); ctx.scale(scale, scale); ctx.globalAlpha = alpha;
         roundedGlow(0, -8, 75 * flicker, `rgba(255,106,28,${.31*flicker})`, "rgba(255,91,27,0)");
@@ -310,21 +355,20 @@ if (canvas && canvas.getContext) {
     function drawPumpkinPatch(time) {
         const scaleBase = clamp(width / 1000, .56, 1.22);
         const row = [
-            [.025, .955, 1.42], [.085, .982, .82], [.15, .966, .62], [.225, .99, .42],
-            [.77, .986, .48], [.835, .968, .66], [.91, .984, 1.02], [.975, .952, 1.5],
-            [.29, .989, .38], [.39, .995, .3], [.61, .991, .34], [.7, .995, .3]
+            [.035, .958, 1.18], [.14, .979, .62], [.245, .99, .43],
+            [.755, .99, .43], [.86, .974, .72], [.965, .955, 1.22]
         ];
-        row.forEach((p,i) => drawPumpkin(width*p[0], height*p[1], p[2]*scaleBase, time, i % 3 === 1 ? .78 : .98, i));
-        // کدوهای کوچک‌تر میان بوته‌ها برای عمق صحنه
-        for (let i=0;i<9;i++) {
-            const x = width * (.255 + i * .061), y = height * (.947 + (i%3)*.016);
-            drawPumpkin(x,y,scaleBase*(.24 + (i%4)*.075),time,.76,i+9);
+        row.forEach((p,i) => drawPumpkin(width*p[0], height*p[1], p[2]*scaleBase, time, i % 2 === 1 ? .82 : .98, i));
+        // چند کدوی کوچک‌تر برای عمق صحنه، بدون شلوغ کردن تصویر
+        for (let i=0;i<3;i++) {
+            const x = width * (.36 + i * .14), y = height * (.989 + (i%2)*.008);
+            drawPumpkin(x,y,scaleBase*(.27 + (i%3)*.06),time,.8,i+6);
         }
     }
 
     function drawFog(time) {
-        for (let i=0;i<5;i++) {
-            const y = height*(.72 + i*.061);
+        for (let i=0;i<3;i++) {
+            const y = height*(.76 + i*.065);
             const travel = ((time*(.006 + i*.0017)) % (width+450)) - 220;
             ctx.save(); ctx.globalAlpha = .74;
             const g = ctx.createLinearGradient(travel-230,y,travel+260,y+10);
@@ -437,10 +481,11 @@ if (canvas && canvas.getContext) {
         }
 
         if(isHalloweenSeason){
+            drawGhosts(time);
             bats.forEach((bat,i)=>{
                 if(!reducedMotion){bat.x+=bat.vx*(isDay?.7:1);bat.y+=bat.vy;bat.angle+=bat.turn;
                     if(bat.x>1.13)bat.x=-.13;if(bat.x<-.13)bat.x=1.13;if(bat.y<.04||bat.y>.68)bat.vy*=-1;}
-                if(!isDay || i<5) drawBat(bat,time);
+                if(!isDay || i<3) drawBat(bat,time);
             });
             if(isDay){drawWitch(time);drawLeaves();}
             else {drawFog(time);drawLightning(time);}
@@ -449,7 +494,7 @@ if (canvas && canvas.getContext) {
     }
 
     function animate(time) {
-        if(!lastFrame || time-lastFrame>=30){renderSky(time);lastFrame=time;}
+        if(!lastFrame || time-lastFrame>=42){renderSky(time);lastFrame=time;}
         if(!reducedMotion) requestAnimationFrame(animate);
     }
 
