@@ -103,9 +103,9 @@ if (canvas && canvas.getContext) {
         drift: rand(-.0004, .0004), spin: rand(0, Math.PI * 2), spinSpeed: rand(-.035, .035),
         color: ["#f58a27", "#ffc04d", "#b94824", "#d96721", "#9d4c24", "#ffdb77"][Math.floor(Math.random() * 6)]
     }));
-    const bats = Array.from({ length: 14 }, (_, i) => ({
+    const bats = Array.from({ length: 26 }, (_, i) => ({
         x: Math.random(), y: rand(.07, .66), vx: rand(.00010, .00031) * (Math.random() < .25 ? -1 : 1),
-        vy: rand(-.00008, .00008), scale: rand(.62, 1.45), phase: rand(0, 10),
+        vy: rand(-.00008, .00008), scale: rand(.78, 1.9), phase: rand(0, 10),
         angle: rand(-.3, .3), turn: rand(-.0012, .0012), type: i % 3
     }));
     const motes = Array.from({ length: 55 }, () => ({
@@ -204,10 +204,10 @@ if (canvas && canvas.getContext) {
     }
 
     function drawBat(bat, time) {
-        const flap = Math.sin(time * .015 + bat.phase) * 10;
+        const flap = Math.sin(time * .019 + bat.phase) * 16;
         const x = bat.x * width, y = bat.y * height + Math.sin(time * .0017 + bat.phase) * 24;
         ctx.save(); ctx.translate(x, y); ctx.rotate(bat.angle + Math.sin(time * .0008 + bat.phase) * .13); ctx.scale(bat.scale, bat.scale);
-        ctx.fillStyle = "rgba(9,6,22,.96)"; ctx.strokeStyle = "rgba(86,53,117,.7)"; ctx.lineWidth = 1.1;
+        ctx.fillStyle = "rgba(5,3,18,.99)"; ctx.strokeStyle = "rgba(139,77,174,.9)"; ctx.lineWidth = 1.7; ctx.shadowColor = "rgba(115,63,170,.45)"; ctx.shadowBlur = 8;
         ctx.beginPath();
         ctx.moveTo(-30, 0); ctx.quadraticCurveTo(-49, -19 - flap, -58, -11 - flap * .4);
         ctx.lineTo(-50, 7); ctx.lineTo(-39, 1); ctx.lineTo(-34, 14); ctx.lineTo(-23, 6);
@@ -217,7 +217,8 @@ if (canvas && canvas.getContext) {
         ctx.quadraticCurveTo(46, -22 + flap, 30, 0); ctx.quadraticCurveTo(14, -7, 4, -3);
         ctx.lineTo(0, 11); ctx.lineTo(-6, 17); ctx.lineTo(-12, 9); ctx.lineTo(-19, 17); ctx.lineTo(-22, 6); ctx.closePath();
         ctx.fill(); ctx.stroke();
-        ctx.beginPath(); ctx.ellipse(0, 1, 5.5, 8, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.ellipse(0, 1, 6.5, 9, 0, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(-4,-4); ctx.lineTo(-8,-13); ctx.lineTo(-1,-7); ctx.moveTo(4,-4); ctx.lineTo(8,-13); ctx.lineTo(1,-7); ctx.fill();
         if (isHalloweenSeason) {
             ctx.fillStyle = "#ff9b55"; ctx.shadowColor = "#ff602e"; ctx.shadowBlur = 7;
             ctx.beginPath(); ctx.ellipse(-2.5, 0, 1.5, 2.1, 0, 0, Math.PI * 2); ctx.ellipse(2.5, 0, 1.5, 2.1, 0, 0, Math.PI * 2); ctx.fill();
@@ -299,24 +300,25 @@ if (canvas && canvas.getContext) {
         ctx.beginPath(); ctx.moveTo(-25,-10); ctx.quadraticCurveTo(-20,6,-22,14); ctx.moveTo(25,-10); ctx.quadraticCurveTo(20,6,22,14); ctx.stroke();
         // چهرهٔ حک‌شده با نور از داخل
         ctx.shadowColor = "#ffcf56"; ctx.shadowBlur = 14 * flicker; ctx.fillStyle = `rgba(255,238,134,${flicker})`;
-        ctx.beginPath(); ctx.moveTo(-20,-7); ctx.lineTo(-7,-2); ctx.lineTo(-14,5); ctx.closePath(); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(7,-2); ctx.lineTo(20,-7); ctx.lineTo(14,5); ctx.closePath(); ctx.fill();
-        ctx.beginPath(); ctx.moveTo(-15,8); ctx.lineTo(-8,11); ctx.lineTo(-3,8); ctx.lineTo(2,12); ctx.lineTo(8,8); ctx.lineTo(15,8); ctx.lineTo(10,18); ctx.lineTo(-10,18); ctx.closePath(); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(-21,-8); ctx.lineTo(-7,-3); ctx.lineTo(-13,6); ctx.lineTo(-18,2); ctx.closePath(); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(7,-3); ctx.lineTo(21,-8); ctx.lineTo(18,2); ctx.lineTo(13,6); ctx.closePath(); ctx.fill();
+        ctx.beginPath(); ctx.moveTo(-16,8); ctx.lineTo(-9,10); ctx.lineTo(-5,8); ctx.lineTo(0,12); ctx.lineTo(5,8); ctx.lineTo(10,10); ctx.lineTo(16,8); ctx.lineTo(11,19); ctx.lineTo(6,16); ctx.lineTo(0,20); ctx.lineTo(-6,16); ctx.lineTo(-11,19); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = `rgba(255,248,190,${.42*flicker})`; ctx.fillRect(-8,12,3,5); ctx.fillRect(3,12,3,5);
         ctx.shadowBlur = 0; ctx.restore();
     }
 
     function drawPumpkinPatch(time) {
         const scaleBase = clamp(width / 1000, .56, 1.22);
         const row = [
-            [.035, .965, 1.18], [.105, .985, .69], [.185, .972, .46],
-            [.81, .978, .55], [.895, .984, .88], [.965, .962, 1.28],
-            [.27, .986, .35], [.72, .99, .39]
+            [.025, .955, 1.42], [.085, .982, .82], [.15, .966, .62], [.225, .99, .42],
+            [.77, .986, .48], [.835, .968, .66], [.91, .984, 1.02], [.975, .952, 1.5],
+            [.29, .989, .38], [.39, .995, .3], [.61, .991, .34], [.7, .995, .3]
         ];
         row.forEach((p,i) => drawPumpkin(width*p[0], height*p[1], p[2]*scaleBase, time, i % 3 === 1 ? .78 : .98, i));
         // کدوهای کوچک‌تر میان بوته‌ها برای عمق صحنه
-        for (let i=0;i<5;i++) {
-            const x = width * (.31 + i * .095), y = height * (.953 + (i%2)*.018);
-            drawPumpkin(x,y,scaleBase*(.27 + (i%3)*.06),time,.72,i+9);
+        for (let i=0;i<9;i++) {
+            const x = width * (.255 + i * .061), y = height * (.947 + (i%3)*.016);
+            drawPumpkin(x,y,scaleBase*(.24 + (i%4)*.075),time,.76,i+9);
         }
     }
 
@@ -416,13 +418,14 @@ if (canvas && canvas.getContext) {
         // خانه و جنگل فقط در بازهٔ فصلی نمایش داده می‌شوند تا تم عادی دست‌نخورده بماند.
         if (isHalloweenSeason) {
             drawHills();
-            const ground=height*.89;
+            const ground=height*.84;
             drawTree(width*.035,ground,clamp(width/1000,.56,1.28),-.1);
             drawTree(width*.13,ground+8,clamp(width/1250,.48,1.0),.08);
             drawTree(width*.91,ground+4,clamp(width/1050,.58,1.15),-.08);
             drawTree(width*.985,ground,clamp(width/900,.62,1.35),.12);
-            drawHauntedHouse(width*.76,ground+18,clamp(width/1100,.48,1.12),time,true);
-            drawHauntedHouse(width*.34,ground+28,clamp(width/1900,.34,.68),time,false);
+            drawHauntedHouse(width*.77,ground+26,clamp(width/760,.78,1.55),time,true);
+            drawHauntedHouse(width*.31,ground+38,clamp(width/1250,.52,.92),time,false);
+            drawHauntedHouse(width*.52,ground+45,clamp(width/1900,.34,.62),time,false);
         }
 
         // ابرها در روز عادی و در هر دو حالتِ تم هالووین نمایش داده می‌شوند.
