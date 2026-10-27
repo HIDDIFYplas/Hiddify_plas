@@ -4,60 +4,94 @@
 
 // آیکون‌های SVG سیستم‌عامل‌ها؛ فرم اصلی آیکون‌ها حفظ شده است.
 const OS_ICONS = {
-    // SVG اختصاصی هر پلتفرم؛ نورها داخل خود شکل هستند و سایهٔ بیرونی سنگین ندارند.
+    // آیکون‌های هالووینی SVG؛ نور داخل خود شکل است (بدون فیلتر و سایهٔ سنگین) تا روی همهٔ دستگاه‌ها روان بماند.
     android: `<span class="os-icon os-icon--android" aria-hidden="true"><svg viewBox="0 0 64 64" role="img">
-      <defs><linearGradient id="androidShell" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d5ff8a"/><stop offset=".48" stop-color="#68c94b"/><stop offset="1" stop-color="#247d45"/></linearGradient><linearGradient id="androidHat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6b3ca4"/><stop offset="1" stop-color="#25133e"/></linearGradient></defs>
-      <ellipse cx="32" cy="56" rx="20" ry="3.6" fill="#ff7b32" opacity=".34"/>
-      <path d="M20 25 15 19M44 25l5-6" fill="none" stroke="#78e66b" stroke-width="3.2" stroke-linecap="round"/>
-      <path d="M17 29Q17 14 32 14T47 29V39Q47 44 42 44H22Q17 44 17 39Z" fill="url(#androidShell)" stroke="#b6ff83" stroke-width="1.2"/>
-      <path d="M21 44h22v8q0 3-4 3H25q-4 0-4-3Z" fill="#45a952" stroke="#9cff75" stroke-width="1"/>
-      <path d="M20 47 13 52M44 47l7 5" fill="none" stroke="#79df62" stroke-width="4" stroke-linecap="round"/>
-      <path d="M25 54v4M39 54v4" fill="none" stroke="#a6f76a" stroke-width="4" stroke-linecap="round"/>
-      <path d="M14 19 29 6Q32 3 35 7L51 20 43 22 21 22Z" fill="url(#androidHat)" stroke="#a886e6" stroke-width="1.1"/>
-      <path d="M11 22Q30 18 54 22L51 25Q31 22 13 26Z" fill="#f18b43" stroke="#ffc36e" stroke-width="1"/>
-      <path d="M22 29 29 32 23 37Z M42 29 35 32 41 37Z" fill="#ffb22d" stroke="#fff08a" stroke-width=".7"/>
-      <path d="M24 39 28 37 31 40 34 37 39 39 36 42 27 42Z" fill="#4c261f" stroke="#ffd06a" stroke-width=".7"/>
-      <path d="M27 39v2M32 39v2M36 39v2" stroke="#fff1a3" stroke-width=".8"/>
-      <circle cx="32" cy="13" r="1.5" fill="#ffb44a"/>
+      <defs>
+        <linearGradient id="adBody" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#c4f979"/><stop offset=".55" stop-color="#5fbf3f"/><stop offset="1" stop-color="#26763a"/></linearGradient>
+        <linearGradient id="adHat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8a52c9"/><stop offset="1" stop-color="#2a1448"/></linearGradient>
+        <radialGradient id="adGlow"><stop stop-color="#ff8a2a" stop-opacity=".5"/><stop offset="1" stop-color="#ff8a2a" stop-opacity="0"/></radialGradient>
+      </defs>
+      <circle cx="32" cy="38" r="30" fill="url(#adGlow)"/>
+      <rect x="22" y="46" width="7" height="12" rx="3.5" fill="#4aa838"/><rect x="35" y="46" width="7" height="12" rx="3.5" fill="#4aa838"/>
+      <rect x="8.5" y="33" width="7" height="16" rx="3.5" fill="#76d54c"/><rect x="48.5" y="33" width="7" height="16" rx="3.5" fill="#76d54c"/>
+      <path d="M17 33H47V46Q47 50 43 50H21Q17 50 17 46Z" fill="url(#adBody)" stroke="#dcffa8" stroke-width="1"/>
+      <path d="M16 33Q16 15 32 15T48 33Z" fill="url(#adBody)" stroke="#dcffa8" stroke-width="1"/>
+      <path d="M20.5 28 29 24.5 28 31Z M43.5 28 35 24.5 36 31Z" fill="#ffc23a" stroke="#fff3a8" stroke-width=".7" stroke-linejoin="round"/>
+      <path d="M23 38l3 3 3-3 3 3 3-3 3 3 3-3" fill="none" stroke="#1f4a1c" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"/>
+      <path d="M20.5 16Q28 11 29.5 5Q31 -.5 40.5 3.5Q35.5 6.5 43.5 16Z" fill="url(#adHat)" stroke="#c4a0f5" stroke-width="1" stroke-linejoin="round"/>
+      <ellipse cx="32" cy="16.5" rx="19.5" ry="4" fill="#3a1c63" stroke="#c4a0f5" stroke-width="1"/>
+      <path d="M22.5 14.4Q32 17.6 41.5 14.4L42 11.8Q32 14.8 22 11.8Z" fill="#ff8a2a"/><rect x="30" y="12.2" width="4" height="3.4" rx=".6" fill="#ffd27a"/>
     </svg></span>`,
     windows: `<span class="os-icon os-icon--windows" aria-hidden="true"><svg viewBox="0 0 64 64" role="img">
-      <defs><linearGradient id="winBlue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8ce8ff"/><stop offset="1" stop-color="#2771d9"/></linearGradient><linearGradient id="winAmber" x1="0" y1="0" x2="0.8" y2="1"><stop stop-color="#ffcb75"/><stop offset="1" stop-color="#e85a35"/></linearGradient></defs>
-      <path d="M9 14 29 10V30H9Z" fill="url(#winBlue)" stroke="#c7f6ff" stroke-width="1.1"/><path d="M33 9 55 5V30H33Z" fill="url(#winAmber)" stroke="#ffd59a" stroke-width="1.1"/><path d="M9 34H29V54L9 50Z" fill="url(#winAmber)" stroke="#ffc58a" stroke-width="1.1"/><path d="M33 34H55V58L33 54Z" fill="url(#winBlue)" stroke="#b4eaff" stroke-width="1.1"/>
-      <path d="M32 7V57M7 32H57" stroke="#26123b" stroke-width="3.4"/>
-      <path d="M14 19 18 17 22 20 18 22Z M38 19 42 17 46 20 42 22Z" fill="#fff2a4"/><path d="M37 43 42 40 47 45 42 49Z" fill="#fff1a0"/>
-      <path d="M16 43 22 42 20 47 16 47Z" fill="#2c1738"/>
-      <path d="M18 59 26 56 31 60 38 56 46 59" fill="none" stroke="#ff9148" stroke-width="1.7" stroke-linecap="round"/>
+      <defs>
+        <linearGradient id="wnWall" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#47307d"/><stop offset="1" stop-color="#170c30"/></linearGradient>
+        <linearGradient id="wnRoof" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6a3aa6"/><stop offset="1" stop-color="#1f0e3b"/></linearGradient>
+        <linearGradient id="wnPane" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#ffe88a"/><stop offset=".55" stop-color="#ff9b30"/><stop offset="1" stop-color="#ff5a1c"/></linearGradient>
+        <radialGradient id="wnGlow"><stop stop-color="#ff7a24" stop-opacity=".5"/><stop offset="1" stop-color="#ff7a24" stop-opacity="0"/></radialGradient>
+      </defs>
+      <circle cx="32" cy="38" r="30" fill="url(#wnGlow)"/>
+      <path d="M43 20V7h6.5v16Z" fill="#2b1650" stroke="#a07ae0" stroke-width=".9"/><path d="M42 7h8.5" stroke="#a07ae0" stroke-width="1.4"/>
+      <rect x="11" y="29" width="42" height="28" fill="url(#wnWall)" stroke="#a98ae6" stroke-width="1"/>
+      <path d="M5.5 32Q23 26 32 6Q41 26 58.5 32Z" fill="url(#wnRoof)" stroke="#d2b4ff" stroke-width="1.1" stroke-linejoin="round"/>
+      <rect x="15.5" y="35" width="15" height="9.5" rx=".8" fill="url(#wnPane)"/><rect x="33.5" y="35" width="15" height="9.5" rx=".8" fill="url(#wnPane)"/>
+      <rect x="15.5" y="47" width="15" height="9" rx=".8" fill="url(#wnPane)"/><rect x="33.5" y="47" width="15" height="9" rx=".8" fill="url(#wnPane)"/>
+      <path d="M32 34V57M14 45.8H50" stroke="#190c32" stroke-width="2"/>
+      <ellipse cx="32" cy="58.5" rx="22" ry="2.8" fill="#ff7b32" opacity=".3"/>
     </svg></span>`,
     iphone: `<span class="os-icon os-icon--iphone" aria-hidden="true"><svg viewBox="0 0 64 64" role="img">
-      <defs><linearGradient id="iphoneFruit" x1=".15" y1="0" x2=".85" y2="1"><stop stop-color="#ffd26e"/><stop offset=".36" stop-color="#ff8b39"/><stop offset=".76" stop-color="#c53260"/><stop offset="1" stop-color="#61277e"/></linearGradient></defs>
-      <ellipse cx="32" cy="57" rx="18" ry="3" fill="#ff7d35" opacity=".28"/>
-      <path d="M31 18C24 12 13 18 11 29 8 43 17 55 26 54c3 0 4-2 7-2s5 2 8 2c8-1 16-13 12-25-3-9-12-13-20-8Z" fill="url(#iphoneFruit)" stroke="#ffd08a" stroke-width="1.2"/>
-      <path d="M31 18Q27 9 35 5Q40 14 34 20" fill="#6ed16e" stroke="#b7ff95" stroke-width="1.1"/><path d="M33 11Q43 5 48 10Q43 17 34 15" fill="#8cf078" stroke="#cbff9b" stroke-width=".8"/>
-      <path d="M17 31 27 34 20 40Z M47 31 37 34 44 40Z" fill="#351737" stroke="#ffe58a" stroke-width=".8"/>
-      <path d="M18 43Q24 39 29 43L32 46 35 43Q41 39 47 43L43 48 38 47 33 51 28 47 22 48Z" fill="#35152d" stroke="#ffe08a" stroke-width="1"/>
-      <path d="M22 44 24 47M30 45 31 48M38 45 37 48" stroke="#fff0a3" stroke-width="1.1"/>
+      <defs>
+        <linearGradient id="ipFruit" x1=".2" y1="0" x2=".8" y2="1"><stop stop-color="#ffcb66"/><stop offset=".45" stop-color="#ff7e1f"/><stop offset="1" stop-color="#b8330f"/></linearGradient>
+        <radialGradient id="ipGlow"><stop stop-color="#ff7a24" stop-opacity=".55"/><stop offset="1" stop-color="#ff7a24" stop-opacity="0"/></radialGradient>
+        <mask id="ipBite"><rect width="64" height="64" fill="#fff"/><circle cx="56.5" cy="26" r="7.5" fill="#000"/></mask>
+      </defs>
+      <circle cx="32" cy="38" r="30" fill="url(#ipGlow)"/>
+      <g mask="url(#ipBite)">
+        <path d="M31 18C24 12 12 17 10 30 8 44 17 56 26 55c3 0 4-2 6-2s3 2 6 2c9 1 17-11 14-25-2-10-11-15-19-12Z" fill="url(#ipFruit)" stroke="#ffd68a" stroke-width="1"/>
+        <path d="M32 19Q24 35 30 54M32 19Q41 35 36 54M32 19Q16 30 21 50M32 19Q48 30 43 50" fill="none" stroke="#7a2508" stroke-width=".9" opacity=".4"/>
+      </g>
+      <path d="M32 18Q30.5 10 36 5" fill="none" stroke="#5a3a1a" stroke-width="3" stroke-linecap="round"/>
+      <path d="M34 12Q43 5 50 10Q43 17 34 15Z" fill="#7ad14e" stroke="#c9ffa4" stroke-width=".9" stroke-linejoin="round"/>
+      <path d="M16 31 26.5 34 19.5 40Z M44 31 33.5 34 40.5 40Z" fill="#fff0a0" stroke="#ffb838" stroke-width=".6" stroke-linejoin="round"/>
+      <path d="M17 44 23 42 27.5 46 32 42 36.5 46 41 42 47 44 42 51.5 36.5 49 32 53 27.5 49 22 51.5Z" fill="#fff0a0" stroke="#ffb838" stroke-width=".6" stroke-linejoin="round"/>
     </svg></span>`,
     mac: `<span class="os-icon os-icon--mac" aria-hidden="true"><svg viewBox="0 0 64 64" role="img">
-      <defs><linearGradient id="macFruit" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d8a5ff"/><stop offset=".46" stop-color="#8751d0"/><stop offset="1" stop-color="#27256d"/></linearGradient></defs>
-      <ellipse cx="32" cy="57" rx="18" ry="3" fill="#b981ff" opacity=".25"/>
-      <path d="M31 19C24 13 13 18 11 29 8 42 17 55 26 54c3 0 4-2 7-2s5 2 8 2c8-1 16-13 12-25-3-9-12-13-20-8Z" fill="url(#macFruit)" stroke="#f0d4ff" stroke-width="1.2"/>
-      <path d="M31 18Q27 9 35 5Q40 14 34 20" fill="#ff9a54" stroke="#ffda9b" stroke-width="1"/><path d="M33 11Q43 5 48 10Q43 17 34 15" fill="#8fe47b" stroke="#d7ffac" stroke-width=".8"/>
-      <path d="M16 31 26 34 20 40Z M48 31 38 34 44 40Z" fill="#21153e" stroke="#d6bcff" stroke-width=".7"/>
-      <path d="M19 44Q31 52 45 43L42 49 36 48 32 51 27 48 22 49Z" fill="#171239" stroke="#ffbd80" stroke-width="1"/>
-      <path d="M8 25l3-2m44 0 3 2M18 14l2-3m26 3 2-3" stroke="#f3d0ff" stroke-width="1.5" stroke-linecap="round"/><path d="M48 27l2-4 2 4 4 1-4 2-2 4-2-4-4-2Z" fill="#ffe19c"/>
+      <defs>
+        <linearGradient id="macFruit" x1=".15" y1="0" x2=".85" y2="1"><stop stop-color="#e6bcff"/><stop offset=".45" stop-color="#8e55d8"/><stop offset="1" stop-color="#241766"/></linearGradient>
+        <radialGradient id="macGlow"><stop stop-color="#b57cff" stop-opacity=".55"/><stop offset="1" stop-color="#b57cff" stop-opacity="0"/></radialGradient>
+        <mask id="macBite"><rect width="64" height="64" fill="#fff"/><circle cx="56.5" cy="26" r="7.5" fill="#000"/></mask>
+      </defs>
+      <circle cx="32" cy="38" r="30" fill="url(#macGlow)"/>
+      <g mask="url(#macBite)">
+        <path d="M31 18C24 12 12 17 10 30 8 44 17 56 26 55c3 0 4-2 6-2s3 2 6 2c9 1 17-11 14-25-2-10-11-15-19-12Z" fill="url(#macFruit)" stroke="#f1d8ff" stroke-width="1"/>
+      </g>
+      <path d="M32 18Q30 9 36 4Q40 11 35 18" fill="#ff9a3c" stroke="#ffd9a0" stroke-width=".9" stroke-linejoin="round"/>
+      <path d="M35 12Q44 6 50 11Q43 17 35 15Z" fill="#8fe47b" stroke="#d7ffac" stroke-width=".8" stroke-linejoin="round"/>
+      <path d="M16.5 32 27 33.5 20 38.5Z M44 32 33.5 33.5 40.5 38.5Z" fill="#f6ecff" stroke="#fff" stroke-width=".5" stroke-linejoin="round"/>
+      <path d="M20 43Q32 52 43 43" fill="none" stroke="#ffb46a" stroke-width="2" stroke-linecap="round"/>
+      <path d="M9 15l1.6-3.6L14 10l-3.4-1.4L9 5 7.4 8.6 4 10l3.4 1.4Z M53 52l1.2-2.6L57 48.4l-2.8-1.2L53 44.6l-1.2 2.6-2.8 1.2 2.8 1.2Z" fill="#ffe19c"/>
     </svg></span>`,
     tv: `<span class="os-icon os-icon--tv" aria-hidden="true"><svg viewBox="0 0 64 64" role="img">
+      <defs><radialGradient id="tvGlow"><stop stop-color="#ff7a24" stop-opacity=".4"/><stop offset="1" stop-color="#ff7a24" stop-opacity="0"/></radialGradient></defs>
+      <circle cx="32" cy="36" r="30" fill="url(#tvGlow)"/>
       <rect x="7" y="13" width="50" height="36" rx="4" fill="#261b46" stroke="#c7b7ff" stroke-width="2"/><rect x="11" y="17" width="42" height="28" rx="2" fill="#354c81"/><path d="M12 41 24 28 31 35 40 23 53 40Z" fill="#11152e"/><path d="M28 38V28L34 22 40 28V38Z" fill="#ff9d4a"/><path d="M31 38V31H37V38" fill="#fff0a1"/><circle cx="45" cy="23" r="4" fill="#fff0a1"/><path d="M24 12l8-6 8 6" fill="none" stroke="#bca2ff" stroke-width="2"/><path d="M20 54H44" stroke="#ffad60" stroke-width="3" stroke-linecap="round"/>
     </svg></span>`,
     linux: `<span class="os-icon os-icon--linux" aria-hidden="true"><svg viewBox="0 0 64 64" role="img">
-      <defs><linearGradient id="penguinBody" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5b536d"/><stop offset=".5" stop-color="#17142a"/><stop offset="1" stop-color="#050713"/></linearGradient><linearGradient id="penguinBelly" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff7e5"/><stop offset="1" stop-color="#d8d4ed"/></linearGradient></defs>
-      <ellipse cx="32" cy="58" rx="18" ry="3.2" fill="#ff9a35" opacity=".3"/>
-      <path d="M19 28Q15 11 31 12Q48 11 46 30L49 47Q47 56 32 56Q17 56 15 47Z" fill="url(#penguinBody)" stroke="#a89acb" stroke-width="1.2"/>
-      <path d="M24 31Q32 24 40 31L42 48Q39 53 32 53Q25 53 22 48Z" fill="url(#penguinBelly)" stroke="#fff5df" stroke-width=".8"/>
-      <path d="M23 26 13 39 17 44 27 35M41 26 51 39 47 44 37 35" fill="#24223c" stroke="#82789d" stroke-width="1.2"/>
-      <path d="M25 23 30 25 28 29 23 27ZM39 23 34 25 36 29 41 27Z" fill="#ffbc52" stroke="#fff0a5" stroke-width=".7"/><path d="M28 30 36 30 32 36Z" fill="#ff942f" stroke="#ffdb78" stroke-width=".8"/>
-      <path d="M22 13 27 6 40 8 46 17 41 19 25 18Z" fill="#5a2d82" stroke="#caa5ff" stroke-width="1.1"/><path d="M19 17Q32 14 47 18L45 22Q32 19 20 22Z" fill="#ff8b42" stroke="#ffd18a" stroke-width="1"/><path d="M31 9l2-3 2 3" fill="none" stroke="#fff0ab" stroke-width="1.2"/>
-      <path d="M22 54 18 58 28 58 30 55M42 54 46 58 36 58 34 55" fill="#ffab35" stroke="#ffdf82" stroke-width=".8"/>
+      <defs>
+        <linearGradient id="pgBody" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#5d5478"/><stop offset=".5" stop-color="#1b1632"/><stop offset="1" stop-color="#07081a"/></linearGradient>
+        <linearGradient id="pgBelly" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff8e8"/><stop offset="1" stop-color="#d9d3ef"/></linearGradient>
+        <linearGradient id="pgHat" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#8a52c9"/><stop offset="1" stop-color="#2a1448"/></linearGradient>
+        <radialGradient id="pgGlow"><stop stop-color="#ffa03a" stop-opacity=".45"/><stop offset="1" stop-color="#ffa03a" stop-opacity="0"/></radialGradient>
+      </defs>
+      <circle cx="32" cy="38" r="30" fill="url(#pgGlow)"/>
+      <path d="M18 32Q13 15 32 15Q51 15 46 32L50 49Q48 58 32 58Q16 58 14 49Z" fill="url(#pgBody)" stroke="#9b8cc2" stroke-width="1.1"/>
+      <path d="M24 33Q32 26 40 33L42 50Q39 55 32 55Q25 55 22 50Z" fill="url(#pgBelly)" stroke="#fff5df" stroke-width=".7"/>
+      <path d="M18 32 8.5 45 13.5 49 22 39Z M46 32 55.5 45 50.5 49 42 39Z" fill="#2b2447" stroke="#8277a6" stroke-width="1" stroke-linejoin="round"/>
+      <circle cx="27" cy="27" r="3.4" fill="#fff"/><circle cx="37" cy="27" r="3.4" fill="#fff"/><circle cx="27.4" cy="27.4" r="1.7" fill="#ff5a1c"/><circle cx="36.6" cy="27.4" r="1.7" fill="#ff5a1c"/>
+      <path d="M28 31.5H36L32 37Z" fill="#ff9a2f" stroke="#ffd37a" stroke-width=".7" stroke-linejoin="round"/>
+      <path d="M21 57 15 61H27L28.5 58ZM43 57 49 61H37L35.5 58Z" fill="#ffab35" stroke="#ffe08a" stroke-width=".6" stroke-linejoin="round"/>
+      <path d="M21.5 17Q28.5 11.500 30 5.500Q31.500 0 40.500 3.500Q35.500 6.500 43 17Z" fill="url(#pgHat)" stroke="#c4a0f5" stroke-width="1" stroke-linejoin="round"/>
+      <ellipse cx="32" cy="17.500" rx="18" ry="3.800" fill="#3a1c63" stroke="#c4a0f5" stroke-width="1"/>
+      <path d="M23.500 15.600Q32 18.600 40.500 15.600L41 13Q32 15.800 23 13Z" fill="#ff8a2a"/><rect x="30" y="13.300" width="4" height="3.300" rx=".6" fill="#ffd27a"/>
     </svg></span>`
 };
 
@@ -360,64 +394,116 @@ if (canvas && canvas.getContext) {
         ghosts.forEach(ghost => drawGhost(ghost, time));
     }
 
+    // عمارت گوتیک: بدنهٔ ثابت یک‌بار در بوم جدا رسم و کش می‌شود؛ فقط نور پنجره‌ها و دود هر فریم زنده است (سبک و بدون هنگ).
+    const houseCache = new Map();
+    function paintHouseStatic(c, fg) {
+        const wallA = isDay ? "#5b4a68" : "#2a1f4d", wallB = isDay ? "#3a2f48" : "#0c0a1e";
+        const wingA = isDay ? "#6d5a78" : "#221a42", wingB = isDay ? "#41354f" : "#0a0818";
+        const roofA = isDay ? "#4a4062" : "#241a46", roofB = isDay ? "#2a2540" : "#06051a";
+        const rim = isDay ? "rgba(255,214,160,.6)" : "rgba(196,150,255,.62)";
+        const edge = isDay ? "rgba(255,205,150,.34)" : "rgba(140,100,179,.5)";
+        const vg = (y1, y2, a, b) => { const g = c.createLinearGradient(0, y1, 0, y2); g.addColorStop(0, a); g.addColorStop(1, b); return g; };
+        c.lineJoin = "round"; c.lineWidth = 1.2; c.strokeStyle = edge;
+        // سایهٔ زمین
+        c.fillStyle = isDay ? "rgba(50,38,56,.2)" : "rgba(0,0,12,.4)";
+        c.beginPath(); c.ellipse(0, 3, 150, 9, 0, 0, Math.PI * 2); c.fill();
+        // بدنهٔ اصلی و بال‌ها
+        c.fillStyle = vg(-107, 0, wallA, wallB); c.fillRect(-73, -107, 146, 107); c.strokeRect(-73, -107, 146, 107);
+        c.fillStyle = vg(-77, 0, wingA, wingB); c.fillRect(-111, -70, 39, 70); c.fillRect(73, -77, 39, 77);
+        c.strokeRect(-111, -70, 39, 70); c.strokeRect(73, -77, 39, 77);
+        // آجرکاری سبک
+        c.strokeStyle = isDay ? "rgba(255,216,174,.12)" : "rgba(170,135,205,.14)"; c.lineWidth = .8; c.beginPath();
+        for (let yy = -96; yy <= -10; yy += 14) { c.moveTo(-72, yy); c.lineTo(72, yy); }
+        for (let yy = -64; yy <= -10; yy += 14) { c.moveTo(-110, yy); c.lineTo(-73, yy); c.moveTo(74, yy - 6); c.lineTo(111, yy - 6); }
+        c.stroke();
+        // دودکش کج
+        c.fillStyle = roofB; c.strokeStyle = edge; c.lineWidth = 1.2;
+        c.beginPath(); c.moveTo(40, -140); c.lineTo(42, -176); c.lineTo(55, -178); c.lineTo(53, -135); c.closePath(); c.fill(); c.stroke();
+        c.fillRect(38, -181, 20, 6);
+        // برج‌های باریک با سقف مخروطیِ خمیده
+        c.fillStyle = vg(-153, -100, wallA, wallB); c.fillRect(-23, -153, 39, 53); c.strokeRect(-23, -153, 39, 53);
+        c.fillStyle = vg(-122, 0, wingA, wingB); c.fillRect(-101, -122, 28, 122); c.strokeRect(-101, -122, 28, 122);
+        c.fillStyle = vg(-133, 0, wingA, wingB); c.fillRect(73, -133, 31, 133); c.strokeRect(73, -133, 31, 133);
+        const roof = (pts) => {
+            c.fillStyle = vg(pts.ty, pts.by, roofA, roofB); c.strokeStyle = edge;
+            c.beginPath(); c.moveTo(pts.l, pts.by); c.quadraticCurveTo(pts.l + (pts.tx - pts.l) * .45, pts.by - (pts.by - pts.ty) * .18, pts.tx, pts.ty);
+            c.quadraticCurveTo(pts.r - (pts.r - pts.tx) * .45, pts.by - (pts.by - pts.ty) * .18, pts.r, pts.by);
+            c.closePath(); c.fill(); c.stroke();
+            // نور ماه روی لبهٔ راست
+            c.strokeStyle = rim; c.lineWidth = 1.3; c.beginPath(); c.moveTo(pts.tx, pts.ty);
+            c.quadraticCurveTo(pts.r - (pts.r - pts.tx) * .45, pts.by - (pts.by - pts.ty) * .18, pts.r, pts.by); c.stroke(); c.lineWidth = 1.2;
+        };
+        roof({ l: -92, r: 86, tx: -4, ty: -168, by: -105 });
+        roof({ l: -33, r: 26, tx: -4, ty: -209, by: -151 });
+        roof({ l: -110, r: -66, tx: -87, ty: -173, by: -121 });
+        roof({ l: 64, r: 112, tx: 88, ty: -191, by: -132 });
+        roof({ l: -118, r: -68, tx: -92, ty: -104, by: -69 });
+        roof({ l: 66, r: 120, tx: 94, ty: -115, by: -76 });
+        // نوک‌ها و پرچم‌های کوچک
+        c.strokeStyle = "rgba(255,174,95,.7)"; c.lineWidth = 1.3;
+        [[-87, -173], [-4, -209], [88, -191]].forEach(([x, y]) => { c.beginPath(); c.moveTo(x, y); c.lineTo(x, y - 13); c.stroke(); c.beginPath(); c.moveTo(x, y - 12); c.lineTo(x + 9, y - 9); c.lineTo(x, y - 5); c.stroke(); });
+        // قاب پنجره‌های نوک‌قوسی (نور در هر فریم روی آن‌ها کشیده می‌شود)
+        c.strokeStyle = isDay ? "rgba(255,205,150,.5)" : "rgba(170,130,215,.6)"; c.lineWidth = 1.6;
+        WIN_DEF.forEach(([x, y, w, h]) => { c.beginPath(); c.moveTo(x - 1.5, y + h + 1.5); c.lineTo(x - 1.5, y + 5); c.quadraticCurveTo(x + w / 2, y - 6, x + w + 1.5, y + 5); c.lineTo(x + w + 1.5, y + h + 1.5); c.closePath(); c.stroke(); });
+        // دریچهٔ گرد زیر شیروانی (پنجرهٔ خفاش)
+        c.fillStyle = "#0b0818"; c.beginPath(); c.arc(-4, -128, 9, 0, Math.PI * 2); c.fill(); c.strokeStyle = rim; c.lineWidth = 1.5; c.stroke();
+        // در بزرگ قوسی با لولا و دستگیره
+        c.fillStyle = isDay ? "#1c1228" : "#04030f";
+        c.beginPath(); c.moveTo(-17, 0); c.lineTo(-17, -42); c.quadraticCurveTo(0, -64, 17, -42); c.lineTo(17, 0); c.closePath(); c.fill();
+        c.strokeStyle = edge; c.lineWidth = 1.4; c.stroke();
+        c.strokeStyle = "rgba(255,160,90,.35)"; c.lineWidth = 1; c.beginPath(); c.moveTo(0, -57); c.lineTo(0, 0); c.moveTo(-17, -30); c.lineTo(17, -30); c.stroke();
+        c.fillStyle = "#ffb45d"; c.beginPath(); c.arc(9, -23, 1.8, 0, Math.PI * 2); c.fill();
+        // پله‌ها و ستون فانوس
+        c.strokeStyle = isDay ? "rgba(255,208,163,.34)" : "rgba(137,104,164,.45)"; c.lineWidth = 1.7;
+        for (let i = 0; i < 3; i++) { c.beginPath(); c.moveTo(-22 - i * 4, -i * 4); c.lineTo(22 + i * 4, -i * 4); c.stroke(); }
+        c.strokeStyle = "#0b0818"; c.lineWidth = 2.2; c.beginPath(); c.moveTo(-34, 0); c.lineTo(-34, -40); c.lineTo(-28, -44); c.stroke();
+        c.fillStyle = "#1c1228"; c.fillRect(-31, -42, 6, 8);
+        // نردهٔ جلویی فقط برای عمارت پیش‌زمینه
+        if (fg) {
+            c.strokeStyle = "rgba(8,5,20,.92)"; c.lineWidth = 2.4;
+            for (let i = -136; i <= 136; i += 17) { const tall = i % 34 === 0; c.beginPath(); c.moveTo(i, 0); c.lineTo(i, -(tall ? 23 : 17)); c.lineTo(i - 3, -(tall ? 18 : 12)); c.stroke(); }
+            c.beginPath(); c.moveTo(-143, -13); c.lineTo(143, -13); c.moveTo(-143, -3); c.lineTo(143, -3); c.stroke();
+        }
+    }
+    const WIN_DEF = [[-52, -78, 13, 23], [-20, -79, 13, 24], [18, -79, 13, 24], [47, -77, 12, 22], [-91, -101, 8, 16], [83, -110, 9, 18], [-9, -135, 10, 18]];
     function drawHauntedHouse(cx, ground, scale, time, foreground = false) {
-        // عمارت گوتیک با برج‌های باریک، شیروانی‌های چندلایه، پنجره‌های نوک‌قوسی و جزئیات سنگی.
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.15);
+        const key = (isDay ? "d" : "n") + (foreground ? "f" : "b") + Math.round(scale * 100) + "@" + dpr;
+        let off = houseCache.get(key);
+        if (!off) {
+            if (houseCache.size > 14) houseCache.clear();
+            off = document.createElement("canvas");
+            off.width = Math.ceil(310 * scale * dpr); off.height = Math.ceil(240 * scale * dpr);
+            const c = off.getContext("2d");
+            c.scale(scale * dpr, scale * dpr); c.translate(155, 226);
+            paintHouseStatic(c, foreground);
+            houseCache.set(key, off);
+        }
+        ctx.drawImage(off, cx - 155 * scale, ground - 226 * scale, 310 * scale, 240 * scale);
+        // بخش زنده: نور پنجره‌ها، فانوس و دود (بدون shadowBlur)
         ctx.save(); ctx.translate(cx, ground); ctx.scale(scale, scale);
-        const wall = isDay ? "rgba(71,58,79,.78)" : "rgba(8,7,25,.97)";
-        const wallLight = isDay ? "rgba(114,91,112,.68)" : "rgba(30,22,53,.96)";
-        const roof = isDay ? "rgba(39,34,58,.9)" : "rgba(4,4,19,.99)";
-        const trim = isDay ? "rgba(255,205,150,.38)" : "rgba(140,100,179,.52)";
-        ctx.lineWidth = 1.25; ctx.strokeStyle = trim;
-        // سایهٔ زمین و خط پایه
-        ctx.fillStyle = isDay ? "rgba(50,38,56,.18)" : "rgba(0,0,12,.34)";
-        ctx.beginPath(); ctx.ellipse(0, 2, 153, 10, 0, 0, Math.PI * 2); ctx.fill();
-        // بدنه و بال‌های کناری
-        ctx.fillStyle = wall; ctx.fillRect(-73, -107, 146, 107);
-        ctx.fillStyle = wallLight; ctx.fillRect(-111, -70, 39, 70); ctx.fillRect(73, -77, 39, 77);
-        ctx.strokeRect(-73, -107, 146, 107);
-        // سقف اصلی با دو لایهٔ شیروانی
-        ctx.fillStyle = roof; ctx.beginPath(); ctx.moveTo(-88,-105); ctx.lineTo(-4,-166); ctx.lineTo(82,-105); ctx.closePath(); ctx.fill(); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(-79,-105); ctx.lineTo(-4,-158); ctx.lineTo(73,-105); ctx.closePath(); ctx.strokeStyle = "rgba(173,125,191,.28)"; ctx.stroke();
-        // برج مرکزی بلند و برج‌های باریک نامتقارن
-        ctx.fillStyle = wall; ctx.fillRect(-23,-153,39,51);
-        ctx.fillStyle = roof;
-        ctx.beginPath(); ctx.moveTo(-31,-151); ctx.lineTo(-4,-207); ctx.lineTo(24,-151); ctx.closePath(); ctx.fill(); ctx.strokeStyle = trim; ctx.stroke();
-        ctx.fillStyle = wall; ctx.fillRect(-101,-122,28,122); ctx.fillRect(73,-133,31,133);
-        ctx.fillStyle = roof;
-        ctx.beginPath(); ctx.moveTo(-108,-121); ctx.lineTo(-87,-171); ctx.lineTo(-68,-121); ctx.closePath(); ctx.fill(); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(66,-132); ctx.lineTo(88,-189); ctx.lineTo(111,-132); ctx.closePath(); ctx.fill(); ctx.stroke();
-        // نوک‌های فلزی و پرچم کوچک
-        ctx.strokeStyle = "rgba(255,174,95,.58)"; ctx.lineWidth = 1.3;
-        [[-87,-171],[ -4,-207],[88,-189]].forEach(([x,y])=>{ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x,y-13);ctx.stroke();ctx.beginPath();ctx.moveTo(x,y-12);ctx.lineTo(x+9,y-9);ctx.lineTo(x,y-5);ctx.stroke();});
-        // شیروانی‌های فرعی و پنجرهٔ زیرشیروانی
-        ctx.fillStyle = roof; ctx.beginPath(); ctx.moveTo(-116,-69); ctx.lineTo(-92,-101); ctx.lineTo(-69,-69); ctx.closePath(); ctx.fill(); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(66,-76); ctx.lineTo(92,-112); ctx.lineTo(118,-76); ctx.closePath(); ctx.fill(); ctx.stroke();
-        // خط‌های سنگ و تیرک‌ها، به تعداد محدود برای حفظ کارایی
-        ctx.strokeStyle = isDay ? "rgba(255,216,174,.13)" : "rgba(159,124,190,.16)"; ctx.lineWidth = .8;
-        for(let yy=-91; yy<=-19; yy+=18){ctx.beginPath();ctx.moveTo(-67,yy);ctx.lineTo(-45,yy);ctx.moveTo(48,yy+5);ctx.lineTo(68,yy+5);ctx.stroke();}
-        // پنجره‌های نوک‌قوسی با نور هالووینی
-        const glow = .72 + .2 * Math.sin(time * .0017 + cx * .013);
-        ctx.shadowColor = isDay ? "rgba(255,190,100,.42)" : "rgba(255,115,43,.7)";
-        ctx.shadowBlur = foreground ? 4 : 3;
-        const windows = [[-52,-78,13,23],[-20,-79,13,24],[18,-79,13,24],[47,-77,12,22],[-91,-101,8,16],[83,-110,9,18],[-9,-135,10,18]];
-        windows.forEach(([x,y,w,h],i)=>{
-            ctx.fillStyle = i%3===0 ? `rgba(255,208,111,${isDay?.76:glow})` : `rgba(255,151,60,${isDay?.65:glow})`;
-            ctx.beginPath(); ctx.moveTo(x,y+h); ctx.lineTo(x,y+6); ctx.quadraticCurveTo(x+w/2,y-3,x+w,y+6); ctx.lineTo(x+w,y+h); ctx.closePath(); ctx.fill();
-            ctx.fillStyle = "rgba(55,26,32,.8)"; ctx.fillRect(x+w*.45,y+4,w*.12,h-4);
+        const glow = .74 + .2 * Math.sin(time * .0017 + cx * .013);
+        WIN_DEF.forEach(([x, y, w, h], i) => {
+            const purple = i === 3;
+            ctx.fillStyle = purple ? `rgba(190,120,255,${.1 * glow})` : `rgba(255,130,50,${.13 * glow})`;
+            ctx.fillRect(x - 4, y - 3, w + 8, h + 8);
+            ctx.fillStyle = purple ? `rgba(205,150,255,${isDay ? .7 : glow})` : (i % 3 === 0 ? `rgba(255,214,120,${isDay ? .76 : glow})` : `rgba(255,152,62,${isDay ? .66 : glow})`);
+            ctx.beginPath(); ctx.moveTo(x, y + h); ctx.lineTo(x, y + 6); ctx.quadraticCurveTo(x + w / 2, y - 3, x + w, y + 6); ctx.lineTo(x + w, y + h); ctx.closePath(); ctx.fill();
+            ctx.fillStyle = "rgba(40,18,30,.85)"; ctx.fillRect(x + w * .45, y + 4, w * .1, h - 4); ctx.fillRect(x, y + h * .5, w, 1.3);
         });
-        ctx.shadowBlur = 0;
-        // در بزرگ با پنل و حلقهٔ فلزی
-        ctx.fillStyle = isDay ? "rgba(25,18,35,.92)" : "rgba(2,2,13,.99)";
-        ctx.beginPath(); ctx.moveTo(-17,0); ctx.lineTo(-17,-42); ctx.quadraticCurveTo(0,-62,17,-42); ctx.lineTo(17,0); ctx.closePath(); ctx.fill();
-        ctx.strokeStyle = trim; ctx.stroke(); ctx.beginPath(); ctx.arc(9,-23,1.8,0,Math.PI*2); ctx.fillStyle="#ffb45d"; ctx.fill();
-        // پله‌ها
-        ctx.strokeStyle = isDay ? "rgba(255,208,163,.32)" : "rgba(137,104,164,.4)"; ctx.lineWidth = 1.6;
-        for(let i=0;i<3;i++){ctx.beginPath();ctx.moveTo(-22-i*4,-i*4);ctx.lineTo(22+i*4,-i*4);ctx.stroke();}
-        // نردهٔ جلویی و نیزه‌ها فقط در بنای پیش‌زمینه
-        if (foreground) {
-            ctx.strokeStyle = "rgba(8,5,20,.9)"; ctx.lineWidth = 2.4;
-            for(let i=-136;i<=136;i+=17){ctx.beginPath();ctx.moveTo(i,0);ctx.lineTo(i,-(i%34===0?23:17));ctx.lineTo(i-3,-(i%34===0?18:12));ctx.stroke();}
-            ctx.beginPath();ctx.moveTo(-143,-13);ctx.lineTo(143,-13);ctx.moveTo(-143,-3);ctx.lineTo(143,-3);ctx.stroke();
+        // دریچهٔ گرد با خفاش
+        ctx.fillStyle = `rgba(255,140,55,${.85 * glow})`; ctx.beginPath(); ctx.arc(-4, -128, 7.2, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = "#0b0818"; ctx.beginPath(); ctx.moveTo(-4, -128); ctx.lineTo(-9, -132); ctx.lineTo(-7, -127); ctx.lineTo(-4, -125); ctx.lineTo(-1, -127); ctx.lineTo(1, -132); ctx.closePath(); ctx.fill();
+        // شکاف نور زیر در
+        ctx.fillStyle = `rgba(255,150,60,${.5 * glow})`; ctx.fillRect(-12, -2, 24, 1.8);
+        // فانوس ایوان
+        roundedGlow(-28, -38, 12, `rgba(255,170,70,${.55 * glow})`, "rgba(255,140,50,0)");
+        ctx.fillStyle = `rgba(255,208,110,${glow})`; ctx.fillRect(-30, -41, 4, 6);
+        // دود دودکش
+        for (let i = 0; i < 4; i++) {
+            const t = ((time * .00028) + i * .25) % 1;
+            ctx.fillStyle = `rgba(165,150,195,${.2 * (1 - t)})`;
+            ctx.beginPath(); ctx.arc(48 + Math.sin(t * 6 + i) * 6 + t * 18, -186 - t * 46, 3 + t * 8, 0, Math.PI * 2); ctx.fill();
         }
         ctx.restore();
     }
@@ -476,7 +562,7 @@ if (canvas && canvas.getContext) {
         ctx.beginPath(); ctx.moveTo(-5,-23); ctx.quadraticCurveTo(-10,-34,-2,-39); ctx.quadraticCurveTo(6,-34,3,-22); ctx.closePath(); ctx.fill(); ctx.stroke();
         ctx.beginPath(); ctx.moveTo(1,-31); ctx.quadraticCurveTo(12,-39,17,-32); ctx.quadraticCurveTo(10,-26,2,-29); ctx.closePath(); ctx.fill();
         // نور حکاکی‌ها درون خود صورت
-        ctx.shadowColor = "#ffb936"; ctx.shadowBlur = 5 * flicker;
+        ctx.shadowColor = "#ffb936"; ctx.shadowBlur = 3 * flicker;
         ctx.fillStyle = `rgba(255,228,112,${.83*flicker})`;
         if(shape===0){ // چشم‌های شیطانی باریک و دهان دندانه‌دار
             ctx.beginPath();ctx.moveTo(-22,-8);ctx.lineTo(-7,-3);ctx.lineTo(-15,5);ctx.closePath();ctx.fill();
@@ -501,18 +587,18 @@ if (canvas && canvas.getContext) {
         ctx.restore();
     }
 
+    // کدوها پراکنده و نامرتب‌اند؛ هر بار باز شدن صفحه کمی جابه‌جا می‌شوند، ولی تعدادشان کم می‌ماند.
+    const pumpkinSpots = [
+        [.04, .955, 1.15], [.18, .985, .52], [.30, .90, .34], [.46, .972, .30], [.58, .925, .38],
+        [.70, .992, .62], [.82, .905, .42], [.93, .962, 1.0], [.985, .895, .5]
+    ].map((p, i) => ({
+        x: clamp(p[0] + rand(-.022, .022), .01, .99), y: clamp(p[1] + rand(-.012, .012), .88, 1),
+        s: p[2] * rand(.88, 1.12), v: Math.floor(Math.random() * 4), a: i % 3 === 1 ? .84 : .98
+    }));
     function drawPumpkinPatch(time) {
         const scaleBase = clamp(width / 1000, .56, 1.22);
-        const row = [
-            [.035, .958, 1.18], [.14, .979, .62], [.245, .99, .43],
-            [.755, .99, .43], [.86, .974, .72], [.965, .955, 1.22]
-        ];
-        row.forEach((p,i) => drawPumpkin(width*p[0], height*p[1], p[2]*scaleBase, time, i % 2 === 1 ? .82 : .98, i));
-        // چند کدوی کوچک‌تر برای عمق صحنه، بدون شلوغ کردن تصویر
-        for (let i=0;i<3;i++) {
-            const x = width * (.36 + i * .14), y = height * (.989 + (i%2)*.008);
-            drawPumpkin(x,y,scaleBase*(.27 + (i%3)*.06),time,.8,i+6);
-        }
+        const list = width < 600 ? pumpkinSpots.filter((_, i) => i % 3 !== 2) : pumpkinSpots;
+        list.forEach(p => drawPumpkin(width * p.x, height * p.y, p.s * scaleBase, time, p.a, p.v));
     }
 
     function drawFog(time) {
