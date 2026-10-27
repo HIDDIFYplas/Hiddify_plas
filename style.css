@@ -818,3 +818,20 @@ body.halloween-theme .os-icon--tv::after {
 body.halloween-theme .os-icon:hover { transform: translateY(-3px) rotate(-2deg) scale(1.035); box-shadow:0 0 24px rgba(255,107,42,.48), 0 0 32px rgba(150,87,255,.3); }
 /* خانه‌ها و موجودات پس‌زمینه پررنگ‌تر اما پشت محتوا */
 body.halloween-theme #bg-canvas { filter: saturate(1.18) contrast(1.08); }
+
+/* بهینه‌سازی سبک هالووین: آیکون‌های اصلی بدون صورت‌سازی، فقط با رنگ‌های ترسناک */
+body.halloween-theme .os-icon {
+    background: linear-gradient(145deg, rgba(38,22,59,.28), rgba(18,10,30,.22)) !important;
+    border: 1px solid rgba(255,153,82,.38) !important;
+    box-shadow: 0 0 10px rgba(255,104,43,.13), inset 0 1px 0 rgba(255,255,255,.14) !important;
+}
+body.halloween-theme .os-icon::after { content: none !important; display: none !important; }
+body.halloween-theme .os-icon::before { opacity: .35 !important; }
+body.halloween-theme .os-icon--android svg { fill: #8cdd75 !important; filter: drop-shadow(0 0 4px rgba(255,105,43,.42)) !important; }
+body.halloween-theme .os-icon--windows svg { fill: #72baff !important; filter: drop-shadow(0 0 4px rgba(139,80,210,.42)) !important; }
+body.halloween-theme .os-icon--iphone svg,
+body.halloween-theme .os-icon--mac svg { fill: #e8dafa !important; filter: drop-shadow(0 0 4px rgba(255,119,67,.4)) !important; }
+body.halloween-theme .os-icon--linux svg { fill: #f2b85b !important; filter: drop-shadow(0 0 4px rgba(255,91,35,.43)) !important; }
+body.halloween-theme .os-icon--tv svg { fill: #d1c5f7 !important; filter: drop-shadow(0 0 4px rgba(255,119,67,.35)) !important; }
+/* ابرها و پنل‌ها سبک می‌مانند؛ جلوهٔ نور از سایه‌های بزرگ و پرهزینه اجتناب می‌کند */
+body.halloween-theme #bg-canvas { filter: saturate(1.06) contrast(1.03); }
